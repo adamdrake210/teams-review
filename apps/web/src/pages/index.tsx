@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useSession, getSession } from "next-auth/react";
+import { useSession, getSession, signOut } from "next-auth/react";
 
 import { Button } from "ui";
 
@@ -14,8 +14,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.statusCode = 403;
     return { props: { drafts: [] } };
   }
-
-  console.log("sess: ", session);
 
   const users = await prisma.user.findMany();
 
@@ -29,8 +27,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 export default function Web({ initialUsers }) {
   const { data: session, status } = useSession();
 
-  console.log("session: ", session);
-  console.log("status: ", status);
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
   if (!session) {
     return (
       <div className="right">
@@ -64,12 +64,15 @@ export default function Web({ initialUsers }) {
       <h1>Homepage</h1>
       {initialUsers.map((user) => {
         return (
-          <p key={user.id}>
-            {user.firstName} - {user.email}
-          </p>
+          <>
+            <p key={user.id}>
+              {user.firstName} - {user.email}
+            </p>
+          </>
         );
       })}
       <Button />
+      <button onClick={() => signOut()}>Logout</button>
     </div>
   );
 }
