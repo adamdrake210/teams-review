@@ -17,23 +17,4 @@ const options = {
   ],
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
-
-  // callbacks: {
-  //   // async signIn(user, account, profile) { return true },
-  //   async redirect(url, baseUrl) {
-  //     return url.startsWith(baseUrl) ? url : baseUrl;
-  //   },
-  //   async session(session, token) {
-  //     // Add property to session, like an access_token from a provider.
-  //     session.accessToken = token.accessToken;
-  //     return session;
-  //   },
-  //   async jwt(token, user, account, profile, isNewUser) {
-  //     // Add access_token to the token right after signin
-  //     if (account?.accessToken) {
-  //       token.accessToken = account.accessToken;
-  //     }
-  //     return token;
-  //   },
-  // },
 };
