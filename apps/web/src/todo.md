@@ -1,0 +1,4 @@
+- api endpoint for teamMembers
+- Rendering team members in team on FE
+- tailwind css installation
+- Navigation
