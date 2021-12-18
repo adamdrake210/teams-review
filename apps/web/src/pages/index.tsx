@@ -1,12 +1,11 @@
-import { PrismaClient } from "@prisma/client";
-import { GetServerSideProps } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 import { useSession, getSession, signOut } from "next-auth/react";
 
-import { Button } from "ui";
-
-const prisma = new PrismaClient();
+import { Layout } from "../layout/Layout";
+import { MyTeamMembers } from "../components/MyTeamMembers";
+import prisma from "../lib/prisma";
+import { TeamMember } from "@prisma/client";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -15,16 +14,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     return { props: { drafts: [] } };
   }
 
-  const users = await prisma.user.findMany();
+  const teamMembers = await prisma.teamMember.findMany({
+    where: {
+      manager: {
+        email: session.user.email,
+      },
+    },
+  });
 
   return {
     props: {
-      initialUsers: JSON.parse(JSON.stringify(users)),
+      initialTeamMembers: JSON.parse(JSON.stringify(teamMembers)),
     },
   };
 };
 
-export default function Web({ initialUsers }) {
+type TeamReviewProps = {
+  initialTeamMembers: TeamMember[];
+};
+
+export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
@@ -33,7 +42,7 @@ export default function Web({ initialUsers }) {
 
   if (!session) {
     return (
-      <div className="right">
+      <Layout>
         <Link href="/api/auth/signin">
           <a data-active={"/signup"}>Log in</a>
         </Link>
@@ -55,24 +64,15 @@ export default function Web({ initialUsers }) {
             border-radius: 3px;
           }
         `}</style>
-      </div>
+      </Layout>
     );
   }
 
   return (
-    <div>
+    <Layout>
       <h1>Homepage</h1>
-      {initialUsers.map((user) => {
-        return (
-          <>
-            <p key={user.id}>
-              {user.firstName} - {user.email}
-            </p>
-          </>
-        );
-      })}
-      <Button />
+      <MyTeamMembers user={session.user} teamMembers={initialTeamMembers} />
       <button onClick={() => signOut()}>Logout</button>
-    </div>
+    </Layout>
   );
 }
