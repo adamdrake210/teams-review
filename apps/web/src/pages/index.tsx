@@ -2,7 +2,7 @@ import Link from "next/link";
 import { GetServerSideProps } from "next";
 import { useSession, getSession, signOut } from "next-auth/react";
 
-import { Layout } from "../layout/Layout";
+import { Layout } from "../components/layout/Layout";
 import { MyTeamMembers } from "../components/MyTeamMembers";
 import prisma from "../lib/prisma";
 import { TeamMember } from "@prisma/client";
@@ -70,7 +70,7 @@ export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
 
   return (
     <Layout>
-      <h1>Homepage</h1>
+      <h1 className="text-5xl font-bold">Homepage</h1>
       <MyTeamMembers user={session.user} teamMembers={initialTeamMembers} />
       <button onClick={() => signOut()}>Logout</button>
     </Layout>

@@ -14,7 +14,7 @@ type MyTeamMembersProps = {
 export const MyTeamMembers = ({ user, teamMembers }: MyTeamMembersProps) => {
   return (
     <div>
-      <h1>Team Members</h1>
+      <h1 className="text-3xl font-bold">Team Members</h1>
       <ul>
         {teamMembers.map((teamMember) => {
           return (
