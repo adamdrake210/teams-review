@@ -5,6 +5,7 @@ import { useSession, getSession, signOut } from "next-auth/react";
 import { Layout } from "../layout/Layout";
 import { MyTeamMembers } from "../components/MyTeamMembers";
 import prisma from "../lib/prisma";
+import { TeamMember } from "@prisma/client";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -13,16 +14,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     return { props: { drafts: [] } };
   }
 
-  const users = await prisma.user.findMany();
+  const teamMembers = await prisma.teamMember.findMany({
+    where: {
+      manager: {
+        email: session.user.email,
+      },
+    },
+  });
 
   return {
     props: {
-      initialUsers: JSON.parse(JSON.stringify(users)),
+      initialTeamMembers: JSON.parse(JSON.stringify(teamMembers)),
     },
   };
 };
 
-export default function Web({ initialUsers }) {
+type TeamReviewProps = {
+  initialTeamMembers: TeamMember[];
+};
+
+export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
@@ -60,7 +71,7 @@ export default function Web({ initialUsers }) {
   return (
     <Layout>
       <h1>Homepage</h1>
-      <MyTeamMembers user={session.user} />
+      <MyTeamMembers user={session.user} teamMembers={initialTeamMembers} />
       <button onClick={() => signOut()}>Logout</button>
     </Layout>
   );
