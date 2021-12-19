@@ -1,9 +1,10 @@
-import { TeamMember } from "@prisma/client";
-import { User } from "next-auth";
 import React from "react";
+import { TeamMember } from "@prisma/client";
+
+import { TeamMembersCard } from "./TeamMembersCard";
 
 type MyTeamMembersProps = {
-  user: {
+  user?: {
     email?: string;
     name?: string;
     image?: string;
@@ -11,20 +12,11 @@ type MyTeamMembersProps = {
   teamMembers: TeamMember[];
 };
 
-export const MyTeamMembers = ({ user, teamMembers }: MyTeamMembersProps) => {
+export const MyTeamMembers = ({ teamMembers }: MyTeamMembersProps) => {
   return (
     <div>
-      <h1 className="text-3xl font-bold">Team Members</h1>
-      <ul>
-        {teamMembers.map((teamMember) => {
-          return (
-            <li key={teamMember.id}>
-              {teamMember.firstName} {teamMember.lastName} - Joined{" "}
-              {teamMember.joined}
-            </li>
-          );
-        })}
-      </ul>
+      <h2 className="text-3xl font-extralight mb-4">Team Members</h2>
+      <TeamMembersCard teamMembers={teamMembers} />
     </div>
   );
 };
