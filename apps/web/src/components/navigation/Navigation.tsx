@@ -1,5 +1,5 @@
 import React from "react";
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 import { Button } from "../ui/Button";
@@ -33,22 +33,22 @@ export const Navigation = () => {
         <div className="flex justify-between">
           <div className="flex space-x-4">
             <Link href={HOME} passHref>
-              <p className="text-3xl text-sky-400 font-bold uppercase cursor-pointer">
+              <p className="text-3xl text-sky-400 font-bold uppercase cursor-pointer mr-8">
                 Team Reviews
               </p>
             </Link>
-            {session.user && (
-              <div className="md:flex items-center space-x-1">
+            {session?.user && (
+              <div className="md:flex items-center space-x-4">
                 {MenuItems.map((item, index) => {
                   console.log(item.url);
                   return (
                     <>
                       <Link href={item.url} passHref key={index}>
                         <div
-                          className={`text-center border-secondary-500 cursor-pointer text-xl uppercase mr-4 ${
+                          className={`text-center border-secondary-500 cursor-pointer text-xl uppercase hover:text-sky-600 hover:underline ${
                             router.asPath === item.url
-                              ? "text-grey-200"
-                              : "text-sky-700"
+                              ? "text-sky-600 underline"
+                              : "text-sky-400"
                           }`}
                         >
                           <p className="text-secondary-300">{item.label}</p>
@@ -61,10 +61,18 @@ export const Navigation = () => {
             )}
           </div>
           <div className="flex space-x-4">
-            <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">
-              Login
-            </button>
-            <Button btnText="Sign Up" />
+            {session?.user ? (
+              <Button btnText="Logout" onClick={signOut} />
+            ) : (
+              <>
+                <Button btnText="Login" onClick={signIn} />
+                <Button
+                  btnText="Sign Up"
+                  onClick={() => console.log("Sign up!")}
+                  color="primary"
+                />
+              </>
+            )}
           </div>
         </div>
       </div>

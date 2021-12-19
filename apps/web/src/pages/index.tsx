@@ -43,27 +43,13 @@ export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
   if (!session) {
     return (
       <Layout>
-        <Link href="/api/auth/signin">
-          <a data-active={"/signup"}>Log in</a>
-        </Link>
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: #000;
-            display: inline-block;
-          }
-          a + a {
-            margin-left: 1rem;
-          }
-          .right {
-            margin-left: auto;
-          }
-          .right a {
-            border: 1px solid black;
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-        `}</style>
+        <h1 className="text-5xl font-bold mb-2">
+          Welcome to <span className="text-sky-400">Team Reviews</span>
+        </h1>
+        <p className="text-xl">
+          A single place to keep all your team&apos;s feedback and performance
+          reviews
+        </p>
       </Layout>
     );
   }

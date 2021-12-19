@@ -1,4 +1,5 @@
 - api endpoint for teamMembers
 - Rendering team members in team on FE
-- tailwind css installation
-- Navigation
+- Navigation - logged in nav rendering
+- Loader spinner
+- Chose colors and fonts
