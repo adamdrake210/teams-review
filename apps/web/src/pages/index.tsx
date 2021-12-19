@@ -1,11 +1,11 @@
-import Link from "next/link";
 import { GetServerSideProps } from "next";
 import { useSession, getSession, signOut } from "next-auth/react";
+import { TeamMember } from "@prisma/client";
 
 import { Layout } from "../layout/Layout";
 import { MyTeamMembers } from "../components/MyTeamMembers";
 import prisma from "../lib/prisma";
-import { TeamMember } from "@prisma/client";
+import { MyInfo } from "../components/MyInfo";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -61,6 +61,7 @@ export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
       <h1 className="text-5xl font-extralight mb-8">
         Your Team&apos;s Dashboard
       </h1>
+      <MyInfo />
       <MyTeamMembers user={session.user} teamMembers={initialTeamMembers} />
     </Layout>
   );

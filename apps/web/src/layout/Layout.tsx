@@ -9,7 +9,7 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
       <Navigation />
-      <main className="flex flex-col min-h-screen py-4 max-w-screen-lg mx-auto">
+      <main className="flex flex-col min-h-screen py-4 mx-auto container">
         {children}
       </main>
     </div>

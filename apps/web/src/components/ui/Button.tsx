@@ -1,13 +1,21 @@
 type ButtonProps = {
   btnText: string;
-  onClick: () => void;
+  onClick?: () => void;
   color?: "primary" | "secondary";
   className?: string;
+  type?: "button" | "submit" | "reset";
 };
 
-export const Button = ({ btnText, onClick, color, className }: ButtonProps) => {
+export const Button = ({
+  btnText,
+  onClick,
+  color,
+  className,
+  type,
+}: ButtonProps) => {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`${
         color === "primary"
