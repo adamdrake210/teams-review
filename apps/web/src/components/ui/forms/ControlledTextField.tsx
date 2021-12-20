@@ -9,7 +9,7 @@ type TextFieldProps = {
   type?: string;
 };
 
-export const TextField = ({
+export const ControlledTextField = ({
   name,
   label,
   rules,
@@ -31,7 +31,7 @@ export const TextField = ({
             {label}
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-sky-500"
             id={name}
             type={type || "text"}
             placeholder={label}

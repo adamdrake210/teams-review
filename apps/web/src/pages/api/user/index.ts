@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import prisma from "../../../lib/prisma";
 
-// PUT /api/publish/:id
+// GET /api/user
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
@@ -13,6 +13,10 @@ export default async function handle(
     const user = await prisma.user.findUnique({
       where: {
         email: session?.user?.email,
+      },
+      include: {
+        teams: true,
+        employees: true,
       },
     });
     res.json(user);

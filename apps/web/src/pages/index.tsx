@@ -6,6 +6,8 @@ import { Layout } from "../layout/Layout";
 import { MyTeamMembers } from "../components/MyTeamMembers";
 import prisma from "../lib/prisma";
 import { MyInfo } from "../components/MyInfo";
+import { Loading } from "../components/Loading";
+import { Heading1 } from "../components/ui/typography/Heading1";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -37,16 +39,17 @@ export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (!session) {
     return (
       <Layout>
         <div className="flex flex-col items-center justify-center h-96">
-          <h1 className="text-5xl font-bold mb-2">
+          <Heading1>
             Welcome to <span className="text-sky-400">Team Reviews</span>
-          </h1>
+          </Heading1>
+
           <p className="text-xl">
             A single place to keep all your team&apos;s feedback and performance
             reviews
@@ -58,9 +61,7 @@ export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
 
   return (
     <Layout>
-      <h1 className="text-5xl font-extralight mb-8">
-        Your Team&apos;s Dashboard
-      </h1>
+      <Heading1>Your Team&apos;s Dashboard</Heading1>
       <MyInfo />
       <MyTeamMembers user={session.user} teamMembers={initialTeamMembers} />
     </Layout>

@@ -21,7 +21,7 @@ export default async function handle(
           email,
           position,
           team: {
-            connect: { id: "aa33a755-4c82-490f-88ec-81a6d5b05798" }, // TODO how to get this dynamically?
+            connect: { id: team },
           },
           joined,
           manager: { connect: { email: session?.user?.email } },

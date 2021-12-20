@@ -1,5 +1,7 @@
+import { fetchAbsolute } from "../../utils/apiHelpers";
+
 export async function getUser() {
-  const response = await fetch("api/user", {
+  const response = await fetchAbsolute("/api/user", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

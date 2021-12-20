@@ -1,9 +1,10 @@
 import { TeamMember } from "@prisma/client";
+import { fetchAbsolute } from "../../utils/apiHelpers";
 
 export async function createTeamMembersRequest(
   createTeamMembersRequest: TeamMember
 ) {
-  const response = await fetch("/api/team-members/create", {
+  const response = await fetchAbsolute("/api/team-members/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
