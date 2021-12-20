@@ -6,7 +6,7 @@ import { Layout } from "../../layout/Layout";
 
 export default function Create() {
   return (
-    <Layout>
+    <Layout title="Create Team Member">
       <Heading1>Create Team Member</Heading1>
       <TeamMemberForm />
     </Layout>

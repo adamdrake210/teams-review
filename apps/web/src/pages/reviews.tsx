@@ -4,7 +4,7 @@ import { Layout } from "../layout/Layout";
 
 export default function Reviews() {
   return (
-    <Layout>
+    <Layout title="Reviews">
       <Heading1>Reviews</Heading1>
     </Layout>
   );

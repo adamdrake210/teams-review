@@ -44,7 +44,7 @@ export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
 
   if (!session) {
     return (
-      <Layout>
+      <Layout title="Welcome!">
         <div className="flex flex-col items-center justify-center h-96">
           <Heading1>
             Welcome to <span className="text-sky-400">Team Reviews</span>
@@ -60,7 +60,7 @@ export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
   }
 
   return (
-    <Layout>
+    <Layout title="Home">
       <Heading1>Your Team&apos;s Dashboard</Heading1>
       <MyInfo />
       <MyTeamMembers user={session.user} teamMembers={initialTeamMembers} />

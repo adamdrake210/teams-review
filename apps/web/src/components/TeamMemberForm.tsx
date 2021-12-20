@@ -38,7 +38,7 @@ export const TeamMemberForm = () => {
     },
     onSuccess: () => {
       queryClient.refetchQueries([RQ_KEY_USER]);
-      // reset(initialFormValues);
+      reset(initialFormValues);
     },
     // Always refetch after error or success:
     onSettled: () => {
@@ -47,7 +47,6 @@ export const TeamMemberForm = () => {
   });
 
   const onSubmit = (formData: TeamMember) => {
-    console.log("formData: ", formData);
     createMutation.mutate(formData);
   };
 
