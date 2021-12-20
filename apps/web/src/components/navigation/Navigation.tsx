@@ -63,11 +63,7 @@ export const Navigation = () => {
             ) : (
               <>
                 <Button btnText="Login" onClick={signIn} />
-                <Button
-                  btnText="Sign Up"
-                  onClick={() => console.log("Sign up!")}
-                  color="primary"
-                />
+                <Button btnText="Sign Up" onClick={signIn} color="primary" />
               </>
             )}
           </div>

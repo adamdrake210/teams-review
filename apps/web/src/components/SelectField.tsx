@@ -15,7 +15,6 @@ export const SelectField = ({
   control,
   data,
 }: SelectFieldProps) => {
-  console.log("data: ", data);
   return (
     <div className="flex">
       <div className="mb-3 w-full">

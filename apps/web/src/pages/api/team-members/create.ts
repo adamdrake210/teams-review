@@ -9,8 +9,6 @@ export default async function handle(
 ) {
   const { firstName, lastName, email, position, team, joined } = req.body.data;
 
-  console.log("req.body: ", req.body);
-
   try {
     const session = await getSession({ req });
     if (session) {
