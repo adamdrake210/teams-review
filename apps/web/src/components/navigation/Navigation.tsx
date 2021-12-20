@@ -40,21 +40,18 @@ export const Navigation = () => {
             {session?.user && (
               <div className="md:flex items-center space-x-4">
                 {MenuItems.map((item, index) => {
-                  console.log(item.url);
                   return (
-                    <>
-                      <Link href={item.url} passHref key={index}>
-                        <div
-                          className={`text-center border-secondary-500 cursor-pointer text-xl uppercase hover:text-sky-600 hover:underline ${
-                            router.asPath === item.url
-                              ? "text-sky-600 underline"
-                              : "text-sky-400"
-                          }`}
-                        >
-                          <p className="text-secondary-300">{item.label}</p>
-                        </div>
-                      </Link>
-                    </>
+                    <Link href={item.url} passHref key={index}>
+                      <div
+                        className={`text-center border-secondary-500 cursor-pointer text-xl uppercase hover:text-sky-600 hover:underline ${
+                          router.asPath === item.url
+                            ? "text-sky-600 underline"
+                            : "text-sky-400"
+                        }`}
+                      >
+                        <p className="text-secondary-300">{item.label}</p>
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -66,11 +63,7 @@ export const Navigation = () => {
             ) : (
               <>
                 <Button btnText="Login" onClick={signIn} />
-                <Button
-                  btnText="Sign Up"
-                  onClick={() => console.log("Sign up!")}
-                  color="primary"
-                />
+                <Button btnText="Sign Up" onClick={signIn} color="primary" />
               </>
             )}
           </div>

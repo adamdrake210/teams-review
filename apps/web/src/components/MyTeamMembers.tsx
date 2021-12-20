@@ -2,6 +2,7 @@ import React from "react";
 import { TeamMember } from "@prisma/client";
 
 import { TeamMembersCard } from "./TeamMembersCard";
+import { Heading2 } from "./ui/typography/Heading2";
 
 type MyTeamMembersProps = {
   user?: {
@@ -15,7 +16,7 @@ type MyTeamMembersProps = {
 export const MyTeamMembers = ({ teamMembers }: MyTeamMembersProps) => {
   return (
     <div>
-      <h2 className="text-3xl font-extralight mb-4">Team Members</h2>
+      <Heading2>Team Members</Heading2>
       <TeamMembersCard teamMembers={teamMembers} />
     </div>
   );

@@ -1,5 +1,8 @@
-- api endpoint for teamMembers
-- Rendering team members in team on FE
-- Navigation - logged in nav rendering
+- Card container
+- team member individual profile
+- Navigation - Mobile rendering
 - Loader spinner
 - Chose colors and fonts
+- user avatar in navigation
+- profile page
+- meta info for SEO in head section

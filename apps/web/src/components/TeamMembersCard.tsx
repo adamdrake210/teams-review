@@ -1,5 +1,7 @@
 import { TeamMember } from "@prisma/client";
+import { useRouter } from "next/dist/client/router";
 import React from "react";
+import { TEAM_MEMBERS_CREATE } from "../constants/routerConstants";
 import { Button } from "./ui/Button";
 
 type TeamMembersCardProps = {
@@ -7,6 +9,7 @@ type TeamMembersCardProps = {
 };
 
 export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
+  const router = useRouter();
   return (
     <div className="bg-white rounded-lg shadow-2xl w-3/4">
       <header className="bg-gray-100 rounded-t-lg py-3 px-8 text-xl font-extrabold">
@@ -27,7 +30,9 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
           className="mt-6"
           btnText="Add Team Member"
           color="primary"
-          onClick={() => console.log("Adding Team Member!")}
+          onClick={() => {
+            router.push(TEAM_MEMBERS_CREATE);
+          }}
         />
       </div>
     </div>
