@@ -1,4 +1,3 @@
-- Card container
 - team member individual profile
 - Navigation - Mobile rendering
 - Loader spinner
