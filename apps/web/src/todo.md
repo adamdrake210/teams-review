@@ -4,3 +4,4 @@
 - user avatar in navigation
 - profile page
 - meta info for SEO in head section
+- if no team members - message that no team members/ teams etc

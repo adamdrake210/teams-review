@@ -5,12 +5,9 @@ import { Team, TeamMember } from "@prisma/client";
 import { CardContainer } from "./ui/CardContainer";
 import { Button } from "./ui/Button";
 import { TEAM_MEMBERS_EDIT } from "@/constants/routerConstants";
+import { TeamMemberProps } from "@/pages/team-members/[id]";
 
-type TeamMemberDetailsProps = {
-  teamMember: TeamMember & { team: Team };
-};
-
-export const TeamMemberDetails = ({ teamMember }: TeamMemberDetailsProps) => {
+export const TeamMemberDetails = ({ teamMember }: TeamMemberProps) => {
   const router = useRouter();
 
   const { id, firstName, lastName, joined, position, team } = teamMember;

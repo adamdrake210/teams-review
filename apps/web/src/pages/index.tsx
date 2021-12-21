@@ -46,7 +46,7 @@ type TeamReviewProps = {
 export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
   return (
     <Layout title="Home">
-      <Heading1>Your Team&apos;s Dashboard</Heading1>
+      <Heading1>Your Dashboard</Heading1>
       <MyInfo />
       <MyTeamMembers teamMembers={initialTeamMembers} />
     </Layout>
