@@ -94,18 +94,7 @@ model TeamMember {
   userId String
   team Team @relation(fields: [teamId], references: [id])
   teamId String
-  review Review[]
   feedback Feedback[]
-}
-
-model Review {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  reviewYear Int
-  teamMember TeamMember @relation(fields: [teamMemberId], references: [id])
-  teamMemberId String
-  monthlyReview String[]
 }
 
 model Feedback {
