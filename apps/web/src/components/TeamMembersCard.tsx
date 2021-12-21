@@ -37,7 +37,7 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
       })}
       <Button
         className="mt-6"
-        btnText="Add Team Member"
+        btnText="Create Team Member"
         color="primary"
         onClick={() => {
           router.push(TEAM_MEMBERS_CREATE);
