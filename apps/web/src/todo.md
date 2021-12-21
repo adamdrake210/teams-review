@@ -1,5 +1,4 @@
-- team member individual profile
-- Navigation - Mobile rendering
+- Navigation - hamburger icon
 - Loader spinner
 - Chose colors and fonts
 - user avatar in navigation

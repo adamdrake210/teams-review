@@ -1,28 +1,38 @@
-import { TeamMember } from "@prisma/client";
+import { Team, TeamMember } from "@prisma/client";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useRouter } from "next/dist/client/router";
 
 import { RQ_KEY_USER } from "../constants/constants";
 import { getUser } from "../services/api/userApi";
-import { createTeamMembersRequest } from "../services/api/teamMembersApi";
+import {
+  createTeamMemberRequest,
+  updateTeamMemberRequest,
+} from "../services/api/teamMembersApi";
 import { SelectField } from "./SelectField";
 import { Button } from "./ui/Button";
 import { ControlledTextField } from "./ui/forms/ControlledTextField";
 import { Loading } from "./Loading";
+import { TEAM_MEMBER } from "@/constants/routerConstants";
 
-const initialFormValues = {
-  firstName: "",
-  lastName: "",
-  position: "",
-  joined: new Date(),
-  team: "",
+type TeamMemberFormProps = {
+  editTeamMember?: TeamMember & { team: Team };
 };
 
-export const TeamMemberForm = () => {
+export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
   const queryClient = useQueryClient();
-  const { handleSubmit, control, reset } = useForm<TeamMember>({
-    defaultValues: initialFormValues,
+  const router = useRouter();
+
+  const { handleSubmit, control } = useForm<TeamMember>({
+    defaultValues: {
+      firstName: editTeamMember?.firstName || "",
+      lastName: editTeamMember?.lastName || "",
+      position: editTeamMember?.position || "",
+      email: editTeamMember?.email || "",
+      joined: editTeamMember?.joined || new Date(),
+      teamId: editTeamMember?.teamId || "",
+    },
   });
 
   const {
@@ -32,13 +42,27 @@ export const TeamMemberForm = () => {
     isError,
   } = useQuery(RQ_KEY_USER, getUser);
 
-  const createMutation = useMutation(createTeamMembersRequest, {
+  const createMutation = useMutation(createTeamMemberRequest, {
     onError: (err: Error) => {
       console.error(err.message);
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      router.push(`${TEAM_MEMBER}${data.id}`);
       queryClient.refetchQueries([RQ_KEY_USER]);
-      reset(initialFormValues);
+    },
+    // Always refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries([RQ_KEY_USER]);
+    },
+  });
+
+  const updateMutation = useMutation(updateTeamMemberRequest, {
+    onError: (err: Error) => {
+      console.error(err.message);
+    },
+    onSuccess: (data) => {
+      router.push(`${TEAM_MEMBER}${data.id}`);
+      queryClient.refetchQueries([RQ_KEY_USER]);
     },
     // Always refetch after error or success:
     onSettled: () => {
@@ -47,7 +71,11 @@ export const TeamMemberForm = () => {
   });
 
   const onSubmit = (formData: TeamMember) => {
-    createMutation.mutate(formData);
+    if (editTeamMember) {
+      updateMutation.mutate({ id: editTeamMember.id, ...formData });
+    } else {
+      createMutation.mutate(formData);
+    }
   };
 
   return (
@@ -79,7 +107,7 @@ export const TeamMemberForm = () => {
       <Loading isLoading={isLoading} error={error} isError={isError}>
         {userData && (
           <SelectField
-            name="team"
+            name="teamId"
             label="Select Team"
             control={control}
             data={userData.teams}
@@ -87,7 +115,12 @@ export const TeamMemberForm = () => {
         )}
       </Loading>
 
-      <Button type="submit" btnText="Submit" color="primary" />
+      <Button
+        type="submit"
+        btnText={`${editTeamMember ? "Update" : "Submit"}`}
+        color="primary"
+        disabled={updateMutation.isLoading || createMutation.isLoading}
+      />
     </form>
   );
 };

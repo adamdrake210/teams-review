@@ -7,6 +7,7 @@ import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { LOGIN } from "@/constants/routerConstants";
 import { TeamMemberDetails } from "@/components/TeamMemberDetails";
+import { TeamMemberForm } from "@/components/TeamMemberForm";
 
 const returnSingleParam = (param: string | string[]) => {
   if (typeof param === "string") return param;
@@ -50,13 +51,13 @@ type TeamMemberProps = {
   teamMember: TeamMember & { team: Team };
 };
 
-export default function TeamMemberDetailsPage({ teamMember }: TeamMemberProps) {
+export default function TeamMemberEditPage({ teamMember }: TeamMemberProps) {
   return (
     <Layout title="Team Member">
       <Heading1>
-        Details for {teamMember.firstName} {teamMember.lastName}
+        Edit Details for {teamMember.firstName} {teamMember.lastName}
       </Heading1>
-      <TeamMemberDetails teamMember={teamMember} />
+      <TeamMemberForm editTeamMember={teamMember} />
     </Layout>
   );
 }

@@ -4,6 +4,7 @@ type ButtonProps = {
   color?: "primary" | "secondary";
   className?: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 };
 
 export const Button = ({
@@ -12,6 +13,8 @@ export const Button = ({
   color,
   className,
   type,
+  disabled,
+  ...rest
 }: ButtonProps) => {
   return (
     <button
@@ -21,7 +24,9 @@ export const Button = ({
         color === "primary"
           ? "bg-sky-400 hover:bg-sky-600 text-white"
           : "bg-gray-200 hover:bg-gray-300 text-gray-800"
-      } font-bold py-2 px-4 rounded ${className}`}
+      } font-bold py-2 px-4 rounded disabled:bg-slate-400 ${className}`}
+      disabled={disabled}
+      {...rest}
     >
       {btnText}
     </button>

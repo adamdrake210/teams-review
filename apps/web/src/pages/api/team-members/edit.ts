@@ -2,18 +2,21 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../lib/prisma";
 import { getSession } from "next-auth/react";
 
-// POST /api/post
+// PUT /api/post
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { firstName, lastName, email, position, teamId, joined } =
+  const { id, firstName, lastName, email, position, teamId, joined } =
     req.body.data;
 
   try {
     const session = await getSession({ req });
     if (session) {
-      const result = await prisma.teamMember.create({
+      const result = await prisma.teamMember.update({
+        where: {
+          id: id,
+        },
         data: {
           firstName,
           lastName,
