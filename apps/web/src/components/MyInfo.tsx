@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "@prisma/client";
+import { TeamMember, User } from "@prisma/client";
 import { useQuery } from "react-query";
 
 import { RQ_KEY_USER } from "@/constants/constants";
@@ -8,10 +8,9 @@ import { Loading } from "./Loading";
 import { CardContainer } from "./ui/CardContainer";
 
 export const MyInfo = () => {
-  const { data, isLoading, isError, error } = useQuery<User>(
-    RQ_KEY_USER,
-    getUser
-  );
+  const { data, isLoading, isError, error } = useQuery<
+    User & { employees: TeamMember[] }
+  >(RQ_KEY_USER, getUser);
 
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
