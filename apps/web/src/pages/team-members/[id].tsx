@@ -1,12 +1,13 @@
 import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
-import { Team, TeamMember } from "@prisma/client";
+import { Feedback, Team, TeamMember } from "@prisma/client";
 import prisma from "@/lib/prisma";
 
 import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { LOGIN } from "@/constants/routerConstants";
 import { TeamMemberDetails } from "@/components/TeamMemberDetails";
+import { TeamMemberFeedback } from "@/components/TeamMemberFeedback";
 
 const returnSingleParam = (param: string | string[]) => {
   if (typeof param === "string") return param;
@@ -35,6 +36,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
     include: {
       team: true,
+      feedback: true,
     },
   });
 
@@ -46,8 +48,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-type TeamMemberProps = {
-  teamMember: TeamMember & { team: Team };
+export type TeamMemberProps = {
+  teamMember: TeamMember & { team?: Team; feedback?: Feedback[] };
 };
 
 export default function TeamMemberDetailsPage({ teamMember }: TeamMemberProps) {
@@ -57,6 +59,7 @@ export default function TeamMemberDetailsPage({ teamMember }: TeamMemberProps) {
         Details for {teamMember.firstName} {teamMember.lastName}
       </Heading1>
       <TeamMemberDetails teamMember={teamMember} />
+      <TeamMemberFeedback teamMember={teamMember} />
     </Layout>
   );
 }

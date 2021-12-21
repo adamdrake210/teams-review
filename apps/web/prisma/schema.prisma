@@ -94,14 +94,14 @@ model TeamMember {
   userId String
   team Team @relation(fields: [teamId], references: [id])
   teamId String
-  review Review[]
+  feedback Feedback[]
 }
 
-model Review {
+model Feedback {
   id String @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  reviewYear Int
+  yearOfFeedback Int
   teamMember TeamMember @relation(fields: [teamMemberId], references: [id])
   teamMemberId String
   monthlyReview String[]
