@@ -15,7 +15,7 @@ export const Layout = ({ children, title }: LayoutProps) => {
         <title>{title} | Feedback</title>
       </Head>
       <Navigation />
-      <main className="flex flex-col min-h-screen py-4 mx-auto container">
+      <main className="flex flex-col min-h-screen p-4 mx-auto container">
         {children}
       </main>
     </div>

@@ -33,12 +33,12 @@ export const Navigation = () => {
         <div className="flex justify-between">
           <div className="flex space-x-4">
             <Link href={HOME} passHref>
-              <p className="text-3xl text-sky-400 font-bold uppercase cursor-pointer mr-8">
-                Team Reviews
+              <p className="text-2xl md:text-3xl text-sky-400 font-extralight uppercase cursor-pointer mr-8">
+                FeedBack
               </p>
             </Link>
             {session?.user && (
-              <div className="md:flex items-center space-x-4">
+              <div className="hidden md:flex items-center space-x-4">
                 {MenuItems.map((item, index) => {
                   return (
                     <Link href={item.url} passHref key={index}>

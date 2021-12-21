@@ -5,11 +5,6 @@ import { TeamMembersCard } from "./TeamMembersCard";
 import { Heading2 } from "./ui/typography/Heading2";
 
 type MyTeamMembersProps = {
-  user?: {
-    email?: string;
-    name?: string;
-    image?: string;
-  };
   teamMembers: TeamMember[];
 };
 
