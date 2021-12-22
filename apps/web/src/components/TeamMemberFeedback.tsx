@@ -1,16 +1,15 @@
-import { TeamMemberProps } from "@/pages/team-members/[id]";
-import { Months } from "@/types/types";
-import { Feedback, TeamMember } from "@prisma/client";
 import React from "react";
+
+import { TeamMemberProps } from "@/pages/team-members/[id]";
+import { MonthlyFeedbackDetails } from "./MonthlyFeedbackDetails";
 import { CardContainer } from "./ui/CardContainer";
+import { Button } from "./ui/Button";
 
 export const TeamMemberFeedback = ({
   teamMember,
   feedback,
 }: TeamMemberProps) => {
-  const { id, firstName, lastName, joined, position } = teamMember;
-
-  console.log("feedback: ", feedback);
+  const { firstName } = teamMember;
 
   return (
     <>
@@ -24,10 +23,10 @@ export const TeamMemberFeedback = ({
               {fb?.monthlyFeedback?.length > 0 ? (
                 fb?.monthlyFeedback.map((monthFb) => {
                   return (
-                    <div key={monthFb.id}>
-                      <p className="text-xl">{Months[monthFb.month]}</p>
-                      <p>{monthFb.feedback}</p>
-                    </div>
+                    <MonthlyFeedbackDetails
+                      key={monthFb.id}
+                      monthlyFeedback={monthFb}
+                    />
                   );
                 })
               ) : (
@@ -36,6 +35,7 @@ export const TeamMemberFeedback = ({
                   moment.
                 </p>
               )}
+              <Button btnText="Add Feedback" color="primary" />
             </CardContainer>
           );
         })
