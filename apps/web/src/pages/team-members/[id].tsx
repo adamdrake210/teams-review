@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
-import { Feedback, Team, TeamMember } from "@prisma/client";
+import { Feedback, MonthlyFeedback, Team, TeamMember } from "@prisma/client";
 import prisma from "@/lib/prisma";
 
 import { Heading1 } from "@/components/ui/typography/Heading1";
@@ -36,7 +36,15 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
     include: {
       team: true,
-      feedback: true,
+    },
+  });
+
+  const feedback = await prisma.feedback.findMany({
+    where: {
+      teamMemberId: returnSingleParam(params?.id),
+    },
+    include: {
+      monthlyFeedback: true,
     },
   });
 
@@ -44,22 +52,27 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       user: session,
       teamMember: JSON.parse(JSON.stringify(teamMember)),
+      feedback: JSON.parse(JSON.stringify(feedback)),
     },
   };
 };
 
 export type TeamMemberProps = {
-  teamMember: TeamMember & { team?: Team; feedback?: Feedback[] };
+  teamMember: TeamMember & { team?: Team };
+  feedback?: Array<Feedback & { monthlyFeedback: MonthlyFeedback[] }>;
 };
 
-export default function TeamMemberDetailsPage({ teamMember }: TeamMemberProps) {
+export default function TeamMemberDetailsPage({
+  teamMember,
+  feedback,
+}: TeamMemberProps) {
   return (
     <Layout title="Team Member">
       <Heading1>
         Details for {teamMember.firstName} {teamMember.lastName}
       </Heading1>
       <TeamMemberDetails teamMember={teamMember} />
-      <TeamMemberFeedback teamMember={teamMember} />
+      <TeamMemberFeedback teamMember={teamMember} feedback={feedback} />
     </Layout>
   );
 }

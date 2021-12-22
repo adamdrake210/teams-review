@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Button } from "../ui/Button";
 import { useRouter } from "next/dist/client/router";
-import { HOME, REVIEWS, TEAM_MEMBERS } from "../../constants/routerConstants";
+import { FEEDBACKS, HOME, TEAM_MEMBERS } from "../../constants/routerConstants";
 
 const MenuItems = [
   {
@@ -14,7 +14,7 @@ const MenuItems = [
   },
   {
     label: "Reviews",
-    url: REVIEWS,
+    url: FEEDBACKS,
     active: false,
   },
 ];

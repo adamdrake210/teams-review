@@ -48,18 +48,18 @@ model VerificationToken {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String       @id @default(uuid())
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   name          String?
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
-  role      Role     @default(USER)
-  firstName String?
-  lastName  String?
-  teams     Team[]
-  employees TeamMember[]
+  role          Role         @default(USER)
+  firstName     String?
+  lastName      String?
+  teams         Team[]
+  employees     TeamMember[]
   accounts      Account[]
   sessions      Session[]
 }
@@ -70,40 +70,47 @@ enum Role {
 }
 
 model Team {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String       @id @default(uuid())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   title       String
   description String
   category    String
-  manager     User     @relation(fields: [userId], references: [id])
+  manager     User         @relation(fields: [userId], references: [id])
   userId      String
-  members TeamMember[]
+  members     TeamMember[]
 }
 
 model TeamMember {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   firstName String
-  lastName String
-  email String @unique
-  joined DateTime
-  position String
-  manager     User     @relation(fields: [userId], references: [id])
-  userId String
-  team Team @relation(fields: [teamId], references: [id])
-  teamId String
-  feedback Feedback[]
+  lastName  String
+  email     String     @unique
+  joined    DateTime
+  position  String
+  manager   User       @relation(fields: [userId], references: [id])
+  userId    String
+  team      Team       @relation(fields: [teamId], references: [id])
+  teamId    String
+  feedback  Feedback[]
 }
 
 model Feedback {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String            @id @default(uuid())
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
   yearOfFeedback Int
-  teamMember TeamMember @relation(fields: [teamMemberId], references: [id])
-  teamMemberId String
-  monthlyReview String[]
+  teamMember     TeamMember        @relation(fields: [teamMemberId], references: [id])
+  teamMemberId   String
+  monthlyFeedback  MonthlyFeedback[]
+}
 
+model MonthlyFeedback {
+  id         String    @id @default(uuid())
+  month      Int
+  feedback   String
+  Feedback   Feedback? @relation(fields: [feedbackId], references: [id])
+  feedbackId String?
 }
