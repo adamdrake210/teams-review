@@ -4,6 +4,7 @@ import { GetServerSideProps } from "next";
 import { Heading1 } from "@/components/ui/typography/Heading1";
 import { HOME } from "@/constants/routerConstants";
 import { Layout } from "@/layout/Layout";
+import { COMPANY_NAME } from "@/constants/constants";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -25,7 +26,7 @@ export default function Login() {
     <Layout title="Welcome!">
       <div className="flex flex-col items-center justify-center h-96">
         <Heading1>
-          Welcome to <span className="text-sky-400">FeedBack</span>
+          Welcome to <span className="text-sky-400">{COMPANY_NAME}</span>
         </Heading1>
 
         <p className="text-xl text-center">

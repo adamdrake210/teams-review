@@ -24,10 +24,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   };
 };
 
-export default function Reviews() {
+export default function FeedbacksPage() {
   return (
-    <Layout title="Reviews">
-      <Heading1>Reviews</Heading1>
+    <Layout title="Feedback">
+      <Heading1>Feedbacks</Heading1>
     </Layout>
   );
 }

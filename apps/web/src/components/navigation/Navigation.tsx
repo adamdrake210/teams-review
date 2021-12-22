@@ -4,17 +4,27 @@ import Link from "next/link";
 
 import { Button } from "../ui/Button";
 import { useRouter } from "next/dist/client/router";
-import { HOME, REVIEWS, TEAM_MEMBERS } from "../../constants/routerConstants";
+import {
+  FEEDBACKS,
+  HOME,
+  TEAMS,
+  TEAM_MEMBERS,
+} from "../../constants/routerConstants";
 
 const MenuItems = [
+  // {
+  //   label: "Team Members",
+  //   url: TEAM_MEMBERS,
+  //   active: false,
+  // },
   {
-    label: "Team Members",
-    url: TEAM_MEMBERS,
+    label: "Your Teams",
+    url: TEAMS,
     active: false,
   },
   {
-    label: "Reviews",
-    url: REVIEWS,
+    label: "Feedbacks",
+    url: FEEDBACKS,
     active: false,
   },
 ];
