@@ -4,6 +4,7 @@ import { TeamMemberProps } from "@/pages/team-members/[id]";
 import { MonthlyFeedbackDetails } from "./MonthlyFeedbackDetails";
 import { CardContainer } from "./ui/CardContainer";
 import { Button } from "./ui/Button";
+import { MONTH_ARRAY } from "@/constants/constants";
 
 export const TeamMemberFeedback = ({
   teamMember,
@@ -35,7 +36,6 @@ export const TeamMemberFeedback = ({
                   moment.
                 </p>
               )}
-              <Button btnText="Add Feedback" color="primary" />
             </CardContainer>
           );
         })
