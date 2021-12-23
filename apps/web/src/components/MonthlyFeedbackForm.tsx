@@ -29,8 +29,6 @@ export const MonthlyFeedbackForm = ({
     },
   });
 
-  console.log("monthlyFeedback: ", monthlyFeedback);
-
   const updateMutation = useMutation(updateMonthlyFeedbackRequest, {
     onError: (err: Error) => {
       console.error(err.message);
@@ -65,6 +63,7 @@ export const MonthlyFeedbackForm = ({
         label="Feedback"
         control={control}
         placeholder="Write your feedback here..."
+        rows={8}
       />
 
       <Button

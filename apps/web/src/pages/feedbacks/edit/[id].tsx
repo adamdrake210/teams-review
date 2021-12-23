@@ -58,8 +58,6 @@ type FeedbackEditPageProps = {
 };
 
 export default function FeedbackEditPage({ feedback }: FeedbackEditPageProps) {
-  console.log("feedback: ", feedback);
-
   const router = useRouter();
   const { month } = router.query;
 
