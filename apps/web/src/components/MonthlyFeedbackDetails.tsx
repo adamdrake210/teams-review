@@ -3,6 +3,8 @@ import { MonthlyFeedback } from "@prisma/client";
 
 import { Button } from "./ui/Button";
 import { Months } from "@/types/types";
+import { useRouter } from "next/dist/client/router";
+import { FEEDBACKS_EDIT } from "@/constants/routerConstants";
 
 type MonthlyFeedbackDetailsProps = {
   monthlyFeedback: MonthlyFeedback;
@@ -11,8 +13,13 @@ type MonthlyFeedbackDetailsProps = {
 export const MonthlyFeedbackDetails = ({
   monthlyFeedback,
 }: MonthlyFeedbackDetailsProps) => {
+  const router = useRouter();
   const handleMonthlyFeedbackUpdate = () => {
     console.log(monthlyFeedback);
+    router.push({
+      pathname: `${FEEDBACKS_EDIT}${monthlyFeedback.feedbackId}`,
+      query: { month: monthlyFeedback.month },
+    });
   };
 
   return (

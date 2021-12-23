@@ -3,8 +3,17 @@ import React from "react";
 import { TeamMemberProps } from "@/pages/team-members/[id]";
 import { MonthlyFeedbackDetails } from "./MonthlyFeedbackDetails";
 import { CardContainer } from "./ui/CardContainer";
-import { Button } from "./ui/Button";
-import { MONTH_ARRAY } from "@/constants/constants";
+import { MonthlyFeedback } from "@prisma/client";
+
+function compare(a: MonthlyFeedback, b: MonthlyFeedback) {
+  if (a.month < b.month) {
+    return -1;
+  }
+  if (a.month > b.month) {
+    return 1;
+  }
+  return 0;
+}
 
 export const TeamMemberFeedback = ({
   teamMember,
@@ -22,7 +31,7 @@ export const TeamMemberFeedback = ({
               headerText={`Feedback for ${fb.yearOfFeedback}`}
             >
               {fb?.monthlyFeedback?.length > 0 ? (
-                fb?.monthlyFeedback.map((monthFb) => {
+                (fb?.monthlyFeedback).sort(compare).map((monthFb) => {
                   return (
                     <MonthlyFeedbackDetails
                       key={monthFb.id}
