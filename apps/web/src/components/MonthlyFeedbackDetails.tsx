@@ -3,6 +3,8 @@ import { MonthlyFeedback } from "@prisma/client";
 
 import { Button } from "./ui/Button";
 import { Months } from "@/types/types";
+import { useRouter } from "next/dist/client/router";
+import { FEEDBACKS_EDIT } from "@/constants/routerConstants";
 
 type MonthlyFeedbackDetailsProps = {
   monthlyFeedback: MonthlyFeedback;
@@ -11,14 +13,27 @@ type MonthlyFeedbackDetailsProps = {
 export const MonthlyFeedbackDetails = ({
   monthlyFeedback,
 }: MonthlyFeedbackDetailsProps) => {
+  const router = useRouter();
   const handleMonthlyFeedbackUpdate = () => {
     console.log(monthlyFeedback);
+    router.push({
+      pathname: `${FEEDBACKS_EDIT}${monthlyFeedback.feedbackId}`,
+      query: { month: monthlyFeedback.month },
+    });
   };
 
   return (
-    <div className="mb-4">
-      <p className="text-xl font-extralight">{Months[monthlyFeedback.month]}</p>
-      <p>{monthlyFeedback.feedback}</p>
+    <div className="flex justify-between mb-4">
+      <div>
+        <p className="text-xl font-extralight">
+          {Months[monthlyFeedback.month]}
+        </p>
+        {monthlyFeedback.feedback ? (
+          <p>{monthlyFeedback.feedback}</p>
+        ) : (
+          "No feedback written for this month yet."
+        )}
+      </div>
       <Button
         className="mt-4"
         btnText={

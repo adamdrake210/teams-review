@@ -6,13 +6,8 @@ import prisma from "@/lib/prisma";
 import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { LOGIN } from "@/constants/routerConstants";
-import { TeamMemberDetails } from "@/components/TeamMemberDetails";
 import { TeamMemberForm } from "@/components/TeamMemberForm";
-
-const returnSingleParam = (param: string | string[]) => {
-  if (typeof param === "string") return param;
-  return param[0];
-};
+import { returnSingleParam } from "@/utils/getSingleParam";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
