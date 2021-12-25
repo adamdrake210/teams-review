@@ -44,7 +44,7 @@ export const SelectField = ({
       mb-4
       mt-2
       p-2
-      focus:text-gray-700 focus:bg-white focus:border-sky-500 focus:outline-none focus:shadow-outline"
+      focus:text-gray-700 focus:bg-white focus:border-purple-500 focus:outline-none focus:shadow-outline"
               aria-label={label}
               onChange={onChange}
               value={value}

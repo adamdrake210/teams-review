@@ -26,7 +26,7 @@ export default function Login() {
     <Layout title="Welcome!">
       <div className="flex flex-col items-center justify-center h-96">
         <Heading1>
-          Welcome to <span className="text-sky-400">{COMPANY_NAME}</span>
+          Welcome to <span className="text-purple-400">{COMPANY_NAME}</span>
         </Heading1>
 
         <p className="text-xl text-center">

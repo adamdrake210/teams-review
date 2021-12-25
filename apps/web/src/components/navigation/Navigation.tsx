@@ -39,12 +39,12 @@ export const Navigation = () => {
   }
 
   return (
-    <nav className="bg-gray-100 left-0 right-0 font-raleway">
+    <nav className="bg-slate-50 left-0 right-0 font-raleway shadow-md fixed z-10">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between p-3">
           <div className="flex space-x-4">
             <Link href={HOME} passHref>
-              <span className="text-2xl md:text-3xl text-sky-400 font-extralight uppercase cursor-pointer mr-8">
+              <span className="text-3xl text-purple-700 font-extralight uppercase cursor-pointer mr-8">
                 FeedBack
               </span>
             </Link>
@@ -55,10 +55,10 @@ export const Navigation = () => {
                   return (
                     <Link href={item.url} passHref key={index}>
                       <div
-                        className={`text-center border-secondary-500 cursor-pointer text-xl uppercase hover:text-sky-600 hover:underline ${
+                        className={`text-center border-secondary-500 cursor-pointer text-xl uppercase hover:text-purple-600 hover:underline ${
                           router.asPath === item.url
-                            ? "text-sky-600 underline"
-                            : "text-sky-400"
+                            ? "text-purple-600 underline"
+                            : "text-purple-400"
                         }`}
                       >
                         <p className="text-secondary-300">{item.label}</p>
@@ -104,13 +104,13 @@ export const Navigation = () => {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 fill-sky-500"
+                  className="h-6 w-6 fill-purple-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
                   <path
-                    className="fill-sky-500"
+                    className="fill-purple-500"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
@@ -128,10 +128,10 @@ export const Navigation = () => {
               return (
                 <Link href={item.url} passHref key={index}>
                   <div
-                    className={`text-xl uppercase hover:text-sky-600 hover:underline py-3 px-4 border-b-2 border-sky-400 ${
+                    className={`text-xl uppercase hover:text-purple-600 hover:underline py-3 px-4 border-b-2 border-purple-400 ${
                       router.asPath === item.url
-                        ? "text-sky-600 underline"
-                        : "text-sky-400"
+                        ? "text-purple-600 underline"
+                        : "text-purple-400"
                     }`}
                   >
                     <p className="text-secondary-300">{item.label}</p>

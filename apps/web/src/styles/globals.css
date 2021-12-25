@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply text-zinc-700;
+}
+
 .container {
   max-width: 1100px;
   padding: 16px;
+  padding-top: 72px;
 }
