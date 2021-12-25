@@ -7,7 +7,7 @@ type Heading1Props = {
 export const Heading2 = ({ children, ...rest }: Heading1Props) => {
   return (
     <h2
-      className={`text-xl font-vollkorn md:text-3xl font-extralight mb-2 ${rest}`}
+      className={`text-xl font-vollkorn text-zinc-700 md:text-3xl font-extralight mb-2 ${rest}`}
     >
       {children}
     </h2>

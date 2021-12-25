@@ -25,7 +25,7 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
           >
             <p
               key={teamMember.id}
-              className="mb-2 cursor-pointer hover:underline text-purple-400 hover:text-purple-600"
+              className="mb-2 cursor-pointer hover:underline text-gray-500 hover:text-green-600"
             >
               <span className="font-bold">
                 {teamMember.firstName} {teamMember.lastName}

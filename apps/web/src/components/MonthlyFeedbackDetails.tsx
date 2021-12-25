@@ -31,11 +31,13 @@ export const MonthlyFeedbackDetails = ({
         {monthlyFeedback.feedback ? (
           <p>{monthlyFeedback.feedback}</p>
         ) : (
-          "No feedback written for this month yet."
+          <p className="italic text-slate-400">
+            No feedback written for this month yet.
+          </p>
         )}
       </div>
       <Button
-        className="mt-4"
+        className="mt-4 self-center"
         btnText={
           <svg
             xmlns="http://www.w3.org/2000/svg"
