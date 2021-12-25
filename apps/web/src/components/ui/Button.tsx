@@ -24,8 +24,8 @@ export const Button = ({
       onClick={onClick}
       className={`${
         color === "primary"
-          ? "bg-sky-400 hover:bg-sky-600 text-white"
-          : "bg-gray-200 hover:bg-gray-300 text-gray-800"
+          ? "bg-green-700 hover:bg-green-800 text-white"
+          : "bg-white hover:bg-gray-100 text-green-800"
       } font-bold py-2 px-4 rounded disabled:bg-slate-400 uppercase ${className}`}
       disabled={disabled}
       {...rest}

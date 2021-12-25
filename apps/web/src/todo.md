@@ -1,5 +1,4 @@
 - Loader spinner
-- Chose colors and fonts
 - user avatar in navigation
 - profile page
 - meta info for SEO in head section
