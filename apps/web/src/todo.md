@@ -1,4 +1,3 @@
-- Navigation - hamburger icon
 - Loader spinner
 - Chose colors and fonts
 - user avatar in navigation
@@ -6,3 +5,4 @@
 - meta info for SEO in head section
 - dark mode
 - if no team members - message that no team members/ teams etc
+- Check how many prisma clients are running
