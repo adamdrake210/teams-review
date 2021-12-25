@@ -39,7 +39,7 @@ export const Navigation = () => {
   }
 
   return (
-    <nav className="bg-gray-100 left-0 right-0">
+    <nav className="bg-gray-100 left-0 right-0 font-raleway">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between p-3">
           <div className="flex space-x-4">
