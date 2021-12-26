@@ -1,9 +1,9 @@
 import React from "react";
+import { useRouter } from "next/dist/client/router";
 import { MonthlyFeedback } from "@prisma/client";
 
-import { Button } from "./ui/Button";
+import { Button } from "@/components/ui/Button";
 import { Months } from "@/types/types";
-import { useRouter } from "next/dist/client/router";
 import { FEEDBACKS_EDIT } from "@/constants/routerConstants";
 
 type MonthlyFeedbackDetailsProps = {

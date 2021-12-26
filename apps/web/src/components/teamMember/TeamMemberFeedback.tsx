@@ -1,7 +1,7 @@
 import React from "react";
 
 import { TeamMemberProps } from "@/pages/team-members/[id]";
-import { MonthlyFeedbackDetails } from "@/components/MonthlyFeedbackDetails";
+import { MonthlyFeedbackDetails } from "@/components/monthlyFeedback/MonthlyFeedbackDetails";
 import { CardContainer } from "@/components/ui/CardContainer";
 import { MonthlyFeedback } from "@prisma/client";
 

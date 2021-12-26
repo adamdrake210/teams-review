@@ -8,8 +8,8 @@ import { MonthlyFeedback } from "@prisma/client";
 import { Months } from "@/types/types";
 import { TEAM_MEMBER } from "@/constants/routerConstants";
 import { RQ_KEY_USER } from "@/constants/constants";
-import { Button } from "./ui/Button";
-import { ControlledTextArea } from "./ui/forms/ControlledTextArea";
+import { Button } from "@/components/ui/Button";
+import { ControlledTextArea } from "@/components/ui/forms/ControlledTextArea";
 
 type MonthlyFeedbackFormProps = {
   monthlyFeedback: MonthlyFeedback;
