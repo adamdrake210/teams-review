@@ -1,8 +1,8 @@
 import React from "react";
 import { TeamMember } from "@prisma/client";
 
-import { TeamMembersCard } from "./TeamMembersCard";
-import { Heading2 } from "./ui/typography/Heading2";
+import { TeamMembersCard } from "@/components/teamMember/TeamMembersCard";
+import { Heading2 } from "@/components/ui/typography/Heading2";
 
 type MyTeamMembersProps = {
   teamMembers: TeamMember[];

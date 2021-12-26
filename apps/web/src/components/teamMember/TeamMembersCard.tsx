@@ -3,9 +3,9 @@ import { TeamMember } from "@prisma/client";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 
-import { TEAM_MEMBER, TEAM_MEMBERS_CREATE } from "../constants/routerConstants";
-import { Button } from "./ui/Button";
-import { CardContainer } from "./ui/CardContainer";
+import { TEAM_MEMBER, TEAM_MEMBERS_CREATE } from "@/constants/routerConstants";
+import { Button } from "@/components/ui/Button";
+import { CardContainer } from "@/components/ui/CardContainer";
 
 type TeamMembersCardProps = {
   teamMembers: TeamMember[];

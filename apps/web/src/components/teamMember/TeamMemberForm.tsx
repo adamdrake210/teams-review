@@ -10,7 +10,7 @@ import {
   createTeamMemberRequest,
   updateTeamMemberRequest,
 } from "../services/api/teamMembersApi";
-import { SelectField } from "./SelectField";
+import { SelectField } from "./ui/forms/SelectField";
 import { Button } from "./ui/Button";
 import { ControlledTextField } from "./ui/forms/ControlledTextField";
 import { Loading } from "./Loading";

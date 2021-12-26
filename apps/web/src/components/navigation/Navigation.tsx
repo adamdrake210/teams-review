@@ -10,6 +10,7 @@ import {
   TEAMS,
   TEAM_MEMBERS,
 } from "../../constants/routerConstants";
+import { Loading } from "../Loading";
 
 const MenuItems = [
   // {
@@ -33,10 +34,6 @@ export const Navigation = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
-
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
 
   return (
     <nav className="bg-slate-50 left-0 right-0 font-raleway shadow-md fixed z-10">
@@ -70,7 +67,9 @@ export const Navigation = () => {
             )}
           </div>
           <div className="hidden md:flex space-x-4">
-            {session?.user ? (
+            {status === "loading" ? (
+              <Loading />
+            ) : session?.user ? (
               <Button btnText="Logout" onClick={signOut} />
             ) : (
               <>
@@ -140,7 +139,9 @@ export const Navigation = () => {
               );
             })}
             <div className="flex justify-center py-2">
-              {session?.user ? (
+              {status === "loading" ? (
+                <Loading />
+              ) : session?.user ? (
                 <Button btnText="Logout" onClick={signOut} />
               ) : (
                 <>

@@ -5,3 +5,8 @@
 - dark mode
 - if no team members - message that no team members/ teams etc
 - Check how many prisma clients are running
+- Home Landing page
+- Latest reviews feature on Homepage
+- Teams Page - needed?
+- Feedbacks page - monthly reviews / yearly reviews
+- tips for good feedback / inspiration colomn

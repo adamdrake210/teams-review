@@ -1,8 +1,8 @@
 import React from "react";
 
 import { TeamMemberProps } from "@/pages/team-members/[id]";
-import { MonthlyFeedbackDetails } from "./MonthlyFeedbackDetails";
-import { CardContainer } from "./ui/CardContainer";
+import { MonthlyFeedbackDetails } from "@/components/MonthlyFeedbackDetails";
+import { CardContainer } from "@/components/ui/CardContainer";
 import { MonthlyFeedback } from "@prisma/client";
 
 function compare(a: MonthlyFeedback, b: MonthlyFeedback) {
