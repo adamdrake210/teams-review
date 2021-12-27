@@ -5,5 +5,7 @@ type ErrorTextProps = {
 };
 
 export const ErrorText = ({ children }: ErrorTextProps) => {
-  return <p className="text-md font-extralight text-red-500">{children}</p>;
+  return (
+    <p className="text-md font-extralight text-red-500 my-2">{children}</p>
+  );
 };
