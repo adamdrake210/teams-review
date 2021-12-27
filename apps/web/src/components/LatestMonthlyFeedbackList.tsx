@@ -32,7 +32,10 @@ export const LatestMonthlyFeedbackList = ({
               </Heading3>
               <div className="flex flex-col sm:flex-row sm:space-x-4">
                 {mfb?.feedback[0]?.monthlyFeedback?.map((fb, i) => {
-                  if (fb.positiveFeedback.length > 0) {
+                  if (
+                    fb.positiveFeedback.length > 0 ||
+                    fb.negativeFeedback.length > 0
+                  ) {
                     return (
                       <MonthlyFeedbackCard
                         key={`${fb.feedbackId}${i}`}

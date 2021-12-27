@@ -6,6 +6,7 @@ import { CardContainer } from "@/components/ui/CardContainer";
 import { MonthlyFeedback } from "@prisma/client";
 import { EditButton } from "@/components/ui/EditButton";
 import { FEEDBACKS_EDIT } from "@/constants/routerConstants";
+import { Heading4 } from "@/components/ui/typography/Heading4";
 
 type MonthlyFeedbackCardProps = {
   feedback: MonthlyFeedback;
@@ -17,6 +18,8 @@ export const MonthlyFeedbackCard = ({
   yearOfFeedback,
 }: MonthlyFeedbackCardProps) => {
   const router = useRouter();
+
+  const { positiveFeedback, negativeFeedback } = feedback;
 
   const handleMonthlyFeedbackUpdate = () => {
     router.push({
@@ -30,7 +33,10 @@ export const MonthlyFeedbackCard = ({
       className="flex-1 sm:basis-1/3"
       headerText={`${Months[feedback.month]} - ${yearOfFeedback}`}
     >
-      <p>{feedback.feedback}</p>
+      <Heading4>
+        {positiveFeedback ? "Positive Feedback" : "Negative Feedback"}
+      </Heading4>
+      <p>{feedback.positiveFeedback || feedback.negativeFeedback}</p>
       <EditButton onClick={handleMonthlyFeedbackUpdate} />
     </CardContainer>
   );
