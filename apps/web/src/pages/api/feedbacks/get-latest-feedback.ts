@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import prisma from "@/lib/prisma";
 
-// GET /api/user
+// GET /api/feedbacks/get-latest-feedbacks
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
@@ -24,6 +24,7 @@ export default async function handle(
             yearOfFeedback: true,
             monthlyFeedback: {
               select: {
+                feedbackId: true,
                 feedback: true,
                 month: true,
                 updatedAt: true,
