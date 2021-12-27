@@ -7,6 +7,7 @@ import { MyTeamMembers } from "../components/MyTeamMembers";
 import prisma from "../lib/prisma";
 import { MyInfo } from "../components/MyInfo";
 import { Heading1 } from "../components/ui/typography/Heading1";
+import { LatestMonthlyFeedback } from "@/components/LatestMonthlyFeedback";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -47,8 +48,16 @@ export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
   return (
     <Layout title="Home">
       <Heading1>Your Dashboard</Heading1>
-      <MyInfo />
-      <MyTeamMembers teamMembers={initialTeamMembers} />
+      <div className="flex flex-col-reverse sm:space-x-4 sm:flex-row">
+        <MyTeamMembers
+          teamMembers={initialTeamMembers}
+          className="flex-1 sm:basis-2/3"
+        />
+        <MyInfo className="flex-1 sm:basis-1/3" />
+      </div>
+      <div className="flex flex-col w-full sm:space-x-4 sm:flex-row">
+        <LatestMonthlyFeedback className="w-full" />
+      </div>
     </Layout>
   );
 }

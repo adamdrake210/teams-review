@@ -18,7 +18,7 @@ export const Layout = ({ children, title }: LayoutProps) => {
         </title>
       </Head>
       <Navigation />
-      <main className="flex flex-col min-h-screen p-4 mx-auto container font-raleway">
+      <main className="flex flex-col min-h-screen font-raleway p-4 mx-auto container">
         {children}
       </main>
     </div>

@@ -14,3 +14,14 @@ export async function updateMonthlyFeedbackRequest(
   const data = await response.json();
   return data;
 }
+
+export async function getLatestMonthlyFeedback() {
+  const response = await fetchAbsolute("/api/feedbacks/get-latest-feedback", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  return data;
+}

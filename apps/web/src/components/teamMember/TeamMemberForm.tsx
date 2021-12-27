@@ -4,16 +4,16 @@ import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/dist/client/router";
 
-import { RQ_KEY_USER } from "../constants/constants";
-import { getUser } from "../services/api/userApi";
+import { RQ_KEY_USER } from "@/constants/constants";
+import { getUser } from "@/services/api/userApi";
 import {
   createTeamMemberRequest,
   updateTeamMemberRequest,
-} from "../services/api/teamMembersApi";
-import { SelectField } from "./SelectField";
-import { Button } from "./ui/Button";
-import { ControlledTextField } from "./ui/forms/ControlledTextField";
-import { Loading } from "./Loading";
+} from "@/services/api/teamMembersApi";
+import { SelectField } from "@/components/ui/forms/SelectField";
+import { Button } from "@/components/ui/Button";
+import { ControlledTextField } from "@/components/ui/forms/ControlledTextField";
+import { Loading } from "@/components/Loading";
 import { TEAM_MEMBER } from "@/constants/routerConstants";
 
 type TeamMemberFormProps = {

@@ -7,9 +7,9 @@ import { updateMonthlyFeedbackRequest } from "@/services/api/monthlyFeedbackApi"
 import { MonthlyFeedback } from "@prisma/client";
 import { Months } from "@/types/types";
 import { TEAM_MEMBER } from "@/constants/routerConstants";
-import { RQ_KEY_USER } from "@/constants/constants";
-import { Button } from "./ui/Button";
-import { ControlledTextArea } from "./ui/forms/ControlledTextArea";
+import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
+import { Button } from "@/components/ui/Button";
+import { ControlledTextArea } from "@/components/ui/forms/ControlledTextArea";
 
 type MonthlyFeedbackFormProps = {
   monthlyFeedback: MonthlyFeedback;
@@ -35,11 +35,11 @@ export const MonthlyFeedbackForm = ({
     },
     onSuccess: () => {
       router.push(`${TEAM_MEMBER}${teamMemberId}`);
-      queryClient.refetchQueries([RQ_KEY_USER]);
+      queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
     },
     // Always refetch after error or success:
     onSettled: () => {
-      queryClient.invalidateQueries([RQ_KEY_USER]);
+      queryClient.invalidateQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
     },
   });
 

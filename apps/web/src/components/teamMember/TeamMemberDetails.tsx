@@ -1,9 +1,8 @@
 import React from "react";
 import { useRouter } from "next/dist/client/router";
 
-import { Team, TeamMember } from "@prisma/client";
-import { CardContainer } from "./ui/CardContainer";
-import { Button } from "./ui/Button";
+import { CardContainer } from "@/components/ui/CardContainer";
+import { Button } from "@/components/ui/Button";
 import { TEAM_MEMBERS_EDIT } from "@/constants/routerConstants";
 import { TeamMemberProps } from "@/pages/team-members/[id]";
 

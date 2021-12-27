@@ -6,10 +6,10 @@ import prisma from "@/lib/prisma";
 import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { LOGIN } from "@/constants/routerConstants";
-import { TeamMemberForm } from "@/components/TeamMemberForm";
+import { TeamMemberForm } from "@/components/teamMember/TeamMemberForm";
 import { returnSingleParam } from "@/utils/getSingleParam";
 import { Months } from "@/types/types";
-import { MonthlyFeedbackForm } from "@/components/MonthlyFeedbackForm";
+import { MonthlyFeedbackForm } from "@/components/monthlyFeedback/MonthlyFeedbackForm";
 import { useRouter } from "next/dist/client/router";
 
 export const getServerSideProps: GetServerSideProps = async ({

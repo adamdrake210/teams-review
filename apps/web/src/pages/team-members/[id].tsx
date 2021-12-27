@@ -6,8 +6,8 @@ import prisma from "@/lib/prisma";
 import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { LOGIN } from "@/constants/routerConstants";
-import { TeamMemberDetails } from "@/components/TeamMemberDetails";
-import { TeamMemberFeedback } from "@/components/TeamMemberFeedback";
+import { TeamMemberDetails } from "@/components/teamMember/TeamMemberDetails";
+import { TeamMemberFeedback } from "@/components/teamMember/TeamMemberFeedback";
 
 const returnSingleParam = (param: string | string[]) => {
   if (typeof param === "string") return param;

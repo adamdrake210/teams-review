@@ -1,8 +1,8 @@
 import React from "react";
 
-import { TeamMemberForm } from "../../components/TeamMemberForm";
-import { Heading1 } from "../../components/ui/typography/Heading1";
-import { Layout } from "../../layout/Layout";
+import { TeamMemberForm } from "@/components/teamMember/TeamMemberForm";
+import { Heading1 } from "@/components/ui/typography/Heading1";
+import { Layout } from "@/layout/Layout";
 
 export default function Create() {
   return (
