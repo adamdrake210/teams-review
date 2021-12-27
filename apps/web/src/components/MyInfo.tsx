@@ -7,9 +7,10 @@ import { getUser } from "@/services/api/userApi";
 import { Loading } from "./Loading";
 import { CardContainer } from "./ui/CardContainer";
 import { Heading2 } from "./ui/typography/Heading2";
+import { Paragraph } from "./ui/typography/paragraph";
 
 type MyInfoProps = {
-  className: string;
+  className?: string;
 };
 
 export const MyInfo = ({ className }: MyInfoProps) => {
@@ -19,15 +20,15 @@ export const MyInfo = ({ className }: MyInfoProps) => {
 
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
-      <div className={className}>
+      <div className={className || ""}>
         <Heading2>Team Info</Heading2>
         <CardContainer
           headerText={`Welcome back ${data?.firstName || data?.name}!`}
         >
           {data && (
-            <p className="text-2xl font-extralight">
+            <Paragraph>
               You currently have {data.employees.length} employees!
-            </p>
+            </Paragraph>
           )}
         </CardContainer>
       </div>

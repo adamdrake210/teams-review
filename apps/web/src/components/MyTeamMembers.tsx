@@ -6,7 +6,7 @@ import { Heading2 } from "@/components/ui/typography/Heading2";
 
 type MyTeamMembersProps = {
   teamMembers: TeamMember[];
-  className: string;
+  className?: string;
 };
 
 export const MyTeamMembers = ({
@@ -14,7 +14,7 @@ export const MyTeamMembers = ({
   className,
 }: MyTeamMembersProps) => {
   return (
-    <div className={className}>
+    <div className={className || ""}>
       <Heading2>Team Members</Heading2>
       <TeamMembersCard teamMembers={teamMembers} />
     </div>

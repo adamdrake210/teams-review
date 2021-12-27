@@ -6,6 +6,7 @@ import Link from "next/link";
 import { TEAM_MEMBER, TEAM_MEMBERS_CREATE } from "@/constants/routerConstants";
 import { Button } from "@/components/ui/Button";
 import { CardContainer } from "@/components/ui/CardContainer";
+import { Paragraph } from "../ui/typography/paragraph";
 
 type TeamMembersCardProps = {
   teamMembers: TeamMember[];
@@ -16,25 +17,29 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
 
   return (
     <CardContainer headerText="Current Team Members">
-      {teamMembers.map((teamMember) => {
-        return (
-          <Link
-            href={`${TEAM_MEMBER}${teamMember.id}`}
-            passHref
-            key={teamMember.id}
-          >
-            <p
+      {teamMembers?.length > 0 ? (
+        teamMembers.map((teamMember) => {
+          return (
+            <Link
+              href={`${TEAM_MEMBER}${teamMember.id}`}
+              passHref
               key={teamMember.id}
-              className="mb-2 cursor-pointer hover:underline text-gray-500 hover:text-green-600"
             >
-              <span className="font-bold">
-                {teamMember.firstName} {teamMember.lastName}
-              </span>{" "}
-              - {teamMember.position}
-            </p>
-          </Link>
-        );
-      })}
+              <p
+                key={teamMember.id}
+                className="mb-2 cursor-pointer hover:underline text-gray-500 hover:text-green-600"
+              >
+                <span className="font-bold">
+                  {teamMember.firstName} {teamMember.lastName}
+                </span>{" "}
+                - {teamMember.position}
+              </p>
+            </Link>
+          );
+        })
+      ) : (
+        <Paragraph>Currently you have no team members.</Paragraph>
+      )}
       <Button
         className="mt-6"
         btnText="Create Team Member"

@@ -19,7 +19,7 @@ const MenuItems = [
   //   active: false,
   // },
   {
-    label: "Your Teams",
+    label: "Teams",
     url: TEAMS,
     active: false,
   },

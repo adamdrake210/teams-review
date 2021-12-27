@@ -55,8 +55,8 @@ export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
         />
         <MyInfo className="flex-1 sm:basis-1/3" />
       </div>
-      <div className="flex flex-col sm:space-x-4 sm:flex-row">
-        <LatestMonthlyFeedback />
+      <div className="flex flex-col w-full sm:space-x-4 sm:flex-row">
+        <LatestMonthlyFeedback className="w-full" />
       </div>
     </Layout>
   );
