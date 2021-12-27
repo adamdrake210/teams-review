@@ -1,7 +1,5 @@
-- Loader spinner
 - user avatar in navigation
 - profile page
-- meta info for SEO in head section
 - dark mode
 - if no team members - message that no team members/ teams etc
 - Check how many prisma clients are running
@@ -12,3 +10,5 @@
 - Add 'Joined' field to CreateTeamMember form
 - footer
 - Google login
+
+- meta info for SEO in head section
