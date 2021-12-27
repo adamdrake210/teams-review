@@ -4,10 +4,10 @@ import { useQuery } from "react-query";
 
 import { RQ_KEY_USER } from "@/constants/constants";
 import { getUser } from "@/services/api/userApi";
-import { Loading } from "./Loading";
-import { CardContainer } from "./ui/CardContainer";
-import { Heading2 } from "./ui/typography/Heading2";
-import { Paragraph } from "./ui/typography/paragraph";
+import { Loading } from "@/components/Loading";
+import { CardContainer } from "@/components/ui/CardContainer";
+import { Heading2 } from "@/components/ui/typography/Heading2";
+import { Paragraph } from "@/components/ui/typography/Paragraph";
 
 type MyInfoProps = {
   className?: string;
