@@ -1,12 +1,10 @@
-import { fetchAbsolute } from "../../utils/apiHelpers";
+import { fetchAbsolute } from "@/utils/apiHelpers";
+import { API_ENDPOINTS } from "./apiConstants";
+
+const { API_USER_GET } = API_ENDPOINTS;
 
 export async function getUser() {
-  const response = await fetchAbsolute("/api/user/get-me", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetchAbsolute(API_USER_GET);
 
   return await response.json();
 }
