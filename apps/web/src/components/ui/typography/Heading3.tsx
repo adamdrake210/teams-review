@@ -6,10 +6,10 @@ type Heading1Props = {
 
 export const Heading3 = ({ children, ...rest }: Heading1Props) => {
   return (
-    <h2
+    <h3
       className={`text-xl font-vollkorn text-zinc-700 md:text-2xl font-extralight mb-2 ${rest}`}
     >
       {children}
-    </h2>
+    </h3>
   );
 };

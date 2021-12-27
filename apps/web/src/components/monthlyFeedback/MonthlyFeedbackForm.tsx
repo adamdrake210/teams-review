@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/dist/client/router";
@@ -10,6 +10,7 @@ import { TEAM_MEMBER } from "@/constants/routerConstants";
 import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
 import { Button } from "@/components/ui/Button";
 import { ControlledTextArea } from "@/components/ui/forms/ControlledTextArea";
+import { ErrorText } from "../ui/typography/ErrorText";
 
 type MonthlyFeedbackFormProps = {
   monthlyFeedback: MonthlyFeedback;
@@ -22,16 +23,19 @@ export const MonthlyFeedbackForm = ({
 }: MonthlyFeedbackFormProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const [apiError, setApiError] = useState<Error | null>(null);
 
   const { handleSubmit, control } = useForm({
     defaultValues: {
-      feedback: monthlyFeedback.feedback,
+      positiveFeedback: monthlyFeedback.positiveFeedback,
+      negativeFeedback: monthlyFeedback.negativeFeedback,
     },
   });
 
   const updateMutation = useMutation(updateMonthlyFeedbackRequest, {
     onError: (err: Error) => {
       console.error(err.message);
+      setApiError(err);
     },
     onSuccess: () => {
       router.push(`${TEAM_MEMBER}${teamMemberId}`);
@@ -44,13 +48,16 @@ export const MonthlyFeedbackForm = ({
   });
 
   type FormData = {
-    feedback: string;
+    positiveFeedback: string;
+    negativeFeedback: string;
   };
 
   const onSubmit = (formData: FormData) => {
+    setApiError(null);
     updateMutation.mutate({
       id: monthlyFeedback.id,
-      feedback: formData.feedback,
+      positiveFeedback: formData.positiveFeedback,
+      negativeFeedback: formData.negativeFeedback,
     });
   };
 
@@ -59,10 +66,17 @@ export const MonthlyFeedbackForm = ({
       <p>{Months[monthlyFeedback.month]}</p>
 
       <ControlledTextArea
-        name="feedback"
-        label="Feedback"
+        name="positiveFeedback"
+        label="Positive Feedback"
         control={control}
-        placeholder="Write your feedback here..."
+        placeholder="What did they do really well this month..."
+        rows={8}
+      />
+      <ControlledTextArea
+        name="negativeFeedback"
+        label="Negative Feedback"
+        control={control}
+        placeholder="Where is there room for improvement..."
         rows={8}
       />
 
@@ -72,6 +86,9 @@ export const MonthlyFeedbackForm = ({
         color="primary"
         disabled={updateMutation.isLoading}
       />
+      {apiError && (
+        <ErrorText>Something went wrong. {apiError.message}</ErrorText>
+      )}
     </form>
   );
 };
