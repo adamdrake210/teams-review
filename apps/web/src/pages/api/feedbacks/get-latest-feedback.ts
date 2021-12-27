@@ -7,41 +7,48 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req });
-
-  if (session) {
-    const feedback = await prisma.teamMember.findMany({
-      where: {
-        manager: {
-          email: session?.user?.email,
+  try {
+    const session = await getSession({ req });
+    if (session) {
+      const feedback = await prisma.teamMember.findMany({
+        where: {
+          manager: {
+            email: session?.user?.email,
+          },
         },
-      },
-      select: {
-        firstName: true,
-        lastName: true,
-        feedback: {
-          select: {
-            yearOfFeedback: true,
-            monthlyFeedback: {
-              select: {
-                feedbackId: true,
-                positiveFeedback: true,
-                negativeFeedback: true,
-                month: true,
-                updatedAt: true,
-              },
-              take: 3,
-              orderBy: {
-                updatedAt: "desc",
+        select: {
+          firstName: true,
+          lastName: true,
+          feedback: {
+            select: {
+              yearOfFeedback: true,
+              monthlyFeedback: {
+                select: {
+                  feedbackId: true,
+                  positiveFeedback: true,
+                  negativeFeedback: true,
+                  month: true,
+                  updatedAt: true,
+                },
+                take: 3,
+                orderBy: {
+                  updatedAt: "desc",
+                },
               },
             },
+            take: 3,
           },
-          take: 3,
         },
-      },
-    });
-    res.json(feedback);
-  } else {
-    res.status(401).send({ message: "Unauthorized" });
+      });
+      res.json(feedback);
+    } else {
+      res.status(401).send({ message: "Unauthorized" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+    return Promise.reject(error);
+  } finally {
+    await prisma.$disconnect();
   }
 }

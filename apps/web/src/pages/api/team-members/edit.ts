@@ -35,9 +35,8 @@ export default async function handle(
     }
   } catch (error) {
     console.error(error);
-
     res.status(500);
-    res.json({ error: "Sorry unable to save this information to database" });
+    return Promise.reject(error);
   } finally {
     await prisma.$disconnect();
   }
