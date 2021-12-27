@@ -25,7 +25,8 @@ export default async function handle(
             monthlyFeedback: {
               select: {
                 feedbackId: true,
-                feedback: true,
+                positiveFeedback: true,
+                negativeFeedback: true,
                 month: true,
                 updatedAt: true,
               },

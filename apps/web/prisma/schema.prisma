@@ -98,20 +98,21 @@ model TeamMember {
 }
 
 model Feedback {
-  id             String            @id @default(uuid())
-  createdAt      DateTime          @default(now())
-  yearOfFeedback Int
-  teamMember     TeamMember        @relation(fields: [teamMemberId], references: [id])
-  teamMemberId   String
-  monthlyFeedback  MonthlyFeedback[]
+  id              String            @id @default(uuid())
+  createdAt       DateTime          @default(now())
+  yearOfFeedback  Int
+  teamMember      TeamMember        @relation(fields: [teamMemberId], references: [id])
+  teamMemberId    String
+  monthlyFeedback MonthlyFeedback[]
 }
 
 model MonthlyFeedback {
-  id         String    @id @default(uuid())
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
-  month      Int
-  feedback   String
-  Feedback   Feedback? @relation(fields: [feedbackId], references: [id])
-  feedbackId String?
+  id               String    @id @default(uuid())
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  month            Int
+  positiveFeedback String
+  negativeFeedback String
+  Feedback         Feedback? @relation(fields: [feedbackId], references: [id])
+  feedbackId       String?
 }

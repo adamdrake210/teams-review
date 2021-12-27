@@ -1,5 +1,5 @@
 import { Team, TeamMember } from "@prisma/client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/dist/client/router";
@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/Button";
 import { ControlledTextField } from "@/components/ui/forms/ControlledTextField";
 import { Loading } from "@/components/Loading";
 import { TEAM_MEMBER } from "@/constants/routerConstants";
+import { ErrorText } from "../ui/typography/ErrorText";
 
 type TeamMemberFormProps = {
   editTeamMember?: TeamMember & { team: Team };
@@ -23,6 +24,7 @@ type TeamMemberFormProps = {
 export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const [apiError, setApiError] = useState<Error | null>(null);
 
   const { handleSubmit, control } = useForm<TeamMember>({
     defaultValues: {
@@ -45,6 +47,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
   const createMutation = useMutation(createTeamMemberRequest, {
     onError: (err: Error) => {
       console.error(err.message);
+      setApiError(err);
     },
     onSuccess: (data) => {
       router.push(`${TEAM_MEMBER}${data.id}`);
@@ -59,6 +62,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
   const updateMutation = useMutation(updateTeamMemberRequest, {
     onError: (err: Error) => {
       console.error(err.message);
+      setApiError(err);
     },
     onSuccess: (data) => {
       router.push(`${TEAM_MEMBER}${data.id}`);
@@ -71,6 +75,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
   });
 
   const onSubmit = (formData: TeamMember) => {
+    setApiError(null);
     if (editTeamMember) {
       updateMutation.mutate({ id: editTeamMember.id, ...formData });
     } else {
@@ -121,6 +126,9 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         color="primary"
         disabled={updateMutation.isLoading || createMutation.isLoading}
       />
+      {apiError && (
+        <ErrorText>Something went wrong. {apiError.message}</ErrorText>
+      )}
     </form>
   );
 };
