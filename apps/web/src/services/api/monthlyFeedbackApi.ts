@@ -1,27 +1,19 @@
 import { fetchAbsolute } from "@/utils/apiHelpers";
 import { MonthlyFeedback } from "@prisma/client";
+import { API_ENDPOINTS } from "./apiConstants";
+
+const { API_FEEDBACKS_UPDATE, API_MONTHLY_FEEDBACK_LATEST } = API_ENDPOINTS;
 
 export async function updateMonthlyFeedbackRequest(
   updateMonthlyFeedbackRequestParams: Partial<MonthlyFeedback>
 ) {
-  const response = await fetchAbsolute("/api/feedbacks/edit", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const response = await fetchAbsolute(API_FEEDBACKS_UPDATE, {
     body: JSON.stringify({ data: updateMonthlyFeedbackRequestParams }),
   });
-  const data = await response.json();
-  return data;
+  return await response.json();
 }
 
 export async function getLatestMonthlyFeedback() {
-  const response = await fetchAbsolute("/api/feedbacks/get-latest-feedback", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  return data;
+  const response = await fetchAbsolute(API_MONTHLY_FEEDBACK_LATEST);
+  return await response.json();
 }
