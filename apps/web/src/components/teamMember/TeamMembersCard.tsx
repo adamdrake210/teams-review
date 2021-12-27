@@ -6,7 +6,7 @@ import Link from "next/link";
 import { TEAM_MEMBER, TEAM_MEMBERS_CREATE } from "@/constants/routerConstants";
 import { Button } from "@/components/ui/Button";
 import { CardContainer } from "@/components/ui/CardContainer";
-import { Paragraph } from "../ui/typography/paragraph";
+import { Paragraph } from "@/components/ui/typography/Paragraph";
 
 type TeamMembersCardProps = {
   teamMembers: TeamMember[];
