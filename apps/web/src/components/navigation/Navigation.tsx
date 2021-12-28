@@ -9,8 +9,10 @@ import {
   HOME,
   TEAMS,
   TEAM_MEMBERS,
+  USER_PROFILE,
 } from "../../constants/routerConstants";
 import { Loading } from "../Loading";
+import { NavDropDownMenu } from "./NavDropDownMenu";
 
 const MenuItems = [
   // {
@@ -26,6 +28,15 @@ const MenuItems = [
   {
     label: "Feedbacks",
     url: FEEDBACKS,
+    active: false,
+  },
+];
+
+const MobileMenuItems = [
+  ...MenuItems,
+  {
+    label: "Profile",
+    url: USER_PROFILE,
     active: false,
   },
 ];
@@ -70,7 +81,7 @@ export const Navigation = () => {
             {status === "loading" ? (
               <Loading />
             ) : session?.user ? (
-              <Button btnText="Logout" onClick={signOut} />
+              <NavDropDownMenu user={session.user} />
             ) : (
               <>
                 <Button btnText="Login" onClick={signIn} />
@@ -123,11 +134,11 @@ export const Navigation = () => {
         {/* Mobile Menu */}
         {showMenu && (
           <div className="flex flex-col">
-            {MenuItems.map((item, index) => {
+            {MobileMenuItems.map((item, index) => {
               return (
                 <Link href={item.url} passHref key={index}>
                   <div
-                    className={`text-xl uppercase hover:text-green-600 hover:underline py-3 px-4 border-b-2 border-green-400 ${
+                    className={`text-xl uppercase hover:text-green-600 hover:underline py-3 px-4 ${
                       router.asPath === item.url
                         ? "text-green-600 underline"
                         : "text-gray-500"
