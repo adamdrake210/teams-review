@@ -44,20 +44,20 @@ type TeamReviewProps = {
   initialTeamMembers: TeamMember[];
 };
 
-export default function TeamReview({ initialTeamMembers }: TeamReviewProps) {
+export default function UserDashboard({ initialTeamMembers }: TeamReviewProps) {
   return (
     <Layout title="Home">
       <Heading1>Your Dashboard</Heading1>
-      <div className="flex flex-col-reverse sm:space-x-4 sm:flex-row">
+      <section className="flex flex-col-reverse sm:space-x-4 sm:flex-row">
         <MyTeamMembers
           teamMembers={initialTeamMembers}
           className="flex-1 sm:basis-2/3"
         />
         <MyInfo className="flex-1 sm:basis-1/3" />
-      </div>
-      <div className="flex flex-col w-full sm:space-x-4 sm:flex-row">
+      </section>
+      <section className="flex flex-col w-full sm:space-x-4 sm:flex-row">
         <LatestMonthlyFeedback className="w-full" />
-      </div>
+      </section>
     </Layout>
   );
 }
