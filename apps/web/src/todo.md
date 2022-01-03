@@ -1,4 +1,3 @@
-- profile page
 - dark mode
 - if no team members - message that no team members/ teams etc
 - Check how many prisma clients are running
