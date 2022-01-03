@@ -24,4 +24,12 @@ export const API_ENDPOINTS = {
     method: "GET",
     url: "/api/user/get-me",
   },
+  API_USER_UPDATE: {
+    method: "PUT",
+    url: "/api/user/update",
+  },
+  API_USER_DELETE: {
+    method: "DELETE",
+    url: "/api/user/delete",
+  },
 } as const;
