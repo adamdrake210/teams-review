@@ -7,6 +7,5 @@
 - Feedbacks page - monthly reviews / yearly reviews
 - tips for good feedback / inspiration colomn
 - Add 'Joined' field to CreateTeamMember form
-- Google login
 
 - meta info for SEO in head section

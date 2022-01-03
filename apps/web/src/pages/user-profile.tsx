@@ -5,6 +5,7 @@ import { getSession } from "next-auth/react";
 import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { User } from "next-auth";
+import { UserProfile } from "@/components/userProfile/UserProfile";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -33,6 +34,7 @@ export default function UserProfilePage({ user }: UserProfilePageProps) {
   return (
     <Layout title="Feedback">
       <Heading1>User Profile for {user?.name}</Heading1>
+      <UserProfile />
     </Layout>
   );
 }
