@@ -47,7 +47,7 @@ export const UserProfileForm = ({ userData }: UserProfileFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md my-8">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
       <ControlledTextField
         name="firstName"
         label="First Name"
