@@ -1,4 +1,6 @@
 - dark mode
+- delete user account
+- delete team member
 - if no team members - message that no team members/ teams etc
 - Check how many prisma clients are running
 - Home Landing page
