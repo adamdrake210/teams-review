@@ -41,7 +41,7 @@ export const ControlledTextArea = ({
             rows={rows || 5}
           />
           {error && (
-            <span className="text-red-600 text-sm">This field is required</span>
+            <span className="text-red-600 text-sm">{rules.required}</span>
           )}
         </div>
       )}
