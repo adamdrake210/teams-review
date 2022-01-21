@@ -18,6 +18,10 @@ export const API_ENDPOINTS = {
     method: "PUT",
     url: "/api/team-members/update",
   },
+  API_TEAM_MEMBER_DELETE: {
+    method: "DELETE",
+    url: "/api/team-members/delete",
+  },
 
   // User
   API_USER_GET: {

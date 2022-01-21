@@ -68,11 +68,17 @@ export default function TeamMemberDetailsPage({
 }: TeamMemberProps) {
   return (
     <Layout title="Team Member">
-      <Heading1>
-        Details for {teamMember.firstName} {teamMember.lastName}
-      </Heading1>
-      <TeamMemberDetails teamMember={teamMember} />
-      <TeamMemberFeedback teamMember={teamMember} feedback={feedback} />
+      {teamMember ? (
+        <>
+          <Heading1>
+            Details for {teamMember.firstName} {teamMember.lastName}
+          </Heading1>
+          <TeamMemberDetails teamMember={teamMember} />
+          <TeamMemberFeedback teamMember={teamMember} feedback={feedback} />
+        </>
+      ) : (
+        <Heading1>No Team Member found</Heading1>
+      )}
     </Layout>
   );
 }
