@@ -18,12 +18,6 @@ export default async function handle(
         },
       });
 
-      const deleteFeedback = prisma.feedback.deleteMany({
-        where: {
-          teamMemberId,
-        },
-      });
-
       const deleteTeamMember = prisma.teamMember.delete({
         where: {
           id: teamMemberId,
@@ -32,7 +26,6 @@ export default async function handle(
 
       const transaction = await prisma.$transaction([
         deleteMonthlyFeedback,
-        deleteFeedback,
         deleteTeamMember,
       ]);
       res.json(transaction);

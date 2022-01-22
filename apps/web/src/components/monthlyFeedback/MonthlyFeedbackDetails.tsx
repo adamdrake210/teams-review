@@ -17,8 +17,8 @@ export const MonthlyFeedbackDetails = ({
   const router = useRouter();
   const handleMonthlyFeedbackUpdate = () => {
     router.push({
-      pathname: `${FEEDBACKS_EDIT}${monthlyFeedback.feedbackId}`,
-      query: { month: monthlyFeedback.month },
+      pathname: `${FEEDBACKS_EDIT}${monthlyFeedback.id}`,
+      // query: { month: monthlyFeedback.month },
     });
   };
 
@@ -26,7 +26,7 @@ export const MonthlyFeedbackDetails = ({
     <div className="flex justify-between mb-4">
       <div className="w-5/6">
         <p className="text-xl font-extralight">
-          {Months[monthlyFeedback.month]}
+          {Months[new Date(monthlyFeedback.createdAt).getMonth()]}
         </p>
         <div className="flex flex-col sm:flex-row sm:justify-between w-full">
           <div className="flex flex-col sm:basis-1/2">

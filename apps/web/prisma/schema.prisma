@@ -94,16 +94,6 @@ model TeamMember {
   userId          String
   team            Team              @relation(fields: [teamId], references: [id])
   teamId          String
-  feedback        Feedback[]
-  monthlyFeedback MonthlyFeedback[]
-}
-
-model Feedback {
-  id              String            @id @default(uuid())
-  createdAt       DateTime          @default(now())
-  yearOfFeedback  Int
-  teamMember      TeamMember        @relation(fields: [teamMemberId], references: [id])
-  teamMemberId    String
   monthlyFeedback MonthlyFeedback[]
 }
 
@@ -111,11 +101,8 @@ model MonthlyFeedback {
   id               String      @id @default(uuid())
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
-  month            Int
   positiveFeedback String
   negativeFeedback String
-  Feedback         Feedback?   @relation(fields: [feedbackId], references: [id])
-  feedbackId       String?
   TeamMember       TeamMember? @relation(fields: [teamMemberId], references: [id])
   teamMemberId     String?
 }

@@ -3,48 +3,34 @@ import React from "react";
 import { TeamMemberProps } from "@/pages/team-members/[id]";
 import { MonthlyFeedbackDetails } from "@/components/monthlyFeedback/MonthlyFeedbackDetails";
 import { CardContainer } from "@/components/ui/CardContainer";
-import { MonthlyFeedback } from "@prisma/client";
 
-function compare(a: MonthlyFeedback, b: MonthlyFeedback) {
-  if (a.month < b.month) {
-    return -1;
-  }
-  if (a.month > b.month) {
-    return 1;
-  }
-  return 0;
-}
+// function compare(a: MonthlyFeedback, b: MonthlyFeedback) {
+//   if (a.month < b.month) {
+//     return -1;
+//   }
+//   if (a.month > b.month) {
+//     return 1;
+//   }
+//   return 0;
+// }
 
-export const TeamMemberFeedback = ({
-  teamMember,
-  feedback,
-}: TeamMemberProps) => {
-  const { firstName } = teamMember;
+export const TeamMemberFeedback = ({ teamMember }: TeamMemberProps) => {
+  const { firstName, monthlyFeedback } = teamMember;
+
+  console.log("mfb: ", monthlyFeedback);
 
   return (
     <>
-      {feedback?.length > 0 ? (
-        feedback.map((fb) => {
+      {monthlyFeedback.length > 0 ? (
+        monthlyFeedback.map((mfb) => {
           return (
             <CardContainer
-              key={fb.id}
-              headerText={`Feedback for ${fb.yearOfFeedback}`}
+              key={mfb.id}
+              headerText={`Feedback for ${new Date(
+                mfb.createdAt
+              ).getFullYear()}`}
             >
-              {fb?.monthlyFeedback?.length > 0 ? (
-                (fb?.monthlyFeedback).sort(compare).map((monthFb) => {
-                  return (
-                    <MonthlyFeedbackDetails
-                      key={monthFb.id}
-                      monthlyFeedback={monthFb}
-                    />
-                  );
-                })
-              ) : (
-                <p>
-                  No feedback available for {firstName} for this year at the
-                  moment.
-                </p>
-              )}
+              <MonthlyFeedbackDetails key={mfb.id} monthlyFeedback={mfb} />
             </CardContainer>
           );
         })

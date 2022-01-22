@@ -10,6 +10,7 @@ import { Button } from "../ui/Button";
 import { deleteTeamMemberRequest } from "@/services/api/teamMembersApi";
 import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
 import { ErrorText } from "../ui/typography/ErrorText";
+import { HOME } from "@/constants/routerConstants";
 
 type TeamMemberDeleteModalProps = {
   open: boolean;
@@ -43,8 +44,8 @@ export const TeamMemberDeleteModal = ({
   };
 
   const handleCloseSuccessModal = () => {
-    router.reload();
     handleClose();
+    router.push(HOME);
   };
 
   return (

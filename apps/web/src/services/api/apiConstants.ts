@@ -2,11 +2,11 @@ export const API_ENDPOINTS = {
   // Feedbacks
   API_FEEDBACKS_UPDATE: {
     method: "PUT",
-    url: "/api/feedbacks/update",
+    url: "/api/monthly-feedbacks/update",
   },
   API_MONTHLY_FEEDBACK_LATEST: {
     method: "GET",
-    url: "/api/feedbacks/get-latest-feedback",
+    url: "/api/monthly-feedbacks/get-latest-feedback",
   },
 
   // Team Members

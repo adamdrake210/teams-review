@@ -25,17 +25,9 @@ export default async function handle(
           },
           joined,
           manager: { connect: { email: session?.user?.email } },
-          feedback: {
-            create: {
-              yearOfFeedback: new Date().getFullYear(),
-              monthlyFeedback: {
-                create: MONTH_ARRAY,
-              },
-            },
-          },
-        },
-        include: {
-          feedback: true,
+          // monthlyFeedback: {
+          //   create: MONTH_ARRAY,
+          // },
         },
       });
 

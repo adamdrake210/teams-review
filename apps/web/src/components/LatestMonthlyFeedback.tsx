@@ -23,7 +23,7 @@ export const LatestMonthlyFeedback = ({
     <Loading isLoading={isLoading} isError={isError} error={error}>
       <div className={className}>
         <Heading2>Latest Feedback</Heading2>
-        {data && <LatestMonthlyFeedbackList monthlyFeedbacks={data} />}
+        {data && <LatestMonthlyFeedbackList users={data} />}
       </div>
     </Loading>
   );

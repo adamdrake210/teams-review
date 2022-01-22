@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/dist/client/router";
@@ -15,15 +15,16 @@ import { ErrorText } from "../ui/typography/ErrorText";
 type MonthlyFeedbackFormProps = {
   monthlyFeedback: MonthlyFeedback;
   teamMemberId: string;
+  month: number;
 };
 
 export const MonthlyFeedbackForm = ({
   monthlyFeedback,
   teamMemberId,
+  month,
 }: MonthlyFeedbackFormProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const [apiError, setApiError] = useState<Error | null>(null);
 
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -35,7 +36,6 @@ export const MonthlyFeedbackForm = ({
   const updateMutation = useMutation(updateMonthlyFeedbackRequest, {
     onError: (err: Error) => {
       console.error(err.message);
-      setApiError(err);
     },
     onSuccess: () => {
       router.push(`${TEAM_MEMBER}${teamMemberId}`);
@@ -53,7 +53,6 @@ export const MonthlyFeedbackForm = ({
   };
 
   const onSubmit = (formData: FormData) => {
-    setApiError(null);
     updateMutation.mutate({
       id: monthlyFeedback.id,
       positiveFeedback: formData.positiveFeedback,
@@ -63,7 +62,7 @@ export const MonthlyFeedbackForm = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md my-8">
-      <p>{Months[monthlyFeedback.month]}</p>
+      <p>{Months[month]}</p>
 
       <ControlledTextArea
         name="positiveFeedback"
@@ -86,8 +85,10 @@ export const MonthlyFeedbackForm = ({
         color="primary"
         disabled={updateMutation.isLoading}
       />
-      {apiError && (
-        <ErrorText>Something went wrong. {apiError.message}</ErrorText>
+      {updateMutation.isError && (
+        <ErrorText>
+          Something went wrong. {updateMutation.error.message}
+        </ErrorText>
       )}
     </form>
   );

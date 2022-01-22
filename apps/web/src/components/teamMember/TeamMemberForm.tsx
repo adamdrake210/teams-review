@@ -1,4 +1,4 @@
-import { Team, TeamMember } from "@prisma/client";
+import { Team, TeamMember, User } from "@prisma/client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "react-query";
@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/Button";
 import { ControlledTextField } from "@/components/ui/forms/ControlledTextField";
 import { Loading } from "@/components/Loading";
 import { TEAM_MEMBER } from "@/constants/routerConstants";
-import { ErrorText } from "../ui/typography/ErrorText";
+import { ErrorText } from "@/components/ui/typography/ErrorText";
 
 type TeamMemberFormProps = {
   editTeamMember?: TeamMember & { team: Team };
@@ -42,7 +42,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
     isLoading,
     error,
     isError,
-  } = useQuery(RQ_KEY_USER, getUser);
+  } = useQuery<User & { teams: Team[] }, Error>(RQ_KEY_USER, getUser);
 
   const createMutation = useMutation(createTeamMemberRequest, {
     onError: (err: Error) => {
@@ -89,34 +89,49 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         name="firstName"
         label="First Name"
         control={control}
-        rules={{ required: "First Name is required" }}
+        rules={{
+          required: "First Name is required",
+          maxLength: 30,
+          pattern: /^[A-Za-z]+$/i,
+        }}
       />
       <ControlledTextField
         name="lastName"
         label="Last Name"
         control={control}
-        rules={{ required: "Last Name is required" }}
+        rules={{
+          required: "Last Name is required",
+          maxLength: 30,
+          pattern: /^[A-Za-z]+$/i,
+        }}
       />
       <ControlledTextField
         name="email"
         label="Email"
         control={control}
-        rules={{ required: "Email is required" }}
+        rules={{ required: "Email is required", maxLength: 40 }}
       />
       <ControlledTextField
         name="position"
         label="Current Position"
         control={control}
-        rules={{ required: "Current Position is required" }}
+        rules={{
+          required: "Current Position is required",
+          maxLength: 30,
+        }}
       />
       <Loading isLoading={isLoading} error={error} isError={isError}>
-        {userData && (
+        {userData && userData.teams.length > 0 ? (
           <SelectField
             name="teamId"
             label="Select Team"
             control={control}
             data={userData.teams}
           />
+        ) : (
+          <ErrorText>
+            You need to create a team first before creating any team members.
+          </ErrorText>
         )}
       </Loading>
 
@@ -124,7 +139,11 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         type="submit"
         btnText={`${editTeamMember ? "Update" : "Submit"}`}
         color="primary"
-        disabled={updateMutation.isLoading || createMutation.isLoading}
+        disabled={
+          updateMutation.isLoading ||
+          createMutation.isLoading ||
+          !(userData && userData.teams.length > 0)
+        }
       />
       {apiError && (
         <ErrorText>Something went wrong. {apiError.message}</ErrorText>

@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
-import { Feedback, MonthlyFeedback, Team, TeamMember } from "@prisma/client";
+import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import prisma from "@/lib/prisma";
 
 import { Heading1 } from "@/components/ui/typography/Heading1";
@@ -28,48 +28,43 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 
-  const feedback = await prisma.feedback.findUnique({
+  const monthlyFeedback = await prisma.monthlyFeedback.findUnique({
     where: {
       id: returnSingleParam(params?.id),
     },
     include: {
-      teamMember: true,
-      monthlyFeedback: {
-        orderBy: {
-          month: "asc",
-        },
-      },
+      TeamMember: true,
     },
   });
 
   return {
     props: {
       user: session,
-      feedback: JSON.parse(JSON.stringify(feedback)),
+      monthlyFeedback: JSON.parse(JSON.stringify(monthlyFeedback)),
     },
   };
 };
 
 type FeedbackEditPageProps = {
-  feedback: Feedback & {
-    teamMember: TeamMember;
-    monthlyFeedback: MonthlyFeedback[];
-  };
+  monthlyFeedback: MonthlyFeedback;
 };
 
-export default function FeedbackEditPage({ feedback }: FeedbackEditPageProps) {
-  const router = useRouter();
-  const { month } = router.query;
+export default function FeedbackEditPage({
+  monthlyFeedback,
+}: FeedbackEditPageProps) {
+  const month = new Date(monthlyFeedback.createdAt).getMonth();
 
   return (
     <Layout title="Team Member">
       <Heading1>
-        Editing Feedback for {feedback.teamMember.firstName} -{" "}
-        {Months[returnSingleParam(month)]} {feedback.yearOfFeedback}
+        {/* @ts-ignore - have to work out this type error */}
+        Editing Feedback for {monthlyFeedback.TeamMember.firstName} -{" "}
+        {Months[month]}
       </Heading1>
       <MonthlyFeedbackForm
-        monthlyFeedback={feedback.monthlyFeedback[returnSingleParam(month)]}
-        teamMemberId={feedback.teamMemberId}
+        month={month}
+        monthlyFeedback={monthlyFeedback}
+        teamMemberId={monthlyFeedback.teamMemberId}
       />
     </Layout>
   );

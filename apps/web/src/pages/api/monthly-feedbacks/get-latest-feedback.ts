@@ -19,24 +19,17 @@ export default async function handle(
         select: {
           firstName: true,
           lastName: true,
-          feedback: {
+          monthlyFeedback: {
             select: {
-              yearOfFeedback: true,
-              monthlyFeedback: {
-                select: {
-                  feedbackId: true,
-                  positiveFeedback: true,
-                  negativeFeedback: true,
-                  month: true,
-                  updatedAt: true,
-                },
-                take: 3,
-                orderBy: {
-                  updatedAt: "desc",
-                },
-              },
+              positiveFeedback: true,
+              negativeFeedback: true,
+              createdAt: true,
+              updatedAt: true,
             },
             take: 3,
+            orderBy: {
+              updatedAt: "desc",
+            },
           },
         },
       });
