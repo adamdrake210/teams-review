@@ -97,8 +97,11 @@ export const MonthlyFeedbackForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md my-8">
-      <p>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full md:w-[600px] max-w-md my-8"
+    >
+      <p className="text-3xl font-extralight mb-4">
         {
           Months[
             typeof monthlyFeedback === "string"
@@ -113,14 +116,14 @@ export const MonthlyFeedbackForm = ({
         label="Positive Feedback"
         control={control}
         placeholder="What did they do really well this month..."
-        rows={8}
+        rows={10}
       />
       <ControlledTextArea
         name="negativeFeedback"
         label="Negative Feedback"
         control={control}
         placeholder="Where is there room for improvement..."
-        rows={8}
+        rows={10}
       />
 
       <Button

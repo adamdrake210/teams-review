@@ -49,16 +49,35 @@ export const MonthlyFeedbackDetails = ({
 
   return (
     <>
-      {filteredMonthlyFeedback?.map((mfb) => {
-        return (
-          <div
-            className="flex justify-between mb-4"
-            key={typeof mfb === "string" ? mfb : mfb.id}
-          >
-            <MonthlyFeedbackDetailsRow mfb={mfb} teamMemberId={teamMemberId} />
-          </div>
-        );
-      })}
+      {filteredMonthlyFeedback.length > 0
+        ? filteredMonthlyFeedback.map((mfb) => {
+            return (
+              <div
+                className="flex justify-between mb-4"
+                key={typeof mfb === "string" ? mfb : mfb.id}
+              >
+                <MonthlyFeedbackDetailsRow
+                  mfb={mfb}
+                  teamMemberId={teamMemberId}
+                />
+              </div>
+            );
+          })
+        : Object.keys(Months)
+            .slice(0, 12)
+            .map((month) => {
+              return (
+                <div
+                  key={`${month}${teamMemberId}`}
+                  className="flex justify-between mb-4"
+                >
+                  <MonthlyFeedbackDetailsRow
+                    mfb={month}
+                    teamMemberId={teamMemberId}
+                  />
+                </div>
+              );
+            })}
     </>
   );
 };

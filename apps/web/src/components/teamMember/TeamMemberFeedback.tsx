@@ -9,17 +9,11 @@ export const TeamMemberFeedback = ({ teamMember }: TeamMemberProps) => {
   const { firstName, monthlyFeedback, id } = teamMember;
 
   return (
-    <CardContainer headerText={`Feedback`}>
-      {monthlyFeedback?.length > 0 ? (
-        <MonthlyFeedbackDetails
-          monthlyFeedback={monthlyFeedback}
-          teamMemberId={id}
-        />
-      ) : (
-        <CardContainer headerText="Feedback">
-          <p>No feedback available for {firstName} yet.</p>
-        </CardContainer>
-      )}
+    <CardContainer headerText={`Feedback for ${firstName}`}>
+      <MonthlyFeedbackDetails
+        monthlyFeedback={monthlyFeedback}
+        teamMemberId={id}
+      />
     </CardContainer>
   );
 };

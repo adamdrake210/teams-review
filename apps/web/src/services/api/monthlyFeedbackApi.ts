@@ -12,7 +12,7 @@ type CreateMonthlyFeedbackRequestType = {
   positiveFeedback: string;
   negativeFeedback: string;
   teamMemberId: string;
-  createdAt: any; // TODO
+  createdAt: Date;
 };
 
 export async function createMonthlyFeedbackRequest(
