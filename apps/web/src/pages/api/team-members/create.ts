@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 import { getSession } from "next-auth/react";
-import { MONTH_ARRAY } from "@/constants/constants";
 
 // POST /api/post
 export default async function handle(
@@ -25,9 +24,6 @@ export default async function handle(
           },
           joined,
           manager: { connect: { email: session?.user?.email } },
-          // monthlyFeedback: {
-          //   create: MONTH_ARRAY,
-          // },
         },
       });
 
