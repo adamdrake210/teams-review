@@ -6,12 +6,15 @@ import { MonthlyFeedbackDetails } from "@/components/monthlyFeedback/MonthlyFeed
 import { CardContainer } from "@/components/ui/CardContainer";
 
 export const TeamMemberFeedback = ({ teamMember }: TeamMemberProps) => {
-  const { firstName, monthlyFeedback } = teamMember;
+  const { firstName, monthlyFeedback, id } = teamMember;
 
   return (
     <CardContainer headerText={`Feedback`}>
       {monthlyFeedback?.length > 0 ? (
-        <MonthlyFeedbackDetails monthlyFeedback={monthlyFeedback} />
+        <MonthlyFeedbackDetails
+          monthlyFeedback={monthlyFeedback}
+          teamMemberId={id}
+        />
       ) : (
         <CardContainer headerText="Feedback">
           <p>No feedback available for {firstName} yet.</p>

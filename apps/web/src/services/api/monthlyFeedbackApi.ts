@@ -8,8 +8,15 @@ const {
   API_MONTHLY_FEEDBACK_LATEST,
 } = API_ENDPOINTS;
 
+type CreateMonthlyFeedbackRequestType = {
+  positiveFeedback: string;
+  negativeFeedback: string;
+  teamMemberId: string;
+  createdAt: any; // TODO
+};
+
 export async function createMonthlyFeedbackRequest(
-  createMonthlyFeedbackRequestParams: MonthlyFeedback
+  createMonthlyFeedbackRequestParams: CreateMonthlyFeedbackRequestType
 ) {
   const response = await fetchAbsolute(API_MONTHLY_FEEDBACK_CREATE, {
     body: JSON.stringify({ data: createMonthlyFeedbackRequestParams }),

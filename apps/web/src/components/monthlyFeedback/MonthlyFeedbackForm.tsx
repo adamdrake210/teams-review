@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/dist/client/router";
 
-import { updateMonthlyFeedbackRequest } from "@/services/api/monthlyFeedbackApi";
-import { MonthlyFeedback } from "@prisma/client";
+import {
+  createMonthlyFeedbackRequest,
+  updateMonthlyFeedbackRequest,
+} from "@/services/api/monthlyFeedbackApi";
+import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { Months } from "@/types/types";
 import { TEAM_MEMBER } from "@/constants/routerConstants";
 import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
@@ -15,19 +18,42 @@ import { ErrorText } from "../ui/typography/ErrorText";
 type MonthlyFeedbackFormProps = {
   monthlyFeedback: MonthlyFeedback | string;
   handleClose: () => void;
+  teamMemberId: TeamMember["id"];
 };
 
 export const MonthlyFeedbackForm = ({
   monthlyFeedback,
   handleClose,
+  teamMemberId,
 }: MonthlyFeedbackFormProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const { handleSubmit, control } = useForm({
     defaultValues: {
-      positiveFeedback: monthlyFeedback?.positiveFeedback,
-      negativeFeedback: monthlyFeedback?.negativeFeedback,
+      positiveFeedback:
+        typeof monthlyFeedback !== "string"
+          ? monthlyFeedback?.positiveFeedback
+          : "",
+      negativeFeedback:
+        typeof monthlyFeedback !== "string"
+          ? monthlyFeedback?.negativeFeedback
+          : "",
+    },
+  });
+
+  const createMutation = useMutation(createMonthlyFeedbackRequest, {
+    onError: (err: Error) => {
+      console.error(err.message);
+    },
+    onSuccess: () => {
+      handleClose();
+      router.push(`${TEAM_MEMBER}${teamMemberId}`);
+      queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
+    },
+    // Always refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
     },
   });
 
@@ -36,7 +62,8 @@ export const MonthlyFeedbackForm = ({
       console.error(err.message);
     },
     onSuccess: () => {
-      router.push(`${TEAM_MEMBER}${monthlyFeedback.teamMemberId}`);
+      handleClose();
+      router.push(`${TEAM_MEMBER}${teamMemberId}`);
       queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
     },
     // Always refetch after error or success:
@@ -51,11 +78,22 @@ export const MonthlyFeedbackForm = ({
   };
 
   const onSubmit = (formData: FormData) => {
-    updateMutation.mutate({
-      id: monthlyFeedback.id,
-      positiveFeedback: formData.positiveFeedback,
-      negativeFeedback: formData.negativeFeedback,
-    });
+    if (typeof monthlyFeedback === "string") {
+      const date = new Date();
+
+      createMutation.mutate({
+        createdAt: new Date(date.setMonth(Number(monthlyFeedback))),
+        teamMemberId,
+        positiveFeedback: formData.positiveFeedback,
+        negativeFeedback: formData.negativeFeedback,
+      });
+    } else {
+      updateMutation.mutate({
+        id: monthlyFeedback.id,
+        positiveFeedback: formData.positiveFeedback,
+        negativeFeedback: formData.negativeFeedback,
+      });
+    }
   };
 
   return (

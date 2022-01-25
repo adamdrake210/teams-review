@@ -15,8 +15,8 @@ const FeedbackDetails = ({
 }: FeedbackDetailsProps) => {
   return (
     <div className="flex flex-col sm:basis-1/2">
-      <Heading4>{`${sign} Feedback`}</Heading4>
-      {typeof monthlyFeedback !== "string" ? (
+      <Heading4 className="capitalize">{`${sign} Feedback`}</Heading4>
+      {typeof monthlyFeedback !== "string" && feedback.length > 0 ? (
         <p>{feedback}</p>
       ) : (
         <p className="italic text-slate-400">

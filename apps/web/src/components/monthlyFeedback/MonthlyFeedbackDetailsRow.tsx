@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MonthlyFeedback } from "@prisma/client";
+import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { Months } from "@/types/types";
 import FeedbackDetails from "./FeedbackDetails";
 import { EditButton } from "@/components/ui/EditButton";
@@ -10,9 +10,13 @@ import ModalContainer from "../ui/ModalContainer";
 
 type FeedbackDetailsRowProps = {
   mfb: MonthlyFeedback | string;
+  teamMemberId: TeamMember["id"];
 };
 
-export const MonthlyFeedbackDetailsRow = ({ mfb }: FeedbackDetailsRowProps) => {
+export const MonthlyFeedbackDetailsRow = ({
+  mfb,
+  teamMemberId,
+}: FeedbackDetailsRowProps) => {
   const { open, handleClose, handleOpen } = useOpen();
 
   return (
@@ -41,6 +45,7 @@ export const MonthlyFeedbackDetailsRow = ({ mfb }: FeedbackDetailsRowProps) => {
           <MonthlyFeedbackForm
             monthlyFeedback={mfb}
             handleClose={handleClose}
+            teamMemberId={teamMemberId}
           />
         </ModalContainer>
       </div>

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-import { MonthlyFeedback } from "@prisma/client";
+import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { Months } from "@/types/types";
 import { MonthlyFeedbackDetailsRow } from "./MonthlyFeedbackDetailsRow";
 
 type MonthlyFeedbackDetailsProps = {
   monthlyFeedback: MonthlyFeedback[];
+  teamMemberId: TeamMember["id"];
 };
 
 export const MonthlyFeedbackDetails = ({
   monthlyFeedback,
+  teamMemberId,
 }: MonthlyFeedbackDetailsProps) => {
   const [filteredMonthlyFeedback, setFilteredMonthlyFeedback] = useState<
     Array<MonthlyFeedback | string>
@@ -53,7 +55,7 @@ export const MonthlyFeedbackDetails = ({
             className="flex justify-between mb-4"
             key={typeof mfb === "string" ? mfb : mfb.id}
           >
-            <MonthlyFeedbackDetailsRow mfb={mfb} />
+            <MonthlyFeedbackDetailsRow mfb={mfb} teamMemberId={teamMemberId} />
           </div>
         );
       })}

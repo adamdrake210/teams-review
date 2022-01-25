@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
 
-type Heading1Props = {
+type Heading2Props = {
   children: string | ReactNode;
   className?: string;
 };
 
-export const Heading2 = ({ children, className, ...rest }: Heading1Props) => {
+export const Heading2 = ({ children, className, ...rest }: Heading2Props) => {
   return (
     <h2
       className={`text-2xl font-vollkorn text-zinc-700 md:text-3xl font-extralight mb-2 ${className}`}
