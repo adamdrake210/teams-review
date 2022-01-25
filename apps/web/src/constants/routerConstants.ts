@@ -1,7 +1,7 @@
 export const HOME = "/";
 export const LOGIN = "/login/";
-export const FEEDBACKS = "/feedbacks/";
-export const FEEDBACKS_EDIT = "/feedbacks/edit/";
+export const MONTHLY_FEEDBACK = "/monthly-feedback/";
+export const MONTHLY_FEEDBACK_EDIT = "/monthly-feedback/edit/";
 export const TEAMS = "/teams/";
 export const TEAM_MEMBERS = "/team-members/";
 export const TEAM_MEMBER = "/team-members/";

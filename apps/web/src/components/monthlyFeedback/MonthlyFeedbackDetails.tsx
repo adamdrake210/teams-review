@@ -1,58 +1,62 @@
-import React from "react";
-import { useRouter } from "next/dist/client/router";
+import React, { useEffect, useState } from "react";
 
 import { MonthlyFeedback } from "@prisma/client";
 import { Months } from "@/types/types";
-import { FEEDBACKS_EDIT } from "@/constants/routerConstants";
-import { EditButton } from "@/components/ui/EditButton";
-import { Heading4 } from "../ui/typography/Heading4";
+import { MonthlyFeedbackDetailsRow } from "./MonthlyFeedbackDetailsRow";
 
 type MonthlyFeedbackDetailsProps = {
-  monthlyFeedback: MonthlyFeedback;
+  monthlyFeedback: MonthlyFeedback[];
 };
 
 export const MonthlyFeedbackDetails = ({
   monthlyFeedback,
 }: MonthlyFeedbackDetailsProps) => {
-  const router = useRouter();
-  const handleMonthlyFeedbackUpdate = () => {
-    router.push({
-      pathname: `${FEEDBACKS_EDIT}${monthlyFeedback.id}`,
-      // query: { month: monthlyFeedback.month },
+  const [filteredMonthlyFeedback, setFilteredMonthlyFeedback] = useState<
+    Array<MonthlyFeedback | string>
+  >([]);
+
+  useEffect(() => {
+    // Combining the months array and monthly feedback array from the db to creat
+    // one array which can be used for rendering the ui.
+    const newMonthsArray = Object.keys(Months)
+      .slice(0, 12)
+      .map((month) => {
+        const newMfb = monthlyFeedback?.map((mfb) => {
+          if (month === String(new Date(mfb.createdAt).getMonth())) {
+            return mfb;
+          } else {
+            return month;
+          }
+        });
+
+        return newMfb.reduce(function (a, b) {
+          if (a.indexOf(b) < 0) a.push(b);
+          return a;
+        }, []);
+      });
+
+    const finalFilteredMonthFeedback = newMonthsArray.map((arr) => {
+      if (arr.length > 1) {
+        return arr.filter((x) => typeof x !== "string");
+      }
+      return arr;
     });
-  };
+
+    setFilteredMonthlyFeedback(finalFilteredMonthFeedback.flat(1));
+  }, [monthlyFeedback]);
 
   return (
-    <div className="flex justify-between mb-4">
-      <div className="w-5/6">
-        <p className="text-xl font-extralight">
-          {Months[new Date(monthlyFeedback.createdAt).getMonth()]}
-        </p>
-        <div className="flex flex-col sm:flex-row sm:justify-between w-full">
-          <div className="flex flex-col sm:basis-1/2">
-            <Heading4>Postive Feedback</Heading4>
-            {monthlyFeedback.positiveFeedback ? (
-              <p>{monthlyFeedback.positiveFeedback}</p>
-            ) : (
-              <p className="italic text-slate-400">
-                No positive feedback written for this month yet.
-              </p>
-            )}
+    <>
+      {filteredMonthlyFeedback?.map((mfb) => {
+        return (
+          <div
+            className="flex justify-between mb-4"
+            key={typeof mfb === "string" ? mfb : mfb.id}
+          >
+            <MonthlyFeedbackDetailsRow mfb={mfb} />
           </div>
-
-          <div className="flex flex-col sm:basis-1/2">
-            <Heading4>Negative Feedback</Heading4>
-            {monthlyFeedback.negativeFeedback ? (
-              <p>{monthlyFeedback.negativeFeedback}</p>
-            ) : (
-              <p className="italic text-slate-400">
-                No negative feedback written for this month yet.
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
-      <EditButton onClick={handleMonthlyFeedbackUpdate} />
-    </div>
+        );
+      })}
+    </>
   );
 };

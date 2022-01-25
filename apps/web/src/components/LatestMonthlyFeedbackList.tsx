@@ -36,8 +36,7 @@ export const LatestMonthlyFeedbackList = ({
                     return (
                       <MonthlyFeedbackCard
                         key={`${mfb.createdAt}${i}`}
-                        feedback={mfb}
-                        yearOfFeedback={new Date(mfb.createdAt).getFullYear()}
+                        monthlyFeedback={mfb}
                       />
                     );
                   }

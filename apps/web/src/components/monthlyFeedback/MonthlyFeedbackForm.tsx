@@ -13,23 +13,21 @@ import { ControlledTextArea } from "@/components/ui/forms/ControlledTextArea";
 import { ErrorText } from "../ui/typography/ErrorText";
 
 type MonthlyFeedbackFormProps = {
-  monthlyFeedback: MonthlyFeedback;
-  teamMemberId: string;
-  month: number;
+  monthlyFeedback: MonthlyFeedback | string;
+  handleClose: () => void;
 };
 
 export const MonthlyFeedbackForm = ({
   monthlyFeedback,
-  teamMemberId,
-  month,
+  handleClose,
 }: MonthlyFeedbackFormProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const { handleSubmit, control } = useForm({
     defaultValues: {
-      positiveFeedback: monthlyFeedback.positiveFeedback,
-      negativeFeedback: monthlyFeedback.negativeFeedback,
+      positiveFeedback: monthlyFeedback?.positiveFeedback,
+      negativeFeedback: monthlyFeedback?.negativeFeedback,
     },
   });
 
@@ -38,7 +36,7 @@ export const MonthlyFeedbackForm = ({
       console.error(err.message);
     },
     onSuccess: () => {
-      router.push(`${TEAM_MEMBER}${teamMemberId}`);
+      router.push(`${TEAM_MEMBER}${monthlyFeedback.teamMemberId}`);
       queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
     },
     // Always refetch after error or success:
@@ -62,7 +60,15 @@ export const MonthlyFeedbackForm = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md my-8">
-      <p>{Months[month]}</p>
+      <p>
+        {
+          Months[
+            typeof monthlyFeedback === "string"
+              ? monthlyFeedback
+              : new Date(monthlyFeedback.createdAt).getMonth()
+          ]
+        }
+      </p>
 
       <ControlledTextArea
         name="positiveFeedback"
@@ -84,6 +90,12 @@ export const MonthlyFeedbackForm = ({
         btnText="Update Feedback"
         color="primary"
         disabled={updateMutation.isLoading}
+      />
+      <Button
+        type="button"
+        onClick={handleClose}
+        btnText="Cancel"
+        className="ml-2"
       />
       {updateMutation.isError && (
         <ErrorText>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "../ui/Button";
 import { useRouter } from "next/dist/client/router";
 import {
-  FEEDBACKS,
+  MONTHLY_FEEDBACK,
   HOME,
   TEAMS,
   TEAM_MEMBERS,
@@ -27,7 +27,7 @@ const MenuItems = [
   },
   {
     label: "Feedbacks",
-    url: FEEDBACKS,
+    url: MONTHLY_FEEDBACK,
     active: false,
   },
 ];
