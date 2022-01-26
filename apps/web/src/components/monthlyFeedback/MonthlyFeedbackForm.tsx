@@ -79,10 +79,12 @@ export const MonthlyFeedbackForm = ({
 
   const onSubmit = (formData: FormData) => {
     if (typeof monthlyFeedback === "string") {
-      const date = new Date();
+      const fullYear = new Date().getFullYear();
 
       createMutation.mutate({
-        createdAt: new Date(date.setMonth(Number(monthlyFeedback))),
+        createdAt: new Date(
+          `${Months[monthlyFeedback]} 01 ${fullYear} 00:01:00`
+        ),
         teamMemberId,
         positiveFeedback: formData.positiveFeedback,
         negativeFeedback: formData.negativeFeedback,
