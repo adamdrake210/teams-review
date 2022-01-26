@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/dist/client/router";
 
-import { updateMonthlyFeedbackRequest } from "@/services/api/monthlyFeedbackApi";
-import { MonthlyFeedback } from "@prisma/client";
+import {
+  createMonthlyFeedbackRequest,
+  updateMonthlyFeedbackRequest,
+} from "@/services/api/monthlyFeedbackApi";
+import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { Months } from "@/types/types";
 import { TEAM_MEMBER } from "@/constants/routerConstants";
 import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
@@ -13,31 +16,53 @@ import { ControlledTextArea } from "@/components/ui/forms/ControlledTextArea";
 import { ErrorText } from "../ui/typography/ErrorText";
 
 type MonthlyFeedbackFormProps = {
-  monthlyFeedback: MonthlyFeedback;
-  teamMemberId: string;
+  monthlyFeedback: MonthlyFeedback | string;
+  handleClose: () => void;
+  teamMemberId: TeamMember["id"];
 };
 
 export const MonthlyFeedbackForm = ({
   monthlyFeedback,
+  handleClose,
   teamMemberId,
 }: MonthlyFeedbackFormProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const [apiError, setApiError] = useState<Error | null>(null);
 
   const { handleSubmit, control } = useForm({
     defaultValues: {
-      positiveFeedback: monthlyFeedback.positiveFeedback,
-      negativeFeedback: monthlyFeedback.negativeFeedback,
+      positiveFeedback:
+        typeof monthlyFeedback !== "string"
+          ? monthlyFeedback?.positiveFeedback
+          : "",
+      negativeFeedback:
+        typeof monthlyFeedback !== "string"
+          ? monthlyFeedback?.negativeFeedback
+          : "",
+    },
+  });
+
+  const createMutation = useMutation(createMonthlyFeedbackRequest, {
+    onError: (err: Error) => {
+      console.error(err.message);
+    },
+    onSuccess: () => {
+      handleClose();
+      router.push(`${TEAM_MEMBER}${teamMemberId}`);
+      queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
+    },
+    // Always refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
     },
   });
 
   const updateMutation = useMutation(updateMonthlyFeedbackRequest, {
     onError: (err: Error) => {
       console.error(err.message);
-      setApiError(err);
     },
     onSuccess: () => {
+      handleClose();
       router.push(`${TEAM_MEMBER}${teamMemberId}`);
       queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
     },
@@ -53,31 +78,54 @@ export const MonthlyFeedbackForm = ({
   };
 
   const onSubmit = (formData: FormData) => {
-    setApiError(null);
-    updateMutation.mutate({
-      id: monthlyFeedback.id,
-      positiveFeedback: formData.positiveFeedback,
-      negativeFeedback: formData.negativeFeedback,
-    });
+    if (typeof monthlyFeedback === "string") {
+      const fullYear = new Date().getFullYear();
+
+      createMutation.mutate({
+        createdAt: new Date(
+          `${Months[monthlyFeedback]} 01 ${fullYear} 00:01:00`
+        ),
+        teamMemberId,
+        positiveFeedback: formData.positiveFeedback,
+        negativeFeedback: formData.negativeFeedback,
+      });
+    } else {
+      updateMutation.mutate({
+        id: monthlyFeedback.id,
+        positiveFeedback: formData.positiveFeedback,
+        negativeFeedback: formData.negativeFeedback,
+      });
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md my-8">
-      <p>{Months[monthlyFeedback.month]}</p>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full md:w-[600px] max-w-md my-8"
+    >
+      <p className="text-3xl font-extralight mb-4">
+        {
+          Months[
+            typeof monthlyFeedback === "string"
+              ? monthlyFeedback
+              : new Date(monthlyFeedback.createdAt).getMonth()
+          ]
+        }
+      </p>
 
       <ControlledTextArea
         name="positiveFeedback"
         label="Positive Feedback"
         control={control}
         placeholder="What did they do really well this month..."
-        rows={8}
+        rows={10}
       />
       <ControlledTextArea
         name="negativeFeedback"
         label="Negative Feedback"
         control={control}
         placeholder="Where is there room for improvement..."
-        rows={8}
+        rows={10}
       />
 
       <Button
@@ -86,8 +134,16 @@ export const MonthlyFeedbackForm = ({
         color="primary"
         disabled={updateMutation.isLoading}
       />
-      {apiError && (
-        <ErrorText>Something went wrong. {apiError.message}</ErrorText>
+      <Button
+        type="button"
+        onClick={handleClose}
+        btnText="Cancel"
+        className="ml-2"
+      />
+      {updateMutation.isError && (
+        <ErrorText>
+          Something went wrong. {updateMutation.error.message}
+        </ErrorText>
       )}
     </form>
   );

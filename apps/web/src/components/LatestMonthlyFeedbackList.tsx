@@ -5,42 +5,38 @@ import { MonthlyFeedbackCard } from "./monthlyFeedback/MonthlyFeedbackCard";
 import { Heading3 } from "./ui/typography/Heading3";
 import { Paragraph } from "./ui/typography/Paragraph";
 
-type LatestFeedback = {
+type TeamMembersWithMonthlyFeedback = {
   firstName: string;
   lastName: string;
-  feedback: Array<{
-    monthlyFeedback: MonthlyFeedback[];
-    yearOfFeedback: number;
-  }>;
+  monthlyFeedback: MonthlyFeedback[];
 };
 
 type LatestMonthlyFeedbackListProps = {
-  monthlyFeedbacks: Array<LatestFeedback>;
+  teamMembers: Array<TeamMembersWithMonthlyFeedback>;
 };
 
 export const LatestMonthlyFeedbackList = ({
-  monthlyFeedbacks,
+  teamMembers,
 }: LatestMonthlyFeedbackListProps) => {
   return (
     <div className="flex flex-col">
-      {monthlyFeedbacks?.length > 0 ? (
-        monthlyFeedbacks.map((mfb, i) => {
+      {teamMembers?.length > 0 ? (
+        teamMembers.map((teamMember, i) => {
           return (
-            <div key={`${i}${mfb.firstName}`} className="flex flex-col">
+            <div key={`${i}${teamMember.firstName}`} className="flex flex-col">
               <Heading3>
-                {mfb.firstName} {mfb.lastName}
+                {teamMember.firstName} {teamMember.lastName}
               </Heading3>
               <div className="flex flex-col sm:flex-row sm:space-x-4">
-                {mfb?.feedback[0]?.monthlyFeedback?.map((fb, i) => {
+                {teamMember?.monthlyFeedback.map((mfb, i) => {
                   if (
-                    fb.positiveFeedback.length > 0 ||
-                    fb.negativeFeedback.length > 0
+                    mfb.positiveFeedback.length > 0 ||
+                    mfb.negativeFeedback.length > 0
                   ) {
                     return (
                       <MonthlyFeedbackCard
-                        key={`${fb.feedbackId}${i}`}
-                        feedback={fb}
-                        yearOfFeedback={mfb.feedback[0].yearOfFeedback}
+                        key={`${mfb.createdAt}${i}`}
+                        monthlyFeedback={mfb}
                       />
                     );
                   }
