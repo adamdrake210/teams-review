@@ -7,23 +7,18 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id, firstName, lastName, email, position, teamId } = req.body.data;
+  const { id, title, description } = req.body.data;
 
   try {
     const session = await getSession({ req });
     if (session) {
-      const result = await prisma.teamMember.update({
+      const result = await prisma.team.update({
         where: {
           id: id,
         },
         data: {
-          firstName,
-          lastName,
-          email,
-          position,
-          team: {
-            connect: { id: teamId },
-          },
+          title,
+          description,
         },
       });
       res.json(result);

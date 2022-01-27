@@ -75,7 +75,6 @@ model Team {
   updatedAt   DateTime     @updatedAt
   title       String
   description String
-  category    String
   manager     User         @relation(fields: [userId], references: [id])
   userId      String
   members     TeamMember[]
