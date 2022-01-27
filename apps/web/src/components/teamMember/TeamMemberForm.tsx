@@ -16,6 +16,7 @@ import { ControlledTextField } from "@/components/ui/forms/ControlledTextField";
 import { Loading } from "@/components/Loading";
 import { TEAM_MEMBER } from "@/constants/routerConstants";
 import { ErrorText } from "@/components/ui/typography/ErrorText";
+import { IS_EMAIL_PATTERN, MAX_FIELD_LENGTH } from "@/utils/formHelpers";
 
 type TeamMemberFormProps = {
   editTeamMember?: TeamMember & { team: Team };
@@ -91,7 +92,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         control={control}
         rules={{
           required: "First Name is required",
-          maxLength: 30,
+          maxLength: MAX_FIELD_LENGTH,
           pattern: /^[A-Za-z]+$/i,
         }}
       />
@@ -101,7 +102,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         control={control}
         rules={{
           required: "Last Name is required",
-          maxLength: 30,
+          maxLength: MAX_FIELD_LENGTH,
           pattern: /^[A-Za-z]+$/i,
         }}
       />
@@ -109,7 +110,11 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         name="email"
         label="Email"
         control={control}
-        rules={{ required: "Email is required", maxLength: 40 }}
+        rules={{
+          required: "Email is required",
+          maxLength: MAX_FIELD_LENGTH,
+          pattern: IS_EMAIL_PATTERN,
+        }}
       />
       <ControlledTextField
         name="position"
@@ -117,7 +122,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         control={control}
         rules={{
           required: "Current Position is required",
-          maxLength: 30,
+          maxLength: MAX_FIELD_LENGTH,
         }}
       />
       <Loading isLoading={isLoading} error={error} isError={isError}>

@@ -6,6 +6,7 @@ import { Heading2 } from "@/components/ui/typography/Heading2";
 import { RQ_KEY_FEEDBACKS_ALL } from "@/constants/constants";
 import { Loading } from "./Loading";
 import { LatestMonthlyFeedbackList } from "./LatestMonthlyFeedbackList";
+import { Paragraph } from "./ui/typography/Paragraph";
 
 type LatestMonthlyFeedbackProps = {
   className?: string;
@@ -14,16 +15,24 @@ type LatestMonthlyFeedbackProps = {
 export const LatestMonthlyFeedback = ({
   className,
 }: LatestMonthlyFeedbackProps) => {
-  const { data, isLoading, isError, error } = useQuery(
-    RQ_KEY_FEEDBACKS_ALL,
-    getLatestMonthlyFeedback
-  );
+  const {
+    data: teamMembers,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(RQ_KEY_FEEDBACKS_ALL, getLatestMonthlyFeedback);
 
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
       <div className={className}>
         <Heading2>Latest Feedback</Heading2>
-        {data && <LatestMonthlyFeedbackList teamMembers={data} />}
+        {teamMembers?.length > 0 ? (
+          <LatestMonthlyFeedbackList teamMembers={teamMembers} />
+        ) : (
+          <Paragraph>
+            Currently you haven&apos;t written any feedback.
+          </Paragraph>
+        )}
       </div>
     </Loading>
   );

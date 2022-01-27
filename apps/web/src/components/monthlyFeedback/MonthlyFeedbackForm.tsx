@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { useRouter } from "next/dist/client/router";
 
 import {
   createMonthlyFeedbackRequest,
@@ -9,7 +8,6 @@ import {
 } from "@/services/api/monthlyFeedbackApi";
 import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { Months } from "@/types/types";
-import { TEAM_MEMBER } from "@/constants/routerConstants";
 import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
 import { Button } from "@/components/ui/Button";
 import { ControlledTextArea } from "@/components/ui/forms/ControlledTextArea";
@@ -27,7 +25,6 @@ export const MonthlyFeedbackForm = ({
   teamMemberId,
 }: MonthlyFeedbackFormProps) => {
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -48,7 +45,6 @@ export const MonthlyFeedbackForm = ({
     },
     onSuccess: () => {
       handleClose();
-      router.push(`${TEAM_MEMBER}${teamMemberId}`);
       queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
     },
     // Always refetch after error or success:
@@ -63,7 +59,6 @@ export const MonthlyFeedbackForm = ({
     },
     onSuccess: () => {
       handleClose();
-      router.push(`${TEAM_MEMBER}${teamMemberId}`);
       queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
     },
     // Always refetch after error or success:

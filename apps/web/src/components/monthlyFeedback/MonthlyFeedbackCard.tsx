@@ -1,29 +1,26 @@
 import React from "react";
-import { useRouter } from "next/dist/client/router";
 
 import { Months } from "@/types/types";
 import { CardContainer } from "@/components/ui/CardContainer";
-import { MonthlyFeedback } from "@prisma/client";
+import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { EditButton } from "@/components/ui/EditButton";
-import { MONTHLY_FEEDBACK_EDIT } from "@/constants/routerConstants";
-import { Heading4 } from "@/components/ui/typography/Heading4";
+import FeedbackDetails from "./FeedbackDetails";
+import { useOpen } from "@/utils/useOpen";
+import ModalContainer from "../ui/ModalContainer";
+import { MonthlyFeedbackForm } from "./MonthlyFeedbackForm";
 
 type MonthlyFeedbackCardProps = {
   monthlyFeedback: MonthlyFeedback;
+  teamMemberId: TeamMember["id"];
 };
 
 export const MonthlyFeedbackCard = ({
   monthlyFeedback,
+  teamMemberId,
 }: MonthlyFeedbackCardProps) => {
-  const router = useRouter();
+  const { open, handleClose, handleOpen } = useOpen();
 
   const { positiveFeedback, negativeFeedback } = monthlyFeedback;
-
-  const handleMonthlyFeedbackUpdate = () => {
-    router.push({
-      pathname: `${MONTHLY_FEEDBACK_EDIT}${monthlyFeedback.id}`,
-    });
-  };
 
   return (
     <CardContainer
@@ -32,13 +29,19 @@ export const MonthlyFeedbackCard = ({
         Months[new Date(monthlyFeedback.createdAt).getMonth()]
       } - ${new Date(monthlyFeedback.createdAt).getFullYear()}`}
     >
-      <Heading4>
-        {positiveFeedback ? "Positive Feedback" : "Negative Feedback"}
-      </Heading4>
-      <p>
-        {monthlyFeedback.positiveFeedback || monthlyFeedback.negativeFeedback}
-      </p>
-      <EditButton onClick={handleMonthlyFeedbackUpdate} />
+      <FeedbackDetails
+        feedback={positiveFeedback || negativeFeedback}
+        monthlyFeedback={monthlyFeedback}
+        sign={positiveFeedback ? "positive" : "negative"}
+      />
+      <EditButton onClick={handleOpen} />
+      <ModalContainer handleClose={handleClose} open={open}>
+        <MonthlyFeedbackForm
+          monthlyFeedback={monthlyFeedback}
+          handleClose={handleClose}
+          teamMemberId={teamMemberId}
+        />
+      </ModalContainer>
     </CardContainer>
   );
 };
