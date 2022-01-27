@@ -19,8 +19,11 @@ export default async function handle(
         select: {
           firstName: true,
           lastName: true,
+          id: true,
           monthlyFeedback: {
             select: {
+              id: true,
+              teamMemberId: true,
               positiveFeedback: true,
               negativeFeedback: true,
               createdAt: true,
