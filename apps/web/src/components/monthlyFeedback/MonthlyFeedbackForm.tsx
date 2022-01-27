@@ -73,8 +73,6 @@ export const MonthlyFeedbackForm = ({
   };
 
   const onSubmit = (formData: FormData) => {
-    console.log("feed: ", monthlyFeedback);
-
     if (typeof monthlyFeedback === "string") {
       const fullYear = new Date().getFullYear();
 

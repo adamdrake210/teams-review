@@ -22,8 +22,6 @@ export const LatestMonthlyFeedback = ({
     error,
   } = useQuery(RQ_KEY_FEEDBACKS_ALL, getLatestMonthlyFeedback);
 
-  console.log("data: ", teamMembers);
-
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
       <div className={className}>
