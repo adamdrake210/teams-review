@@ -1,5 +1,5 @@
 import { TeamMember } from "@prisma/client";
-import { fetchAbsolute } from "../../utils/apiHelpers";
+import { fetchAbsolute } from "@/utils/apiHelpers";
 import { API_ENDPOINTS } from "./apiConstants";
 
 const {
