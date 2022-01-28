@@ -2,10 +2,10 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 
-import { TeamMemberForm } from "@/components/teamMember/TeamMemberForm";
+import { LOGIN } from "@/constants/routerConstants";
 import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
-import { LOGIN } from "@/constants/routerConstants";
+import { TeamsForm } from "@/components/teams/TeamsForm";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -26,11 +26,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   };
 };
 
-export default function CreateTeamMember() {
+export default function CreateTeam() {
   return (
-    <Layout title="Create Team Member">
-      <Heading1>Create Team Member</Heading1>
-      <TeamMemberForm />
+    <Layout title="Create Team">
+      <Heading1>Create Team</Heading1>
+      <TeamsForm />
     </Layout>
   );
 }

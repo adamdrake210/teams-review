@@ -3,7 +3,7 @@ import { TeamMember } from "@prisma/client";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 
-import { TEAM_MEMBER, TEAM_MEMBERS_CREATE } from "@/constants/routerConstants";
+import { TEAM_MEMBERS, TEAM_MEMBERS_CREATE } from "@/constants/routerConstants";
 import { Button } from "@/components/ui/Button";
 import { CardContainer } from "@/components/ui/CardContainer";
 import { Paragraph } from "@/components/ui/typography/Paragraph";
@@ -21,7 +21,7 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
         teamMembers.map((teamMember) => {
           return (
             <Link
-              href={`${TEAM_MEMBER}${teamMember.id}`}
+              href={`${TEAM_MEMBERS}${teamMember.id}`}
               passHref
               key={teamMember.id}
             >

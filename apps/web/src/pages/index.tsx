@@ -35,7 +35,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return {
     props: {
       initialTeamMembers: JSON.parse(JSON.stringify(teamMembers)),
-      user: session,
     },
   };
 };

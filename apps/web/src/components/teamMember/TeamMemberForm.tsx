@@ -14,9 +14,13 @@ import { SelectField } from "@/components/ui/forms/SelectField";
 import { Button } from "@/components/ui/Button";
 import { ControlledTextField } from "@/components/ui/forms/ControlledTextField";
 import { Loading } from "@/components/Loading";
-import { TEAM_MEMBER } from "@/constants/routerConstants";
+import { TEAM_MEMBERS } from "@/constants/routerConstants";
 import { ErrorText } from "@/components/ui/typography/ErrorText";
-import { IS_EMAIL_PATTERN, MAX_FIELD_LENGTH } from "@/utils/formHelpers";
+import {
+  IS_EMAIL_PATTERN,
+  IS_ONLY_ALPHABET_CHARACTERS,
+  MAX_FIELD_LENGTH,
+} from "@/utils/formHelpers";
 
 type TeamMemberFormProps = {
   editTeamMember?: TeamMember & { team: Team };
@@ -51,7 +55,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
       setApiError(err);
     },
     onSuccess: (data) => {
-      router.push(`${TEAM_MEMBER}${data.id}`);
+      router.push(`${TEAM_MEMBERS}${data.id}`);
       queryClient.refetchQueries([RQ_KEY_USER]);
     },
     // Always refetch after error or success:
@@ -66,7 +70,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
       setApiError(err);
     },
     onSuccess: (data) => {
-      router.push(`${TEAM_MEMBER}${data.id}`);
+      router.push(`${TEAM_MEMBERS}${data.id}`);
       queryClient.refetchQueries([RQ_KEY_USER]);
     },
     // Always refetch after error or success:
@@ -93,7 +97,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         rules={{
           required: "First Name is required",
           maxLength: MAX_FIELD_LENGTH,
-          pattern: /^[A-Za-z]+$/i,
+          pattern: IS_ONLY_ALPHABET_CHARACTERS,
         }}
       />
       <ControlledTextField
@@ -103,7 +107,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         rules={{
           required: "Last Name is required",
           maxLength: MAX_FIELD_LENGTH,
-          pattern: /^[A-Za-z]+$/i,
+          pattern: IS_ONLY_ALPHABET_CHARACTERS,
         }}
       />
       <ControlledTextField

@@ -28,6 +28,24 @@ export const API_ENDPOINTS = {
     url: "/api/team-members/delete",
   },
 
+  // Teams
+  API_TEAMS_GET: {
+    method: "GET",
+    url: "/api/teams/get",
+  },
+  API_TEAMS_CREATE: {
+    method: "POST",
+    url: "/api/teams/create",
+  },
+  API_TEAMS_UPDATE: {
+    method: "PUT",
+    url: "/api/teams/update",
+  },
+  API_TEAMS_DELETE: {
+    method: "DELETE",
+    url: "/api/teams/delete",
+  },
+
   // User
   API_USER_GET: {
     method: "GET",

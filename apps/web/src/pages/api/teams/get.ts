@@ -1,32 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../lib/prisma";
 import { getSession } from "next-auth/react";
+import prisma from "@/lib/prisma";
 
-// PUT /api/post
+// GET /api/feedbacks/get-latest-feedbacks
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id, firstName, lastName, email, position, teamId } = req.body.data;
-
   try {
     const session = await getSession({ req });
     if (session) {
-      const result = await prisma.teamMember.update({
+      const feedback = await prisma.team.findMany({
         where: {
-          id: id,
-        },
-        data: {
-          firstName,
-          lastName,
-          email,
-          position,
-          team: {
-            connect: { id: teamId },
+          manager: {
+            email: session?.user?.email,
           },
         },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          members: true,
+        },
       });
-      res.json(result);
+      res.json(feedback);
     } else {
       res.status(401).send({ message: "Unauthorized" });
     }

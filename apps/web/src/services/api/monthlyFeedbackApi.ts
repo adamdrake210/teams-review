@@ -15,6 +15,11 @@ type CreateMonthlyFeedbackRequestType = {
   createdAt: Date;
 };
 
+export async function getLatestMonthlyFeedback() {
+  const response = await fetchAbsolute(API_MONTHLY_FEEDBACK_LATEST);
+  return await response.json();
+}
+
 export async function createMonthlyFeedbackRequest(
   createMonthlyFeedbackRequestParams: CreateMonthlyFeedbackRequestType
 ) {
@@ -30,10 +35,5 @@ export async function updateMonthlyFeedbackRequest(
   const response = await fetchAbsolute(API_MONTHLY_FEEDBACK_UPDATE, {
     body: JSON.stringify({ data: updateMonthlyFeedbackRequestParams }),
   });
-  return await response.json();
-}
-
-export async function getLatestMonthlyFeedback() {
-  const response = await fetchAbsolute(API_MONTHLY_FEEDBACK_LATEST);
   return await response.json();
 }
