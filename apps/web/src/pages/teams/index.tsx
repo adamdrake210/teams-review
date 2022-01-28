@@ -2,10 +2,9 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 
-import { TeamMemberForm } from "@/components/teamMember/TeamMemberForm";
 import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
-import { LOGIN } from "@/constants/routerConstants";
+import { MyTeams } from "@/components/MyTeams";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -13,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.statusCode = 403;
     return {
       redirect: {
-        destination: LOGIN,
+        destination: "/login",
         permanent: false,
       },
     };
@@ -26,11 +25,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   };
 };
 
-export default function CreateTeamMember() {
+export default function TeamsPage() {
   return (
-    <Layout title="Create Team Member">
-      <Heading1>Create Team Member</Heading1>
-      <TeamMemberForm />
+    <Layout title="Teams">
+      <Heading1>Your Teams</Heading1>
+      <MyTeams />
     </Layout>
   );
 }

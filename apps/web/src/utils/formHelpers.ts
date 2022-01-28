@@ -3,4 +3,9 @@ export const IS_EMAIL_PATTERN = {
   message: "Invalid email address",
 };
 
+export const IS_ONLY_ALPHABET_CHARACTERS = {
+  value: /^[a-zA-Z0-9]([\w -]*[a-zA-Z0-9])?$/i,
+  message: "Only alphabet characters, -, and spaces are allowed",
+};
+
 export const MAX_FIELD_LENGTH = 50;

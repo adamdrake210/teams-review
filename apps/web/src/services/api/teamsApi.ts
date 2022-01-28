@@ -10,7 +10,14 @@ export async function getTeams() {
   return await response.json();
 }
 
-export async function createTeamsRequest(createTeamsParams: Team) {
+type CreateTeamRequestType = {
+  title: Team["title"];
+  description: Team["description"];
+};
+
+export async function createTeamsRequest(
+  createTeamsParams: CreateTeamRequestType
+) {
   const response = await fetchAbsolute(API_TEAMS_CREATE, {
     body: JSON.stringify({ data: createTeamsParams }),
   });
