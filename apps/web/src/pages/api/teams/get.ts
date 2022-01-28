@@ -17,6 +17,7 @@ export default async function handle(
           },
         },
         select: {
+          id: true,
           title: true,
           description: true,
           members: true,

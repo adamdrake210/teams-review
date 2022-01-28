@@ -27,7 +27,6 @@ export const MyTeams = () => {
     <Loading isLoading={isLoading} isError={isError} error={error}>
       <section className="flex flex-col w-full sm:space-y-2">
         <Heading2>Teams Information</Heading2>
-
         {teams?.length > 0 ? (
           <TeamsList teams={teams} />
         ) : (
