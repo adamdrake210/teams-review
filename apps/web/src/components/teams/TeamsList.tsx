@@ -26,6 +26,7 @@ export const TeamsList = ({ teams }: TeamsListProps) => {
             className="w-full sm:w-1/3"
           >
             <p>{team.description}</p>
+
             <EditButton onClick={() => handleEditButton(team.id)} />
           </CardContainer>
         );
