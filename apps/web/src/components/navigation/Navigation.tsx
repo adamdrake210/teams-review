@@ -134,21 +134,22 @@ export const Navigation = () => {
         {/* Mobile Menu */}
         {showMenu && (
           <div className="flex flex-col">
-            {MobileMenuItems.map((item, index) => {
-              return (
-                <Link href={item.url} passHref key={index}>
-                  <div
-                    className={`text-xl uppercase hover:text-green-600 hover:underline py-3 px-4 ${
-                      router.asPath === item.url
-                        ? "text-green-600 underline"
-                        : "text-gray-500"
-                    }`}
-                  >
-                    <p className="text-secondary-300">{item.label}</p>
-                  </div>
-                </Link>
-              );
-            })}
+            {session?.user &&
+              MobileMenuItems.map((item, index) => {
+                return (
+                  <Link href={item.url} passHref key={index}>
+                    <div
+                      className={`text-xl uppercase hover:text-green-600 hover:underline py-3 px-4 ${
+                        router.asPath === item.url
+                          ? "text-green-600 underline"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      <p className="text-secondary-300">{item.label}</p>
+                    </div>
+                  </Link>
+                );
+              })}
             <div className="flex justify-center py-2">
               {status === "loading" ? (
                 <Loading />

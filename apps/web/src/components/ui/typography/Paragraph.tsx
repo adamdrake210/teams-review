@@ -5,5 +5,5 @@ type ParagraphProps = {
 };
 
 export const Paragraph = ({ children }: ParagraphProps) => {
-  return <p className="text-2xl font-extralight">{children}</p>;
+  return <p className="text-xl font-extralight">{children}</p>;
 };

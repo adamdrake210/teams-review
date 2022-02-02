@@ -13,7 +13,7 @@ export const CardContainer = ({
 }: CardContainerProps) => {
   return (
     <div
-      className={`bg-white rounded-lg shadow-xl mb-8 font-raleway ${
+      className={`bg-white rounded-lg shadow-md mb-8 font-raleway ${
         className || ""
       }`}
     >
