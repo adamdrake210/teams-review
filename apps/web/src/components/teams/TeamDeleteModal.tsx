@@ -1,7 +1,6 @@
 import React from "react";
 import { Team } from "@prisma/client";
 import { useMutation, useQueryClient } from "react-query";
-import { useRouter } from "next/router";
 
 import ModalContainer from "../ui/ModalContainer";
 import { Heading2 } from "../ui/typography/Heading2";
@@ -9,7 +8,6 @@ import { DangerButton } from "../ui/buttons/DangerButton";
 import { Button } from "../ui/Button";
 import { RQ_KEY_TEAMS, RQ_KEY_USER } from "@/constants/constants";
 import { ErrorText } from "../ui/typography/ErrorText";
-import { TEAMS } from "@/constants/routerConstants";
 import { deleteTeamsRequest } from "@/services/api/teamsApi";
 
 type TeamMemberDeleteModalProps = {
@@ -24,7 +22,6 @@ export const TeamDeleteModal = ({
   team,
 }: TeamMemberDeleteModalProps) => {
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const deleteMutation = useMutation(deleteTeamsRequest, {
     onError: (err: Error) => {
@@ -45,7 +42,6 @@ export const TeamDeleteModal = ({
 
   const handleCloseSuccessModal = () => {
     handleClose();
-    router.push(TEAMS);
   };
 
   return (
