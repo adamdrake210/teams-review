@@ -20,7 +20,7 @@ export const DangerButton = ({
     <button
       type={type}
       onClick={onClick}
-      className={`bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded disabled:bg-slate-400 uppercase ${className}`}
+      className={`bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded disabled:bg-slate-400 uppercase ${className}`}
       disabled={disabled}
       {...rest}
     >

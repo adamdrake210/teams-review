@@ -23,7 +23,7 @@ export const TeamMemberDetails = ({ teamMember }: TeamMemberProps) => {
         </p>
         <p>Position: {position}</p>
         <p>Joined: {joined}</p>
-        <p>Current Team: {team.title}</p>
+        <p>Current Team: {team ? team.title : "No team"}</p>
         <div className="flex mt-6 space-x-2">
           <Button
             btnText="Update Team Member"

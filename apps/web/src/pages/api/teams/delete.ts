@@ -12,7 +12,7 @@ export default async function handle(
   try {
     const session = await getSession({ req });
     if (session) {
-      const deleteTeam = prisma.team.delete({
+      const deleteTeam = await prisma.team.delete({
         where: {
           id: teamId,
         },

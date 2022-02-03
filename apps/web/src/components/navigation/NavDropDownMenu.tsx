@@ -55,7 +55,9 @@ export const NavDropDownMenu = ({ user }: NavDropDownMenuProps) => {
         <ul
           style={styles.offset}
           className={`${
-            menuOpen ? "py-1 bg-slate-50 w-48 text-center" : "hidden"
+            menuOpen
+              ? "right-0 z-20 py-1 bg-slate-50 w-48 text-center shadow-xl"
+              : "hidden"
           }`}
         >
           <li>
