@@ -3,7 +3,7 @@ import React from "react";
 import { Months } from "@/types/types";
 import { CardContainer } from "@/components/ui/CardContainer";
 import { MonthlyFeedback, TeamMember } from "@prisma/client";
-import { EditButton } from "@/components/ui/EditButton";
+import { EditButton } from "@/components/ui/buttons/EditButton";
 import FeedbackDetails from "./FeedbackDetails";
 import { useOpen } from "@/utils/useOpen";
 import ModalContainer from "../ui/ModalContainer";
