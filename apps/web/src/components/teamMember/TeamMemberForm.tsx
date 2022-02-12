@@ -21,6 +21,7 @@ import {
   IS_ONLY_ALPHABET_CHARACTERS,
   MAX_FIELD_LENGTH,
 } from "@/utils/formHelpers";
+import { DatePick } from "../DatePick";
 
 type TeamMemberFormProps = {
   editTeamMember?: TeamMember & { team: Team };
@@ -129,6 +130,9 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
           maxLength: MAX_FIELD_LENGTH,
         }}
       />
+
+      <DatePick />
+
       <Loading isLoading={isLoading} error={error} isError={isError}>
         {userData && userData.teams.length > 0 ? (
           <SelectField
