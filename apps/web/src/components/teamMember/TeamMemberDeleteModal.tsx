@@ -2,9 +2,9 @@ import React from "react";
 import { Team, TeamMember } from "@prisma/client";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
+import { Typography } from "@mui/material";
 
 import ModalContainer from "../ui/ModalContainer";
-import { Heading2 } from "../ui/typography/Heading2";
 import { DangerButton } from "../ui/buttons/DangerButton";
 import { Button } from "../ui/Button";
 import { deleteTeamMemberRequest } from "@/services/api/teamMembersApi";
@@ -52,7 +52,9 @@ export const TeamMemberDeleteModal = ({
     <ModalContainer handleClose={handleClose} open={open}>
       {deleteMutation.isSuccess ? (
         <>
-          <Heading2>User deleted successfully!</Heading2>
+          <Typography component="h2" variant="h4">
+            User deleted successfully!
+          </Typography>
           <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
             <Button
               type="button"
@@ -65,7 +67,9 @@ export const TeamMemberDeleteModal = ({
         </>
       ) : (
         <>
-          <Heading2>Are you sure you want to delete this team member?</Heading2>
+          <Typography component="h2" variant="h4">
+            Are you sure you want to delete this team member?
+          </Typography>
           <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
             <DangerButton
               btnText="Delete Team Member"

@@ -1,8 +1,8 @@
 import React from "react";
+import { Typography } from "@mui/material";
 
 import { MonthlyFeedback } from "@prisma/client";
 import { MonthlyFeedbackCard } from "./monthlyFeedback/MonthlyFeedbackCard";
-import { Heading3 } from "./ui/typography/Heading3";
 import { Paragraph } from "./ui/typography/Paragraph";
 
 type TeamMembersWithMonthlyFeedback = {
@@ -24,9 +24,9 @@ export const LatestMonthlyFeedbackList = ({
       {teamMembers.map((teamMember, i) => {
         return (
           <div key={`${i}${teamMember.firstName}`} className="flex flex-col">
-            <Heading3>
+            <Typography component="h3" variant="h5" gutterBottom>
               {teamMember.firstName} {teamMember.lastName}
-            </Heading3>
+            </Typography>
             <div className="flex flex-col sm:flex-row sm:space-x-4">
               {teamMember.monthlyFeedback?.length > 0 ? (
                 teamMember.monthlyFeedback.map((mfb, i) => {

@@ -2,8 +2,8 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 
-import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
+import { Typography } from "@mui/material";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -27,7 +27,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 export default function FeedbacksPage() {
   return (
     <Layout title="Feedback">
-      <Heading1>Feedbacks</Heading1>
+      <Typography component="h1" variant="h3">
+        Feedbacks
+      </Typography>
     </Layout>
   );
 }

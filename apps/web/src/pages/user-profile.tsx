@@ -1,8 +1,8 @@
 import React from "react";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import { Typography } from "@mui/material";
 
-import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { User } from "next-auth";
 import { UserProfile } from "@/components/userProfile/UserProfile";
@@ -33,7 +33,9 @@ type UserProfilePageProps = {
 export default function UserProfilePage({ user }: UserProfilePageProps) {
   return (
     <Layout title="Feedback">
-      <Heading1>User Profile for {user?.name}</Heading1>
+      <Typography component="h1" variant="h3">
+        User Profile for {user?.name}
+      </Typography>
       <UserProfile />
     </Layout>
   );

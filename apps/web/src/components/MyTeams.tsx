@@ -1,12 +1,11 @@
 import React from "react";
 import { Team } from "@prisma/client";
 import { useQuery } from "react-query";
-
+import { Typography } from "@mui/material";
 import { useRouter } from "next/router";
 
 import { RQ_KEY_TEAMS } from "@/constants/constants";
 import { Loading } from "@/components/Loading";
-import { Heading2 } from "@/components/ui/typography/Heading2";
 import { Paragraph } from "@/components/ui/typography/Paragraph";
 import { getTeams } from "@/services/api/teamsApi";
 import { TeamsList } from "./teams/TeamsList";
@@ -26,7 +25,9 @@ export const MyTeams = () => {
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
       <section className="flex flex-col w-full sm:space-y-2">
-        <Heading2>Teams Information</Heading2>
+        <Typography component="h2" variant="h4">
+          Teams Information
+        </Typography>
         {teams?.length > 0 ? (
           <TeamsList teams={teams} />
         ) : (

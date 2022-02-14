@@ -1,12 +1,12 @@
 import React from "react";
 import { Team, TeamMember, User } from "@prisma/client";
 import { useQuery } from "react-query";
+import { Typography } from "@mui/material";
 
 import { RQ_KEY_USER } from "@/constants/constants";
 import { getUser } from "@/services/api/userApi";
 import { Loading } from "@/components/Loading";
 import { CardContainer } from "@/components/ui/CardContainer";
-import { Heading2 } from "@/components/ui/typography/Heading2";
 import { Paragraph } from "@/components/ui/typography/Paragraph";
 import { pluralHelper } from "@/utils/pluralHelper";
 
@@ -28,7 +28,9 @@ export const MyInfo = ({ className }: MyInfoProps) => {
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
       <div className={className || ""}>
-        <Heading2>Team Info</Heading2>
+        <Typography component="h2" variant="h4">
+          Team Info
+        </Typography>
         <CardContainer
           headerText={`Welcome back ${userData?.firstName || userData?.name}!`}
         >

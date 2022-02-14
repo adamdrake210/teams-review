@@ -1,8 +1,8 @@
 import React from "react";
 import { TeamMember } from "@prisma/client";
+import { Typography } from "@mui/material";
 
 import { TeamMembersCard } from "@/components/teamMember/TeamMembersCard";
-import { Heading2 } from "@/components/ui/typography/Heading2";
 
 type MyTeamMembersProps = {
   teamMembers: TeamMember[];
@@ -15,7 +15,10 @@ export const MyTeamMembers = ({
 }: MyTeamMembersProps) => {
   return (
     <div className={className || ""}>
-      <Heading2>Team Members</Heading2>
+      <Typography component="h2" variant="h4">
+        Team Members
+      </Typography>
+
       <TeamMembersCard teamMembers={teamMembers} />
     </div>
   );

@@ -2,11 +2,11 @@ import React from "react";
 import { useQuery } from "react-query";
 import { User } from "@prisma/client";
 import Image from "next/image";
+import { Typography } from "@mui/material";
 
 import { RQ_KEY_USER } from "@/constants/constants";
 import { getUser } from "@/services/api/userApi";
 import { Loading } from "../Loading";
-import { Heading2 } from "../ui/typography/Heading2";
 import { UserProfileForm } from "./UserProfileForm";
 import { Paragraph } from "../ui/typography/Paragraph";
 
@@ -33,7 +33,9 @@ export const UserProfile = ({ className }: UserProfileProps) => {
           height={140}
         />
         <Paragraph>{userData?.email}</Paragraph>
-        <Heading2 className="my-4">Update your info</Heading2>
+        <Typography component="h2" variant="h4">
+          Update your info
+        </Typography>
         <UserProfileForm userData={userData} />
       </div>
     </Loading>

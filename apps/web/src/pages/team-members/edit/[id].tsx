@@ -2,8 +2,8 @@ import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import { Team, TeamMember } from "@prisma/client";
 import prisma from "@/lib/prisma";
+import { Typography } from "@mui/material";
 
-import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { LOGIN } from "@/constants/routerConstants";
 import { TeamMemberForm } from "@/components/teamMember/TeamMemberForm";
@@ -49,9 +49,9 @@ type TeamMemberProps = {
 export default function TeamMemberEditPage({ teamMember }: TeamMemberProps) {
   return (
     <Layout title="Team Member">
-      <Heading1>
+      <Typography component="h1" variant="h3">
         Edit Details for {teamMember.firstName} {teamMember.lastName}
-      </Heading1>
+      </Typography>
       <TeamMemberForm editTeamMember={teamMember} />
     </Layout>
   );

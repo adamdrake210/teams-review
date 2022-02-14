@@ -2,8 +2,8 @@ import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import { Team } from "@prisma/client";
 import prisma from "@/lib/prisma";
+import { Typography } from "@mui/material";
 
-import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { LOGIN } from "@/constants/routerConstants";
 import { returnSingleParam } from "@/utils/getSingleParam";
@@ -46,7 +46,9 @@ type TeamsEditPageProps = {
 export default function TeamsEditPage({ team }: TeamsEditPageProps) {
   return (
     <Layout title="Team">
-      <Heading1>Edit Details for {team.title}</Heading1>
+      <Typography component="h1" variant="h3">
+        Edit Details for {team.title}
+      </Typography>
       <TeamsForm editTeams={team} />
     </Layout>
   );

@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { Typography } from "@mui/material";
 
 import { getLatestMonthlyFeedback } from "@/services/api/monthlyFeedbackApi";
-import { Heading2 } from "@/components/ui/typography/Heading2";
 import { RQ_KEY_FEEDBACKS_ALL } from "@/constants/constants";
 import { Loading } from "./Loading";
 import { LatestMonthlyFeedbackList } from "./LatestMonthlyFeedbackList";
@@ -25,7 +25,9 @@ export const LatestMonthlyFeedback = ({
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
       <div className={className}>
-        <Heading2>Latest Feedback</Heading2>
+        <Typography component="h2" variant="h4">
+          Latest Feedback
+        </Typography>
         {teamMembers?.length > 0 ? (
           <LatestMonthlyFeedbackList teamMembers={teamMembers} />
         ) : (
