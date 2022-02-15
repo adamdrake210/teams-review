@@ -1,11 +1,10 @@
 import React from "react";
 import { Team } from "@prisma/client";
 import { useMutation, useQueryClient } from "react-query";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 import ModalContainer from "../ui/ModalContainer";
 import { DangerButton } from "../ui/buttons/DangerButton";
-import { Button } from "../ui/Button";
 import { RQ_KEY_TEAMS, RQ_KEY_USER } from "@/constants/constants";
 import { ErrorText } from "../ui/typography/ErrorText";
 import { deleteTeamsRequest } from "@/services/api/teamsApi";
@@ -52,13 +51,9 @@ export const TeamDeleteModal = ({
             Team deleted successfully!
           </Typography>
           <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
-            <Button
-              type="button"
-              color="primary"
-              onClick={handleCloseSuccessModal}
-              btnText="Close"
-              className="ml-2"
-            />
+            <Button variant="contained" onClick={handleCloseSuccessModal}>
+              Close
+            </Button>
           </div>
         </>
       ) : (
@@ -72,13 +67,9 @@ export const TeamDeleteModal = ({
               onClick={handleDeleteTeam}
               disabled={deleteMutation.isLoading}
             />
-            <Button
-              type="button"
-              onClick={handleClose}
-              btnText="Cancel"
-              className="ml-2"
-              disabled={deleteMutation.isLoading}
-            />
+            <Button onClick={handleClose} disabled={deleteMutation.isLoading}>
+              Cancel
+            </Button>
           </div>
           {deleteMutation.error && (
             <ErrorText>

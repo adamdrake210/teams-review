@@ -2,9 +2,15 @@ import { PaletteMode } from "@mui/material";
 import { lightBlue, pink, grey, blue } from "@mui/material/colors";
 
 const getDesignTokens = (mode: PaletteMode) => ({
-  // typography: {
-  //   fontFamily: ['Market Sans', 'Arial', '"Helvetica Neue"', 'Helvetica', 'sans-serif'].join(','),
-  // },
+  typography: {
+    fontFamily: [
+      "Raleway",
+      "Arial",
+      '"Helvetica Neue"',
+      "Helvetica",
+      "sans-serif",
+    ].join(","),
+  },
   palette: {
     mode,
     ...(mode === "light"

@@ -3,9 +3,9 @@ import { signOut } from "next-auth/react";
 import { User } from "next-auth";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@mui/material";
 
 import { usePopper } from "react-popper";
-import { Button } from "@/components/ui/Button";
 import { USER_PROFILE } from "@/constants/routerConstants";
 
 type NavDropDownMenuProps = {
@@ -68,7 +68,8 @@ export const NavDropDownMenu = ({ user }: NavDropDownMenuProps) => {
             </Link>
           </li>
           <li>
-            <Button btnText="Logout" onClick={signOut} />
+            {/* @ts-ignore */}
+            <Button onClick={signOut}>Logout</Button>
           </li>
         </ul>
       </div>

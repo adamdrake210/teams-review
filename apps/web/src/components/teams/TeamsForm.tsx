@@ -6,7 +6,6 @@ import { useRouter } from "next/dist/client/router";
 
 import { RQ_KEY_USER } from "@/constants/constants";
 import { updateTeamMemberRequest } from "@/services/api/teamMembersApi";
-import { Button } from "@/components/ui/Button";
 import { ControlledTextField } from "@/components/ui/forms/ControlledTextField";
 import { TEAMS } from "@/constants/routerConstants";
 import { ErrorText } from "@/components/ui/typography/ErrorText";
@@ -18,6 +17,7 @@ import {
   createTeamsRequest,
   updateTeamsRequest,
 } from "@/services/api/teamsApi";
+import { Button } from "@mui/material";
 
 type TeamsFormProps = {
   editTeams?: Team;
@@ -100,10 +100,11 @@ export const TeamsForm = ({ editTeams }: TeamsFormProps) => {
 
       <Button
         type="submit"
-        btnText={`${editTeams ? "Update" : "Submit"}`}
-        color="primary"
+        variant="contained"
         disabled={updateMutation.isLoading || createMutation.isLoading}
-      />
+      >
+        {editTeams ? "Update" : "Submit"}
+      </Button>
       {createMutation.isError ||
         (updateMutation.isError && (
           <ErrorText>

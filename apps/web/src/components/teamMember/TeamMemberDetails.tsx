@@ -2,12 +2,13 @@ import React from "react";
 import { useRouter } from "next/dist/client/router";
 
 import { CardContainer } from "@/components/ui/CardContainer";
-import { Button } from "@/components/ui/Button";
+import { CustomButton } from "@/components/ui/Button";
 import { TEAM_MEMBERS_EDIT } from "@/constants/routerConstants";
 import { TeamMemberProps } from "@/pages/team-members/[id]";
 import { DangerButton } from "../ui/buttons/DangerButton";
 import { useOpen } from "@/utils/useOpen";
 import { TeamMemberDeleteModal } from "./TeamMemberDeleteModal";
+import { Button } from "@mui/material";
 
 export const TeamMemberDetails = ({ teamMember }: TeamMemberProps) => {
   const router = useRouter();
@@ -26,12 +27,13 @@ export const TeamMemberDetails = ({ teamMember }: TeamMemberProps) => {
         <p>Current Team: {team ? team.title : "No team"}</p>
         <div className="flex mt-6 space-x-2">
           <Button
-            btnText="Update Team Member"
-            color="primary"
+            variant="contained"
             onClick={() => {
               router.push(`${TEAM_MEMBERS_EDIT}${id}`);
             }}
-          />
+          >
+            Update Team Member
+          </Button>
           <DangerButton btnText="Delete Team Member" onClick={handleOpen} />
         </div>
       </CardContainer>

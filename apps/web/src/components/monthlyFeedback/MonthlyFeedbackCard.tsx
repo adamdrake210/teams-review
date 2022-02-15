@@ -24,7 +24,6 @@ export const MonthlyFeedbackCard = ({
 
   return (
     <CardContainer
-      className="flex-1 sm:basis-1/3"
       headerText={`${
         Months[new Date(monthlyFeedback.createdAt).getMonth()]
       } - ${new Date(monthlyFeedback.createdAt).getFullYear()}`}

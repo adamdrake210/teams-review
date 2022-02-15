@@ -4,9 +4,10 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 
 import { TEAM_MEMBERS, TEAM_MEMBERS_CREATE } from "@/constants/routerConstants";
-import { Button } from "@/components/ui/Button";
+import { CustomButton } from "@/components/ui/Button";
 import { CardContainer } from "@/components/ui/CardContainer";
 import { Paragraph } from "@/components/ui/typography/Paragraph";
+import { Button } from "@mui/material";
 
 type TeamMembersCardProps = {
   teamMembers: TeamMember[];
@@ -41,13 +42,14 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
         <Paragraph>Currently you have no team members.</Paragraph>
       )}
       <Button
-        className="mt-6"
-        btnText="Create Team Member"
         color="primary"
+        variant="contained"
         onClick={() => {
           router.push(TEAM_MEMBERS_CREATE);
         }}
-      />
+      >
+        Create Team Member
+      </Button>
     </CardContainer>
   );
 };

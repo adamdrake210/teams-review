@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
-import { Button } from "../ui/Button";
+import { CustomButton } from "../ui/Button";
 import { useRouter } from "next/dist/client/router";
 import {
   MONTHLY_FEEDBACK,
@@ -13,6 +13,7 @@ import {
 } from "../../constants/routerConstants";
 import { Loading } from "../Loading";
 import { NavDropDownMenu } from "./NavDropDownMenu";
+import { Button } from "@mui/material";
 
 const MenuItems = [
   // {
@@ -45,6 +46,14 @@ export const Navigation = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
+
+  const handleSignIn = () => {
+    signIn();
+  };
+
+  const handleSignOut = () => {
+    signOut();
+  };
 
   return (
     <nav className="bg-slate-50 left-0 right-0 font-raleway shadow-md fixed z-10">
@@ -84,8 +93,10 @@ export const Navigation = () => {
               <NavDropDownMenu user={session.user} />
             ) : (
               <>
-                <Button btnText="Login" onClick={signIn} />
-                <Button btnText="Sign Up" onClick={signIn} color="primary" />
+                <Button onClick={handleSignIn}>Login</Button>
+                <Button variant="contained" onClick={handleSignIn}>
+                  Sign Up
+                </Button>
               </>
             )}
           </div>
@@ -154,11 +165,13 @@ export const Navigation = () => {
               {status === "loading" ? (
                 <Loading />
               ) : session?.user ? (
-                <Button btnText="Logout" onClick={signOut} />
+                <Button onClick={handleSignOut}>Logout</Button>
               ) : (
                 <>
-                  <Button btnText="Login" onClick={signIn} className="mr-4" />
-                  <Button btnText="Sign Up" onClick={signIn} color="primary" />
+                  <Button onClick={handleSignIn}>Login</Button>
+                  <Button variant="contained" onClick={handleSignIn}>
+                    Sign Up
+                  </Button>
                 </>
               )}
             </div>

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useForm } from "react-hook-form";
 import { User } from "@prisma/client";
+import { Button } from "@mui/material";
 
 import { updateUserRequest } from "@/services/api/userApi";
 import { RQ_KEY_USER } from "@/constants/constants";
 import { ControlledTextField } from "../ui/forms/ControlledTextField";
-import { Button } from "../ui/Button";
 import { ErrorText } from "../ui/typography/ErrorText";
 import { SuccessText } from "../ui/typography/SuccessText";
 
@@ -67,12 +67,9 @@ export const UserProfileForm = ({ userData }: UserProfileFormProps) => {
           handleShowingMessage={setSuccessMessage}
         />
       )}
-      <Button
-        type="submit"
-        btnText="Update Profile"
-        color="primary"
-        disabled={updateMutation.isLoading}
-      />
+      <Button type="submit" disabled={updateMutation.isLoading}>
+        Update Profile
+      </Button>
       {apiError && (
         <ErrorText>Something went wrong. {apiError.message}</ErrorText>
       )}
