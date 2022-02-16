@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 
-import { Navigation } from "@/components/navigation/Navigation";
 import { COMPANY_NAME } from "@/constants/constants";
 import { Footer } from "@/components/Footer";
+import NewNavigation from "@/components/navigation/NewNavigation";
 
 type LayoutProps = {
   children: ReactNode;
@@ -18,7 +18,7 @@ export const Layout = ({ children, title }: LayoutProps) => {
           {title} | {COMPANY_NAME}
         </title>
       </Head>
-      <Navigation />
+      <NewNavigation />
       <main className="flex flex-col font-raleway p-4 mx-auto container">
         {children}
       </main>
