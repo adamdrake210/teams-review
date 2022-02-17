@@ -1,9 +1,10 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
+import { Box } from "@mui/material";
 
 import { COMPANY_NAME } from "@/constants/constants";
 import { Footer } from "@/components/Footer";
-import NewNavigation from "@/components/navigation/NewNavigation";
+import Navigation from "@/components/navigation/Navigation";
 
 type LayoutProps = {
   children: ReactNode;
@@ -18,10 +19,20 @@ export const Layout = ({ children, title }: LayoutProps) => {
           {title} | {COMPANY_NAME}
         </title>
       </Head>
-      <NewNavigation />
-      <main className="flex flex-col font-raleway p-4 mx-auto container">
+      <Navigation />
+      <Box
+        component="main"
+        maxWidth="lg"
+        sx={{
+          padding: 2,
+          mx: "auto",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
+      >
         {children}
-      </main>
+      </Box>
       <Footer />
     </div>
   );

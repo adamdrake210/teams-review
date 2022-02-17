@@ -49,9 +49,7 @@ const avatorDropDownMenu = [
   },
 ];
 
-const mobileMenuItems = [...menuItems, ...avatorDropDownMenu];
-
-const NewNavigation = () => {
+const Navigation = () => {
   const { data: session, status } = useSession();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -232,4 +230,4 @@ const NewNavigation = () => {
     </AppBar>
   );
 };
-export default NewNavigation;
+export default Navigation;
