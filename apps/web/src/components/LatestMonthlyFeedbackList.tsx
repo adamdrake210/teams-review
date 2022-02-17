@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 import { MonthlyFeedback } from "@prisma/client";
 import { MonthlyFeedbackCard } from "./monthlyFeedback/MonthlyFeedbackCard";
@@ -20,22 +20,26 @@ export const LatestMonthlyFeedbackList = ({
   teamMembers,
 }: LatestMonthlyFeedbackListProps) => {
   return (
-    <div className="flex flex-col">
+    <>
       {teamMembers.map((teamMember, i) => {
         return (
-          <div key={`${i}${teamMember.firstName}`} className="flex flex-col">
+          <Box
+            sx={{ width: "100%", my: 2 }}
+            key={`${i}${teamMember.firstName}`}
+          >
             <Typography component="h3" variant="h5" gutterBottom>
               {teamMember.firstName} {teamMember.lastName}
             </Typography>
-            <div className="flex flex-col sm:flex-row sm:space-x-4">
+            <Grid container spacing={2}>
               {teamMember.monthlyFeedback?.length > 0 ? (
                 teamMember.monthlyFeedback.map((mfb, i) => {
                   return (
-                    <MonthlyFeedbackCard
-                      key={`${mfb.createdAt}${i}`}
-                      monthlyFeedback={mfb}
-                      teamMemberId={teamMember.id}
-                    />
+                    <Grid key={`${mfb.createdAt}${i}`} item xs={4}>
+                      <MonthlyFeedbackCard
+                        monthlyFeedback={mfb}
+                        teamMemberId={teamMember.id}
+                      />
+                    </Grid>
                   );
                 })
               ) : (
@@ -43,10 +47,10 @@ export const LatestMonthlyFeedbackList = ({
                   Currently you haven&apos;t written any feedback.
                 </Paragraph>
               )}
-            </div>
-          </div>
+            </Grid>
+          </Box>
         );
       })}
-    </div>
+    </>
   );
 };

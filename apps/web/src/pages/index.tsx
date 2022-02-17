@@ -1,13 +1,13 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { TeamMember } from "@prisma/client";
+import { Grid, Typography } from "@mui/material";
 
-import { Layout } from "../layout/Layout";
-import { MyTeamMembers } from "../components/MyTeamMembers";
-import prisma from "../lib/prisma";
-import { MyInfo } from "../components/MyInfo";
+import { Layout } from "@/layout/Layout";
+import { MyTeamMembers } from "@/components/MyTeamMembers";
+import prisma from "@/lib/prisma";
+import { MyInfo } from "@/components/MyInfo";
 import { LatestMonthlyFeedback } from "@/components/LatestMonthlyFeedback";
-import { Typography } from "@mui/material";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -49,16 +49,16 @@ export default function UserDashboard({ initialTeamMembers }: TeamReviewProps) {
       <Typography component="h1" variant="h3">
         Your Dashboard
       </Typography>
-      <section className="flex flex-col-reverse sm:space-x-4 sm:flex-row">
-        <MyTeamMembers
-          teamMembers={initialTeamMembers}
-          className="flex-1 sm:basis-2/3"
-        />
-        <MyInfo className="flex-1 sm:basis-1/3" />
-      </section>
-      <section className="flex flex-col w-full sm:space-x-4 sm:flex-row">
-        <LatestMonthlyFeedback className="w-full" />
-      </section>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+          <MyTeamMembers teamMembers={initialTeamMembers} />
+        </Grid>
+        <Grid item xs={4}>
+          <MyInfo className="flex-1 sm:basis-1/3" />
+        </Grid>
+      </Grid>
+
+      <LatestMonthlyFeedback />
     </Layout>
   );
 }

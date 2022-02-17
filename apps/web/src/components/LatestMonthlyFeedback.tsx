@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { getLatestMonthlyFeedback } from "@/services/api/monthlyFeedbackApi";
 import { RQ_KEY_FEEDBACKS_ALL } from "@/constants/constants";
@@ -8,13 +8,7 @@ import { Loading } from "./Loading";
 import { LatestMonthlyFeedbackList } from "./LatestMonthlyFeedbackList";
 import { Paragraph } from "./ui/typography/Paragraph";
 
-type LatestMonthlyFeedbackProps = {
-  className?: string;
-};
-
-export const LatestMonthlyFeedback = ({
-  className,
-}: LatestMonthlyFeedbackProps) => {
+export const LatestMonthlyFeedback = () => {
   const {
     data: teamMembers,
     isLoading,
@@ -24,7 +18,7 @@ export const LatestMonthlyFeedback = ({
 
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
-      <div className={className}>
+      <Box component="section" sx={{ my: 2, width: "100%" }}>
         <Typography component="h2" variant="h4">
           Latest Feedback
         </Typography>
@@ -35,7 +29,7 @@ export const LatestMonthlyFeedback = ({
             Currently you haven&apos;t written any feedback.
           </Paragraph>
         )}
-      </div>
+      </Box>
     </Loading>
   );
 };
