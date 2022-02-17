@@ -2,11 +2,11 @@ import React from "react";
 import { Team, TeamMember } from "@prisma/client";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
+import { Button, Typography } from "@mui/material";
 
 import ModalContainer from "../ui/ModalContainer";
-import { Heading2 } from "../ui/typography/Heading2";
 import { DangerButton } from "../ui/buttons/DangerButton";
-import { Button } from "../ui/Button";
+import { CustomButton } from "../ui/Button";
 import { deleteTeamMemberRequest } from "@/services/api/teamMembersApi";
 import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
 import { ErrorText } from "../ui/typography/ErrorText";
@@ -52,20 +52,18 @@ export const TeamMemberDeleteModal = ({
     <ModalContainer handleClose={handleClose} open={open}>
       {deleteMutation.isSuccess ? (
         <>
-          <Heading2>User deleted successfully!</Heading2>
+          <Typography component="h2" variant="h4">
+            User deleted successfully!
+          </Typography>
           <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
-            <Button
-              type="button"
-              color="primary"
-              onClick={handleCloseSuccessModal}
-              btnText="Close"
-              className="ml-2"
-            />
+            <Button onClick={handleCloseSuccessModal}>Close</Button>
           </div>
         </>
       ) : (
         <>
-          <Heading2>Are you sure you want to delete this team member?</Heading2>
+          <Typography component="h2" variant="h4">
+            Are you sure you want to delete this team member?
+          </Typography>
           <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
             <DangerButton
               btnText="Delete Team Member"
@@ -73,12 +71,12 @@ export const TeamMemberDeleteModal = ({
               disabled={deleteMutation.isLoading}
             />
             <Button
-              type="button"
               onClick={handleClose}
-              btnText="Cancel"
-              className="ml-2"
+              variant="outlined"
               disabled={deleteMutation.isLoading}
-            />
+            >
+              Cancel
+            </Button>
           </div>
           {deleteMutation.error && (
             <ErrorText>

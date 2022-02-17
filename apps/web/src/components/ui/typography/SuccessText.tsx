@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect } from "react";
+import { Typography } from "@mui/material";
+import React, { useEffect } from "react";
 
 type SuccessTextProps = {
   message: string;
@@ -20,6 +21,8 @@ export const SuccessText = ({
   }, []);
 
   return (
-    <p className="text-md font-extralight text-green-700 my-2">{message}</p>
+    <Typography component="p" variant="body2" color="success">
+      {message}
+    </Typography>
   );
 };

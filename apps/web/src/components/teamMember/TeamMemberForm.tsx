@@ -11,7 +11,6 @@ import {
   updateTeamMemberRequest,
 } from "@/services/api/teamMembersApi";
 import { SelectField } from "@/components/ui/forms/SelectField";
-import { Button } from "@/components/ui/Button";
 import { ControlledTextField } from "@/components/ui/forms/ControlledTextField";
 import { Loading } from "@/components/Loading";
 import { TEAM_MEMBERS } from "@/constants/routerConstants";
@@ -21,6 +20,8 @@ import {
   IS_ONLY_ALPHABET_CHARACTERS,
   MAX_FIELD_LENGTH,
 } from "@/utils/formHelpers";
+import { DatePick } from "../DatePick";
+import { Button } from "@mui/material";
 
 type TeamMemberFormProps = {
   editTeamMember?: TeamMember & { team: Team };
@@ -129,6 +130,9 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
           maxLength: MAX_FIELD_LENGTH,
         }}
       />
+
+      <DatePick />
+
       <Loading isLoading={isLoading} error={error} isError={isError}>
         {userData && userData.teams.length > 0 ? (
           <SelectField
@@ -146,14 +150,15 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
 
       <Button
         type="submit"
-        btnText={`${editTeamMember ? "Update" : "Submit"}`}
-        color="primary"
+        variant="contained"
         disabled={
           updateMutation.isLoading ||
           createMutation.isLoading ||
           !(userData && userData.teams.length > 0)
         }
-      />
+      >
+        {editTeamMember ? "Update" : "Submit"}
+      </Button>
       {apiError && (
         <ErrorText>Something went wrong. {apiError.message}</ErrorText>
       )}

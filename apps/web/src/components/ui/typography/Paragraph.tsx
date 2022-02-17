@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import React, { ReactNode } from "react";
 
 type ParagraphProps = {
@@ -5,5 +6,9 @@ type ParagraphProps = {
 };
 
 export const Paragraph = ({ children }: ParagraphProps) => {
-  return <p className="text-xl font-extralight">{children}</p>;
+  return (
+    <Typography component="p" variant="body2">
+      {children}
+    </Typography>
+  );
 };

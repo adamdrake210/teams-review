@@ -1,9 +1,9 @@
 import React from "react";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import { Typography } from "@mui/material";
 
 import { LOGIN } from "@/constants/routerConstants";
-import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { TeamsForm } from "@/components/teams/TeamsForm";
 
@@ -29,7 +29,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 export default function CreateTeam() {
   return (
     <Layout title="Create Team">
-      <Heading1>Create Team</Heading1>
+      <Typography component="h1" variant="h3">
+        Create Team
+      </Typography>
       <TeamsForm />
     </Layout>
   );

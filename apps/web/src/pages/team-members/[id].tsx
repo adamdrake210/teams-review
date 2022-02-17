@@ -2,8 +2,8 @@ import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import { MonthlyFeedback, Team, TeamMember } from "@prisma/client";
 import prisma from "@/lib/prisma";
+import { Typography } from "@mui/material";
 
-import { Heading1 } from "@/components/ui/typography/Heading1";
 import { Layout } from "@/layout/Layout";
 import { LOGIN } from "@/constants/routerConstants";
 import { TeamMemberDetails } from "@/components/teamMember/TeamMemberDetails";
@@ -57,14 +57,16 @@ export default function TeamMemberDetailsPage({ teamMember }: TeamMemberProps) {
     <Layout title="Team Member">
       {teamMember ? (
         <>
-          <Heading1>
+          <Typography component="h1" variant="h3">
             Details for {teamMember.firstName} {teamMember.lastName}
-          </Heading1>
+          </Typography>
           <TeamMemberDetails teamMember={teamMember} />
           <TeamMemberFeedback teamMember={teamMember} />
         </>
       ) : (
-        <Heading1>No Team Member found</Heading1>
+        <Typography component="h1" variant="h3">
+          No Team Member found
+        </Typography>
       )}
     </Layout>
   );

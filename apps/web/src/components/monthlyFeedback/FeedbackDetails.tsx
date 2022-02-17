@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { MonthlyFeedback } from "@prisma/client";
-import { Heading4 } from "../ui/typography/Heading4";
+import { Typography } from "@mui/material";
 
 type FeedbackDetailsProps = {
   feedback: string;
@@ -15,7 +15,11 @@ const FeedbackDetails = ({
 }: FeedbackDetailsProps) => {
   return (
     <div className="flex flex-col sm:basis-1/2">
-      <Heading4 className="capitalize">{`${sign} Feedback`}</Heading4>
+      <Typography
+        component="h4"
+        variant="h5"
+        sx={{ textTransform: "capitalize" }}
+      >{`${sign} Feedback`}</Typography>
       {typeof monthlyFeedback !== "string" && feedback.length > 0 ? (
         <p>{feedback}</p>
       ) : (

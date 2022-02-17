@@ -23,11 +23,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
 
   return (
     <>
-      <CardContainer
-        key={team.id}
-        headerText={team.title}
-        className="w-full sm:w-1/3 h-[100%] min-h-[250px]"
-      >
+      <CardContainer key={team.id} headerText={team.title}>
         <div className="flex flex-col min-h-[160px] justify-between">
           <p>{team.description}</p>
           <div className="flex space-x-2">

@@ -9,9 +9,9 @@ import {
 import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { Months } from "@/types/types";
 import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
-import { Button } from "@/components/ui/Button";
 import { ControlledTextArea } from "@/components/ui/forms/ControlledTextArea";
 import { ErrorText } from "../ui/typography/ErrorText";
+import { Button } from "@mui/material";
 
 type MonthlyFeedbackFormProps = {
   monthlyFeedback: MonthlyFeedback | string;
@@ -125,16 +125,12 @@ export const MonthlyFeedbackForm = ({
 
       <Button
         type="submit"
-        btnText="Update Feedback"
-        color="primary"
+        variant="contained"
         disabled={updateMutation.isLoading}
-      />
-      <Button
-        type="button"
-        onClick={handleClose}
-        btnText="Cancel"
-        className="ml-2"
-      />
+      >
+        Update Feedback
+      </Button>
+      <Button onClick={handleClose}>Cancel</Button>
       {updateMutation.isError && (
         <ErrorText>
           Something went wrong. {updateMutation.error.message}

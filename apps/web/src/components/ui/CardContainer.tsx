@@ -1,26 +1,35 @@
 import React, { ReactNode } from "react";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
 
 type CardContainerProps = {
   children: ReactNode;
   headerText?: string;
-  className?: string;
 };
 
-export const CardContainer = ({
-  children,
-  headerText,
-  className,
-}: CardContainerProps) => {
+export const CardContainer = ({ children, headerText }: CardContainerProps) => {
   return (
-    <div
-      className={`bg-white rounded-lg shadow-md mb-8 font-raleway ${
-        className || ""
-      }`}
-    >
-      <header className="bg-green-600 rounded-t-lg py-3 px-4 text-2xl font-vollkorn text-white">
-        {headerText}
-      </header>
-      <div className="px-4 py-4">{children}</div>
-    </div>
+    <Card sx={{ borderRadius: 4 }}>
+      <CardHeader title={headerText} />
+      <CardContent>
+        {/* <Typography variant="body2" color="text.secondary">
+          This impressive paella is a perfect party dish and a fun meal to cook
+          together with your guests. Add 1 cup of frozen peas along with the mussels,
+          if you like.
+        </Typography> */}
+        {children}
+      </CardContent>
+      {/* <CardActions disableSpacing>
+        <IconButton aria-label="edit">
+          <FavoriteIcon />
+        </IconButton>
+      </CardActions> */}
+    </Card>
   );
 };
