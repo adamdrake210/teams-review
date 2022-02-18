@@ -35,7 +35,7 @@ export const TeamDeleteModal = ({
     },
   });
 
-  const handleDeleteTeam = async () => {
+  const handleDeleteTeam = () => {
     deleteMutation.mutate({ teamId: team.id });
   };
 
