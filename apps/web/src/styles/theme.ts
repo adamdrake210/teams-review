@@ -35,7 +35,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
           },
           // divider: deepOrange[700],
           background: {
-            default: "rgb(0, 30, 60)",
+            default: "rgb(0, 20, 40)",
             paper: blue[900],
           },
           text: {

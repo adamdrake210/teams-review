@@ -6,7 +6,6 @@ import { Box, Typography } from "@mui/material";
 import { HOME } from "@/constants/routerConstants";
 import { Layout } from "@/layout/Layout";
 import { COMPANY_NAME } from "@/constants/constants";
-import { minHeight } from "@mui/system";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
