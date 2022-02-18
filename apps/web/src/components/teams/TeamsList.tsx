@@ -13,7 +13,7 @@ export const TeamsList = ({ teams }: TeamsListProps) => {
     <Grid container spacing={2}>
       {teams.map((team) => {
         return (
-          <Grid item key={team.id} xs={12} sm={8}>
+          <Grid item key={team.id} xs={12} sm={6}>
             <TeamCard team={team} />
           </Grid>
         );
