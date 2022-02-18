@@ -1,4 +1,5 @@
 import React from "react";
+import { Box, Grid } from "@mui/material";
 
 import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { Months } from "@/types/types";
@@ -7,6 +8,7 @@ import { EditButton } from "@/components/ui/buttons/EditButton";
 import { useOpen } from "@/utils/useOpen";
 import { MonthlyFeedbackForm } from "./MonthlyFeedbackForm";
 import ModalContainer from "../ui/ModalContainer";
+import { CardContainer } from "../ui/CardContainer";
 
 type FeedbackDetailsRowProps = {
   mfb: MonthlyFeedback | string;
@@ -20,35 +22,43 @@ export const MonthlyFeedbackDetailsRow = ({
   const { open, handleClose, handleOpen } = useOpen();
 
   return (
-    <div className="w-5/6">
-      <p className="text-xl font-extralight">
-        {
+    <Grid item xs={12}>
+      <CardContainer
+        headerText={
           Months[
             typeof mfb === "string" ? mfb : new Date(mfb.createdAt).getMonth()
           ]
         }
-      </p>
-      <div className="flex flex-col sm:flex-row sm:justify-between w-full">
-        <FeedbackDetails
-          feedback={typeof mfb === "string" ? mfb : mfb.positiveFeedback}
-          monthlyFeedback={mfb}
-          sign="positive"
-        />
-        <FeedbackDetails
-          feedback={typeof mfb === "string" ? mfb : mfb.negativeFeedback}
-          monthlyFeedback={mfb}
-          sign="negative"
-        />
-
-        <EditButton onClick={handleOpen} />
-        <ModalContainer handleClose={handleClose} open={open}>
-          <MonthlyFeedbackForm
+        action={<EditButton onClick={handleOpen} />}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <FeedbackDetails
+            feedback={typeof mfb === "string" ? mfb : mfb.positiveFeedback}
             monthlyFeedback={mfb}
-            handleClose={handleClose}
-            teamMemberId={teamMemberId}
+            sign="positive"
           />
-        </ModalContainer>
-      </div>
-    </div>
+          <FeedbackDetails
+            feedback={typeof mfb === "string" ? mfb : mfb.negativeFeedback}
+            monthlyFeedback={mfb}
+            sign="negative"
+          />
+
+          <ModalContainer handleClose={handleClose} open={open}>
+            <MonthlyFeedbackForm
+              monthlyFeedback={mfb}
+              handleClose={handleClose}
+              teamMemberId={teamMemberId}
+            />
+          </ModalContainer>
+        </Box>
+      </CardContainer>
+    </Grid>
   );
 };
