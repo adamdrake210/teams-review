@@ -25,9 +25,9 @@ export const LatestMonthlyFeedback = () => {
         {teamMembers?.length > 0 ? (
           <LatestMonthlyFeedbackList teamMembers={teamMembers} />
         ) : (
-          <Paragraph>
+          <Typography variant="subtitle1">
             Currently you haven&apos;t written any feedback.
-          </Paragraph>
+          </Typography>
         )}
       </Box>
     </Loading>

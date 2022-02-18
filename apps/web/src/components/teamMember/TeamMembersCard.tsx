@@ -44,7 +44,7 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
         onClick={() => {
           router.push(TEAM_MEMBERS_CREATE);
         }}
-        sx={{ my: 2 }}
+        sx={{ mt: 2 }}
       >
         Create Team Member
       </Button>
