@@ -28,7 +28,6 @@ export const UserProfileForm = ({ userData }: UserProfileFormProps) => {
 
   const updateMutation = useMutation(updateUserRequest, {
     onError: (err: Error) => {
-      console.error(err.message);
       setApiError(err);
     },
     onSuccess: () => {

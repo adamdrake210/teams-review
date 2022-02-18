@@ -6,7 +6,6 @@ import { getLatestMonthlyFeedback } from "@/services/api/monthlyFeedbackApi";
 import { RQ_KEY_FEEDBACKS_ALL } from "@/constants/constants";
 import { Loading } from "./Loading";
 import { LatestMonthlyFeedbackList } from "./LatestMonthlyFeedbackList";
-import { Paragraph } from "./ui/typography/Paragraph";
 
 export const LatestMonthlyFeedback = () => {
   const {
@@ -25,9 +24,9 @@ export const LatestMonthlyFeedback = () => {
         {teamMembers?.length > 0 ? (
           <LatestMonthlyFeedbackList teamMembers={teamMembers} />
         ) : (
-          <Paragraph>
+          <Typography variant="subtitle1">
             Currently you haven&apos;t written any feedback.
-          </Paragraph>
+          </Typography>
         )}
       </Box>
     </Loading>

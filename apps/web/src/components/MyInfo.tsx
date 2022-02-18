@@ -7,14 +7,9 @@ import { RQ_KEY_USER } from "@/constants/constants";
 import { getUser } from "@/services/api/userApi";
 import { Loading } from "@/components/Loading";
 import { CardContainer } from "@/components/ui/CardContainer";
-import { Paragraph } from "@/components/ui/typography/Paragraph";
 import { pluralHelper } from "@/utils/pluralHelper";
 
-type MyInfoProps = {
-  className?: string;
-};
-
-export const MyInfo = ({ className }: MyInfoProps) => {
+export const MyInfo = () => {
   const {
     data: userData,
     isLoading,
@@ -27,8 +22,8 @@ export const MyInfo = ({ className }: MyInfoProps) => {
 
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
-      <div className={className || ""}>
-        <Typography component="h2" variant="h4">
+      <div>
+        <Typography component="h2" variant="h4" gutterBottom>
           Team Info
         </Typography>
         <CardContainer
@@ -36,14 +31,14 @@ export const MyInfo = ({ className }: MyInfoProps) => {
         >
           {userData && (
             <>
-              <Paragraph>
+              <Typography variant="subtitle1">
                 You have {userData.employees.length} employee
                 {pluralHelper(userData.employees)}.
-              </Paragraph>
-              <Paragraph>
+              </Typography>
+              <Typography variant="subtitle1">
                 You have {userData.teams.length} team
                 {pluralHelper(userData.teams)}.
-              </Paragraph>
+              </Typography>
             </>
           )}
         </CardContainer>

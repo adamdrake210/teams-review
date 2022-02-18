@@ -1,13 +1,24 @@
 import React from "react";
 
 import { COMPANY_NAME } from "@/constants/constants";
+import { Box, Typography } from "@mui/material";
 
 export const Footer = () => {
   return (
-    <footer className="flex justify-center items-end p-4 bg-green-900 left-0 right-0 font-raleway shadow-md h-16">
-      <p className="text-white text-sm">
+    <Box
+      component="footer"
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-end",
+
+        py: 2,
+        backgroundColor: "primary.dark",
+      }}
+    >
+      <Typography variant="subtitle2">
         &copy; {new Date().getFullYear()} - {COMPANY_NAME} s.r.o.
-      </p>
-    </footer>
+      </Typography>
+    </Box>
   );
 };

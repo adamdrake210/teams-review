@@ -1,5 +1,6 @@
 import React from "react";
 import { Team } from "@prisma/client";
+import { Grid } from "@mui/material";
 
 import { TeamCard } from "./TeamCard";
 
@@ -9,10 +10,14 @@ type TeamsListProps = {
 
 export const TeamsList = ({ teams }: TeamsListProps) => {
   return (
-    <div className="flex flex-col sm:flex-row sm:space-x-4 w-full">
+    <Grid container spacing={2}>
       {teams.map((team) => {
-        return <TeamCard key={team.id} team={team} />;
+        return (
+          <Grid item key={team.id} xs={12} sm={8}>
+            <TeamCard team={team} />
+          </Grid>
+        );
       })}
-    </div>
+    </Grid>
   );
 };

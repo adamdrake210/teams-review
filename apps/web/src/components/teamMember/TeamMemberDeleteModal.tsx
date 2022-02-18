@@ -6,7 +6,6 @@ import { Button, Typography } from "@mui/material";
 
 import ModalContainer from "../ui/ModalContainer";
 import { DangerButton } from "../ui/buttons/DangerButton";
-import { CustomButton } from "../ui/Button";
 import { deleteTeamMemberRequest } from "@/services/api/teamMembersApi";
 import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
 import { ErrorText } from "../ui/typography/ErrorText";
@@ -39,7 +38,7 @@ export const TeamMemberDeleteModal = ({
     },
   });
 
-  const handleDeleteTeamMember = async () => {
+  const handleDeleteTeamMember = () => {
     deleteMutation.mutate({ teamMemberId: teamMember.id });
   };
 

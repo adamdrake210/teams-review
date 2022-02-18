@@ -7,7 +7,8 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id, firstName, lastName, email, position, teamId } = req.body.data;
+  const { id, firstName, lastName, email, position, teamId, joined } =
+    req.body.data;
 
   try {
     const session = await getSession({ req });
@@ -21,6 +22,7 @@ export default async function handle(
           lastName,
           email,
           position,
+          joined,
           team: {
             connect: { id: teamId },
           },

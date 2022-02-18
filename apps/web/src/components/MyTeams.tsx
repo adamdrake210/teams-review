@@ -1,12 +1,11 @@
 import React from "react";
 import { Team } from "@prisma/client";
 import { useQuery } from "react-query";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 
 import { RQ_KEY_TEAMS } from "@/constants/constants";
 import { Loading } from "@/components/Loading";
-import { Paragraph } from "@/components/ui/typography/Paragraph";
 import { getTeams } from "@/services/api/teamsApi";
 import { TeamsList } from "./teams/TeamsList";
 import { TEAMS_CREATE } from "@/constants/routerConstants";
@@ -23,26 +22,27 @@ export const MyTeams = () => {
 
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
-      <section className="flex flex-col w-full sm:space-y-2">
-        <Typography component="h2" variant="h4">
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Typography component="h2" variant="h4" gutterBottom>
           Teams Information
         </Typography>
         {teams?.length > 0 ? (
           <TeamsList teams={teams} />
         ) : (
-          <Paragraph>
+          <Typography variant="subtitle1">
             You don&apos;t currently have any teams. Why not create one?
-          </Paragraph>
+          </Typography>
         )}
         <Button
           variant="contained"
           onClick={() => {
             router.push(TEAMS_CREATE);
           }}
+          sx={{ my: 2, maxWidth: 250 }}
         >
           Create New Team
         </Button>
-      </section>
+      </Box>
     </Loading>
   );
 };

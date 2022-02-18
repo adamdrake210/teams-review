@@ -1,5 +1,5 @@
+import React, { ReactNode } from "react";
 import { Button } from "@mui/material";
-import { ReactNode } from "react";
 
 type ButtonProps = {
   btnText: string | ReactNode;

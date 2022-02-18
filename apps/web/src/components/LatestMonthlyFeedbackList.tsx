@@ -3,7 +3,6 @@ import { Box, Grid, Typography } from "@mui/material";
 
 import { MonthlyFeedback } from "@prisma/client";
 import { MonthlyFeedbackCard } from "./monthlyFeedback/MonthlyFeedbackCard";
-import { Paragraph } from "./ui/typography/Paragraph";
 
 type TeamMembersWithMonthlyFeedback = {
   firstName: string;
@@ -34,7 +33,7 @@ export const LatestMonthlyFeedbackList = ({
               {teamMember.monthlyFeedback?.length > 0 ? (
                 teamMember.monthlyFeedback.map((mfb, i) => {
                   return (
-                    <Grid key={`${mfb.createdAt}${i}`} item xs={4}>
+                    <Grid key={`${mfb.createdAt}${i}`} item xs={12} sm={4}>
                       <MonthlyFeedbackCard
                         monthlyFeedback={mfb}
                         teamMemberId={teamMember.id}
@@ -43,9 +42,9 @@ export const LatestMonthlyFeedbackList = ({
                   );
                 })
               ) : (
-                <Paragraph>
+                <Typography variant="subtitle1">
                   Currently you haven&apos;t written any feedback.
-                </Paragraph>
+                </Typography>
               )}
             </Grid>
           </Box>
