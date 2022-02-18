@@ -18,7 +18,7 @@ export const SuccessText = ({
     return () => {
       clearTimeout(timeId);
     };
-  }, []);
+  }, [handleShowingMessage]);
 
   return (
     <Typography component="p" variant="body2" color="success">
