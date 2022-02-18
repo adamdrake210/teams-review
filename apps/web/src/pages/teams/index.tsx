@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 export default function TeamsPage() {
   return (
     <Layout title="Teams">
-      <Typography component="h1" variant="h3">
+      <Typography component="h1" variant="h3" gutterBottom>
         Your Teams
       </Typography>
       <MyTeams />

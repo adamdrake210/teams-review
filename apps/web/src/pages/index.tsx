@@ -1,3 +1,4 @@
+import React from "react";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { TeamMember } from "@prisma/client";
