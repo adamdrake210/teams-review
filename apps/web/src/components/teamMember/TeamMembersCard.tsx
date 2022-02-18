@@ -2,12 +2,10 @@ import React from "react";
 import { TeamMember } from "@prisma/client";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
+import { Button, Typography } from "@mui/material";
 
 import { TEAM_MEMBERS, TEAM_MEMBERS_CREATE } from "@/constants/routerConstants";
-import { CustomButton } from "@/components/ui/Button";
 import { CardContainer } from "@/components/ui/CardContainer";
-import { Paragraph } from "@/components/ui/typography/Paragraph";
-import { Button } from "@mui/material";
 
 type TeamMembersCardProps = {
   teamMembers: TeamMember[];
@@ -26,20 +24,19 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
               passHref
               key={teamMember.id}
             >
-              <p
-                key={teamMember.id}
-                className="mb-2 cursor-pointer hover:underline text-gray-500 hover:text-green-600"
-              >
+              <Typography key={teamMember.id} variant="h6">
                 <span className="font-bold">
                   {teamMember.firstName} {teamMember.lastName}
                 </span>{" "}
                 - {teamMember.position}
-              </p>
+              </Typography>
             </Link>
           );
         })
       ) : (
-        <Paragraph>Currently you have no team members.</Paragraph>
+        <Typography variant="subtitle1">
+          Currently you have no team members.
+        </Typography>
       )}
       <Button
         color="primary"
@@ -47,6 +44,7 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
         onClick={() => {
           router.push(TEAM_MEMBERS_CREATE);
         }}
+        sx={{ my: 2 }}
       >
         Create Team Member
       </Button>

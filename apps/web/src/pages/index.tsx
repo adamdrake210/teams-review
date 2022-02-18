@@ -46,15 +46,15 @@ type TeamReviewProps = {
 export default function UserDashboard({ initialTeamMembers }: TeamReviewProps) {
   return (
     <Layout title="Home">
-      <Typography component="h1" variant="h3">
+      <Typography component="h1" variant="h3" gutterBottom>
         Your Dashboard
       </Typography>
       <Grid container spacing={2}>
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={8}>
           <MyTeamMembers teamMembers={initialTeamMembers} />
         </Grid>
-        <Grid item xs={4}>
-          <MyInfo className="flex-1 sm:basis-1/3" />
+        <Grid item xs={12} sm={4}>
+          <MyInfo />
         </Grid>
       </Grid>
 
