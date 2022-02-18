@@ -24,7 +24,13 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
               passHref
               key={teamMember.id}
             >
-              <Typography key={teamMember.id} variant="h6">
+              <Typography
+                key={teamMember.id}
+                variant="h6"
+                sx={{
+                  ":hover": { textDecoration: "underline", cursor: "pointer" },
+                }}
+              >
                 <span className="font-bold">
                   {teamMember.firstName} {teamMember.lastName}
                 </span>{" "}
