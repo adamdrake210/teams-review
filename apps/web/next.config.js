@@ -1,8 +1,6 @@
-const withTM = require("next-transpile-modules")(["ui"]);
-
-module.exports = withTM({
+module.exports = {
   reactStrictMode: true,
   images: {
     domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com"],
   },
-});
+};
