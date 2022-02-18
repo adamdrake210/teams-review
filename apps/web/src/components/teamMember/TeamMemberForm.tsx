@@ -20,7 +20,7 @@ import {
   IS_ONLY_ALPHABET_CHARACTERS,
   MAX_FIELD_LENGTH,
 } from "@/utils/formHelpers";
-import { DatePick } from "../DatePick";
+import { DatePick } from "@/components/ui/forms/DatePick";
 import { Button } from "@mui/material";
 
 type TeamMemberFormProps = {
@@ -31,6 +31,11 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const [apiError, setApiError] = useState<Error | null>(null);
+  const [startDate, setStartDate] = useState(
+    editTeamMember ? new Date(editTeamMember?.joined) : new Date()
+  );
+
+  console.log("editTeamMember: ", new Date(editTeamMember?.joined));
 
   const { handleSubmit, control } = useForm<TeamMember>({
     defaultValues: {
@@ -38,7 +43,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
       lastName: editTeamMember?.lastName || "",
       position: editTeamMember?.position || "",
       email: editTeamMember?.email || "",
-      joined: editTeamMember?.joined || new Date(),
+      joined: new Date(editTeamMember?.joined) || startDate,
       teamId: editTeamMember?.teamId || "",
     },
   });
@@ -82,10 +87,16 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
 
   const onSubmit = (formData: TeamMember) => {
     setApiError(null);
+
+    console.log("formData: ", { ...formData, joined: startDate.toISOString() });
     if (editTeamMember) {
-      updateMutation.mutate({ id: editTeamMember.id, ...formData });
+      updateMutation.mutate({
+        id: editTeamMember.id,
+        ...formData,
+        joined: startDate,
+      });
     } else {
-      createMutation.mutate(formData);
+      createMutation.mutate({ ...formData, joined: startDate });
     }
   };
 
@@ -131,7 +142,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         }}
       />
 
-      <DatePick />
+      <DatePick startDate={startDate} setStartDate={setStartDate} />
 
       <Loading isLoading={isLoading} error={error} isError={isError}>
         {userData && userData.teams.length > 0 ? (

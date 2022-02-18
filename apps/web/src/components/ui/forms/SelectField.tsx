@@ -1,6 +1,6 @@
-import { User } from "@prisma/client";
 import React from "react";
 import { Control, Controller } from "react-hook-form";
+import { Box, InputLabel, MenuItem, Select } from "@mui/material";
 
 type SelectFieldProps = {
   name: string;
@@ -16,51 +16,30 @@ export const SelectField = ({
   data,
 }: SelectFieldProps) => {
   return (
-    <div className="flex">
-      <div className="mb-3 w-full">
-        <label className="block text-gray-700 text-md font-bold" htmlFor={name}>
-          {label}
-        </label>
-        <Controller
-          name={name}
-          control={control}
-          defaultValue={""}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <select
-              className="form-select
-          cursor-pointer
-      appearance-none
-      shadow
-      block
-      w-full
-      text-base
-      font-normal
-      text-gray-700
-      bg-white bg-clip-padding bg-no-repeat
-      border border-solid border-gray-300
-      rounded
-      transition
-      ease-in-out
-      mb-4
-      mt-2
-      p-2
-      focus:text-gray-700 focus:bg-white focus:border-green-500 focus:outline-none focus:shadow-outline"
-              aria-label={label}
-              onChange={onChange}
-              value={value}
-            >
-              <option value="">Select a Team</option>
-              {data.map((team) => {
-                return (
-                  <option key={team.id} value={team.id}>
-                    {team.title}
-                  </option>
-                );
-              })}
-            </select>
-          )}
-        />
-      </div>
-    </div>
+    <Box sx={{ my: 2, minWidth: 250 }}>
+      <InputLabel id="action-type-select-label">{label}</InputLabel>
+      <Controller
+        name={name}
+        control={control}
+        defaultValue={""}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <Select
+            labelId="action-type-select-label"
+            id="action-type-select"
+            value={value}
+            error={!!error}
+            onChange={onChange}
+            sx={{ minWidth: 300 }}
+          >
+            {data?.length &&
+              data.map((team) => (
+                <MenuItem key={team.id} value={team.id}>
+                  {team.title}
+                </MenuItem>
+              ))}
+          </Select>
+        )}
+      />
+    </Box>
   );
 };

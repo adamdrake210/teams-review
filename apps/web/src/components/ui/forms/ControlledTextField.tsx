@@ -1,5 +1,6 @@
 import React from "react";
 import { Control, Controller } from "react-hook-form";
+import { TextField } from "@mui/material";
 
 type TextFieldProps = {
   name: string;
@@ -7,6 +8,8 @@ type TextFieldProps = {
   rules: any;
   control: Control<any>;
   type?: string;
+  disabled?: boolean;
+  placeholder?: string;
 };
 
 export const ControlledTextField = ({
@@ -15,6 +18,8 @@ export const ControlledTextField = ({
   rules,
   control,
   type,
+  disabled,
+  placeholder,
 }: TextFieldProps) => {
   return (
     <Controller
@@ -23,25 +28,19 @@ export const ControlledTextField = ({
       defaultValue=""
       rules={rules}
       render={({ field, fieldState: { error } }) => (
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-md font-bold mb-2"
-            htmlFor={name}
-          >
-            {label}
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-green-600"
-            id={name}
-            type={type || "text"}
-            placeholder={label}
-            value={field.value}
-            onChange={field.onChange}
-          />
-          {error && (
-            <span className="text-red-600 text-sm">This field is required</span>
-          )}
-        </div>
+        <TextField
+          sx={{ my: 2, minWidth: 250 }}
+          label={label}
+          variant="outlined"
+          fullWidth
+          type={type}
+          error={!!error}
+          placeholder={placeholder}
+          helperText={error ? error.message : null}
+          value={field.value}
+          disabled={disabled}
+          onChange={field.onChange}
+        />
       )}
     />
   );
