@@ -57,7 +57,6 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
 
   const createMutation = useMutation(createTeamMemberRequest, {
     onError: (err: Error) => {
-      console.error(err.message);
       setApiError(err);
     },
     onSuccess: (data) => {
@@ -72,7 +71,6 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
 
   const updateMutation = useMutation(updateTeamMemberRequest, {
     onError: (err: Error) => {
-      console.error(err.message);
       setApiError(err);
     },
     onSuccess: (data) => {
