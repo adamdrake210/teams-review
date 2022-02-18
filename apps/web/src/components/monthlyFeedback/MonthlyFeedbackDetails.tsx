@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 
 import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { Months } from "@/types/types";
@@ -48,36 +49,28 @@ export const MonthlyFeedbackDetails = ({
   }, [monthlyFeedback]);
 
   return (
-    <>
+    <Grid container spacing={2}>
       {filteredMonthlyFeedback.length > 0
         ? filteredMonthlyFeedback.map((mfb) => {
             return (
-              <div
-                className="flex justify-between mb-4"
+              <MonthlyFeedbackDetailsRow
                 key={typeof mfb === "string" ? mfb : mfb.id}
-              >
-                <MonthlyFeedbackDetailsRow
-                  mfb={mfb}
-                  teamMemberId={teamMemberId}
-                />
-              </div>
+                mfb={mfb}
+                teamMemberId={teamMemberId}
+              />
             );
           })
         : Object.keys(Months)
             .slice(0, 12)
             .map((month) => {
               return (
-                <div
+                <MonthlyFeedbackDetailsRow
                   key={`${month}${teamMemberId}`}
-                  className="flex justify-between mb-4"
-                >
-                  <MonthlyFeedbackDetailsRow
-                    mfb={month}
-                    teamMemberId={teamMemberId}
-                  />
-                </div>
+                  mfb={month}
+                  teamMemberId={teamMemberId}
+                />
               );
             })}
-    </>
+    </Grid>
   );
 };

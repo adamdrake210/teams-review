@@ -58,14 +58,14 @@ export default function TeamMemberDetailsPage({ teamMember }: TeamMemberProps) {
     <Layout title="Team Member">
       {teamMember ? (
         <>
-          <Typography component="h1" variant="h3">
+          <Typography component="h1" variant="h3" gutterBottom>
             Details for {teamMember.firstName} {teamMember.lastName}
           </Typography>
           <TeamMemberDetails teamMember={teamMember} />
           <TeamMemberFeedback teamMember={teamMember} />
         </>
       ) : (
-        <Typography component="h1" variant="h3">
+        <Typography component="h1" variant="h3" gutterBottom>
           No Team Member found
         </Typography>
       )}

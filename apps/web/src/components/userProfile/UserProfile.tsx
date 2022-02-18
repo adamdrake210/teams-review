@@ -26,9 +26,9 @@ export const UserProfile = ({ className }: UserProfileProps) => {
     <Loading isLoading={isLoading} isError={isError} error={error}>
       <div className={className || ""}>
         <Image
-          className="w-40 h-40 rounded-full self-center ring-2 ring-white"
+          className="w-30 h-30 rounded-full self-center ring-2 ring-white"
           src={userData?.image}
-          alt={userData.name}
+          alt={userData?.name}
           width={140}
           height={140}
         />
