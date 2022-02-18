@@ -3,7 +3,6 @@ import { Box, Grid, Typography } from "@mui/material";
 
 import { MonthlyFeedback } from "@prisma/client";
 import { MonthlyFeedbackCard } from "./monthlyFeedback/MonthlyFeedbackCard";
-import { Paragraph } from "./ui/typography/Paragraph";
 
 type TeamMembersWithMonthlyFeedback = {
   firstName: string;
