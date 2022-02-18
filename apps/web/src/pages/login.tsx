@@ -39,7 +39,6 @@ export default function Login() {
           Welcome to{" "}
           <span className="text-green-500 uppercase">{COMPANY_NAME}</span>
         </Typography>
-
         <Typography variant="subtitle1" textAlign="center">
           A single place to keep all your team&apos;s feedback and performance
           reviews
