@@ -3,10 +3,20 @@ import { fetchAbsolute } from "@/utils/apiHelpers";
 import { API_ENDPOINTS } from "./apiConstants";
 
 const {
+  API_TEAM_MEMBER_GET_ONE,
   API_TEAM_MEMBER_CREATE,
   API_TEAM_MEMBER_UPDATE,
   API_TEAM_MEMBER_DELETE,
 } = API_ENDPOINTS;
+
+export async function getTeamMemberRequest(
+  getTeamMemberRequestParams: TeamMember["id"]
+) {
+  const response = await fetchAbsolute(API_TEAM_MEMBER_GET_ONE, {
+    body: JSON.stringify({ id: getTeamMemberRequestParams }),
+  });
+  return await response.json();
+}
 
 export async function createTeamMemberRequest(
   createTeamMembersRequestParams: TeamMember

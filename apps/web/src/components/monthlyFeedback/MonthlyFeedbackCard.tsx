@@ -27,13 +27,14 @@ export const MonthlyFeedbackCard = ({
       headerText={`${
         Months[new Date(monthlyFeedback.createdAt).getMonth()]
       } - ${new Date(monthlyFeedback.createdAt).getFullYear()}`}
+      action={<EditButton onClick={handleOpen} />}
     >
       <FeedbackDetails
         feedback={positiveFeedback || negativeFeedback}
         monthlyFeedback={monthlyFeedback}
         sign={positiveFeedback ? "positive" : "negative"}
       />
-      <EditButton onClick={handleOpen} />
+
       <ModalContainer handleClose={handleClose} open={open}>
         <MonthlyFeedbackForm
           monthlyFeedback={monthlyFeedback}

@@ -5,11 +5,12 @@ import { TextField } from "@mui/material";
 type TextFieldProps = {
   name: string;
   label: string;
-  rules: any;
+  rules?: any;
   control: Control<any>;
   type?: string;
   disabled?: boolean;
   placeholder?: string;
+  rows?: number;
 };
 
 export const ControlledTextField = ({
@@ -20,6 +21,7 @@ export const ControlledTextField = ({
   type,
   disabled,
   placeholder,
+  rows,
 }: TextFieldProps) => {
   return (
     <Controller
@@ -33,6 +35,8 @@ export const ControlledTextField = ({
           label={label}
           variant="outlined"
           fullWidth
+          rows={rows}
+          multiline={!!rows}
           type={type}
           error={!!error}
           placeholder={placeholder}

@@ -33,7 +33,7 @@ export const TeamMemberDetails = ({ teamMember }: TeamMemberProps) => {
                     router.push(`${TEAM_MEMBERS_EDIT}${id}`);
                   }}
                 />
-                <DeleteButton onClick={handleOpen} />
+                <DeleteButton onClick={handleOpen} color="error" />
               </>
             }
           >

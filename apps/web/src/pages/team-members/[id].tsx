@@ -62,7 +62,7 @@ export default function TeamMemberDetailsPage({ teamMember }: TeamMemberProps) {
             Details for {teamMember.firstName} {teamMember.lastName}
           </Typography>
           <TeamMemberDetails teamMember={teamMember} />
-          <TeamMemberFeedback teamMember={teamMember} />
+          <TeamMemberFeedback />
         </>
       ) : (
         <Typography component="h1" variant="h3" gutterBottom>

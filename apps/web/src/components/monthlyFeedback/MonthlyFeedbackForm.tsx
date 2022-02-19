@@ -1,17 +1,23 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
+import { Box, Button, Typography } from "@mui/material";
+import { MonthlyFeedback, TeamMember } from "@prisma/client";
 
 import {
   createMonthlyFeedbackRequest,
   updateMonthlyFeedbackRequest,
 } from "@/services/api/monthlyFeedbackApi";
-import { MonthlyFeedback, TeamMember } from "@prisma/client";
 import { Months } from "@/types/types";
-import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
-import { ControlledTextArea } from "@/components/ui/forms/ControlledTextArea";
+import {
+  RQ_KEY_FEEDBACKS_ALL,
+  RQ_KEY_TEAM_MEMBER,
+  RQ_KEY_USER,
+} from "@/constants/constants";
 import { ErrorText } from "../ui/typography/ErrorText";
-import { Button } from "@mui/material";
+import { ControlledTextField } from "../ui/forms/ControlledTextField";
+
+const queries = [RQ_KEY_TEAM_MEMBER, RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL];
 
 type MonthlyFeedbackFormProps = {
   monthlyFeedback: MonthlyFeedback | string;
@@ -45,11 +51,11 @@ export const MonthlyFeedbackForm = ({
     },
     onSuccess: () => {
       handleClose();
-      queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
+      queryClient.refetchQueries(queries);
     },
     // Always refetch after error or success:
     onSettled: () => {
-      queryClient.invalidateQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
+      queryClient.invalidateQueries(queries);
     },
   });
 
@@ -59,11 +65,11 @@ export const MonthlyFeedbackForm = ({
     },
     onSuccess: () => {
       handleClose();
-      queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
+      queryClient.refetchQueries(queries);
     },
     // Always refetch after error or success:
     onSettled: () => {
-      queryClient.invalidateQueries([RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL]);
+      queryClient.invalidateQueries(queries);
     },
   });
 
@@ -98,7 +104,7 @@ export const MonthlyFeedbackForm = ({
       onSubmit={handleSubmit(onSubmit)}
       className="w-full md:w-[600px] max-w-md my-8"
     >
-      <p className="text-3xl font-extralight mb-4">
+      <Typography component="h2" variant="h4">
         {
           Months[
             typeof monthlyFeedback === "string"
@@ -106,16 +112,16 @@ export const MonthlyFeedbackForm = ({
               : new Date(monthlyFeedback.createdAt).getMonth()
           ]
         }
-      </p>
+      </Typography>
 
-      <ControlledTextArea
+      <ControlledTextField
         name="positiveFeedback"
         label="Positive Feedback"
         control={control}
         placeholder="What did they do really well this month..."
         rows={10}
       />
-      <ControlledTextArea
+      <ControlledTextField
         name="negativeFeedback"
         label="Negative Feedback"
         control={control}
@@ -123,14 +129,20 @@ export const MonthlyFeedbackForm = ({
         rows={10}
       />
 
-      <Button
-        type="submit"
-        variant="contained"
-        disabled={updateMutation.isLoading}
+      <Box
+        sx={{ display: "flex", width: "100%", justifyContent: "space-between" }}
       >
-        Update Feedback
-      </Button>
-      <Button onClick={handleClose}>Cancel</Button>
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={updateMutation.isLoading}
+        >
+          Update Feedback
+        </Button>
+        <Button color="secondary" variant="outlined" onClick={handleClose}>
+          Cancel
+        </Button>
+      </Box>
       {updateMutation.isError && (
         <ErrorText>
           Something went wrong. {updateMutation.error.message}

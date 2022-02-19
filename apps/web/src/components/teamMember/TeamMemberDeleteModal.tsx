@@ -2,7 +2,7 @@ import React from "react";
 import { Team, TeamMember } from "@prisma/client";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 import ModalContainer from "../ui/ModalContainer";
 import { DangerButton } from "../ui/buttons/DangerButton";
@@ -54,21 +54,43 @@ export const TeamMemberDeleteModal = ({
           <Typography component="h2" variant="h4">
             User deleted successfully!
           </Typography>
-          <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              mx: "auto",
+              my: 2,
+            }}
+          >
             <Button onClick={handleCloseSuccessModal}>Close</Button>
-          </div>
+          </Box>
         </>
       ) : (
         <>
           <Typography component="h2" variant="h4">
             Are you sure you want to delete this team member?
           </Typography>
-          <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
-            <DangerButton
-              btnText="Delete Team Member"
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              mx: "auto",
+              my: 2,
+            }}
+          >
+            <Button
+              color="error"
+              variant="contained"
               onClick={handleDeleteTeamMember}
               disabled={deleteMutation.isLoading}
-            />
+              sx={{ mr: 2 }}
+            >
+              Delete Team Member
+            </Button>
             <Button
               onClick={handleClose}
               variant="outlined"
@@ -76,7 +98,7 @@ export const TeamMemberDeleteModal = ({
             >
               Cancel
             </Button>
-          </div>
+          </Box>
           {deleteMutation.error && (
             <ErrorText>
               Something went wrong: {deleteMutation.error.message}
