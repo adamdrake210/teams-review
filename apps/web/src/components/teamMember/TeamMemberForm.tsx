@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/dist/client/router";
 
-import { RQ_KEY_USER } from "@/constants/constants";
+import { RQ_KEY_TEAM_MEMBER, RQ_KEY_USER } from "@/constants/constants";
 import { getUser } from "@/services/api/userApi";
 import {
   createTeamMemberRequest,
@@ -65,7 +65,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
     },
     // Always refetch after error or success:
     onSettled: () => {
-      queryClient.invalidateQueries([RQ_KEY_USER]);
+      queryClient.invalidateQueries([RQ_KEY_USER, RQ_KEY_TEAM_MEMBER]);
     },
   });
 
@@ -75,7 +75,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
     },
     onSuccess: (data) => {
       router.push(`${TEAM_MEMBERS}${data.id}`);
-      queryClient.refetchQueries([RQ_KEY_USER]);
+      queryClient.refetchQueries([RQ_KEY_USER, RQ_KEY_TEAM_MEMBER]);
     },
     // Always refetch after error or success:
     onSettled: () => {
