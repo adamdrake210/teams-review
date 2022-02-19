@@ -4,7 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 type EditButtonProps = {
   onClick: () => void;
-  color:
+  color?:
     | "inherit"
     | "disabled"
     | "action"
