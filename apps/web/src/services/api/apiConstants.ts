@@ -16,8 +16,8 @@ export const API_ENDPOINTS = {
 
   // Team Members
   API_TEAM_MEMBER_GET_ONE: {
-    method: "POST",
-    url: "/api/team-members/get-one",
+    method: "GET",
+    url: "/api/team-members/get-one/",
   },
   API_TEAM_MEMBER_CREATE: {
     method: "POST",
