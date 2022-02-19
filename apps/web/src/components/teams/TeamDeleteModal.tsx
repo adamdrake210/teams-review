@@ -1,10 +1,9 @@
 import React from "react";
 import { Team } from "@prisma/client";
 import { useMutation, useQueryClient } from "react-query";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 import ModalContainer from "../ui/ModalContainer";
-import { DangerButton } from "../ui/buttons/DangerButton";
 import { RQ_KEY_TEAMS, RQ_KEY_USER } from "@/constants/constants";
 import { ErrorText } from "../ui/typography/ErrorText";
 import { deleteTeamsRequest } from "@/services/api/teamsApi";
@@ -50,27 +49,53 @@ export const TeamDeleteModal = ({
           <Typography component="h2" variant="h4">
             Team deleted successfully!
           </Typography>
-          <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              mx: "auto",
+              my: 2,
+            }}
+          >
             <Button variant="contained" onClick={handleCloseSuccessModal}>
               Close
             </Button>
-          </div>
+          </Box>
         </>
       ) : (
         <>
-          <Typography component="h2" variant="h4">
+          <Typography component="h2" variant="h5">
             Are you sure you want to delete this team?
           </Typography>
-          <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
-            <DangerButton
-              btnText="Delete Team"
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              mx: "auto",
+              my: 2,
+            }}
+          >
+            <Button
+              variant="contained"
+              color="error"
               onClick={handleDeleteTeam}
               disabled={deleteMutation.isLoading}
-            />
-            <Button onClick={handleClose} disabled={deleteMutation.isLoading}>
+              sx={{ mr: 2 }}
+            >
+              Delete Team
+            </Button>
+            <Button
+              onClick={handleClose}
+              variant="outlined"
+              disabled={deleteMutation.isLoading}
+            >
               Cancel
             </Button>
-          </div>
+          </Box>
           {deleteMutation.error && (
             <ErrorText>
               Something went wrong: {deleteMutation.error.message}

@@ -1,5 +1,17 @@
 import React, { ReactNode } from "react";
+import { Modal, Theme } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { Loading } from "../Loading";
+
+const useStyles = makeStyles<Theme>((theme) => ({
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: `2px solid ${theme.palette.primary.main}`,
+    boxShadow: theme.shadows[20],
+    borderRadius: theme.spacing(1),
+    padding: theme.spacing(4),
+  },
+}));
 
 type Props = {
   handleClose: () => void;
@@ -8,21 +20,25 @@ type Props = {
   error?: Error;
 };
 
-export default function ModalContainer({ open, children, error }: Props) {
-  return open ? (
-    <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-        <div
-          className="relative w-auto my-6 mx-auto max-w-3xl justify-center items-center"
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          <div className="bg-white border-2 shadow-2xl p-8 rounded-lg">
-            {!error ? children : <Loading error={error} isError />}
-          </div>
-        </div>
+export default function ModalContainer({
+  handleClose,
+  open,
+  children,
+  error,
+}: Props) {
+  const classes = useStyles();
+
+  return (
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+    >
+      <div className={classes.paper}>
+        {!error ? children : <Loading error={error} isError />}
       </div>
-      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-    </>
-  ) : null;
+    </Modal>
+  );
 }

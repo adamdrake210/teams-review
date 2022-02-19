@@ -23,14 +23,17 @@ export const TeamCard = ({ team }: TeamCardProps) => {
 
   return (
     <>
-      <CardContainer key={team.id} headerText={team.title}>
-        <div className="flex flex-col min-h-[160px] justify-between">
-          <p>{team.description}</p>
-          <div className="flex space-x-2">
+      <CardContainer
+        key={team.id}
+        headerText={team.title}
+        action={
+          <>
             <EditButton onClick={() => handleEditButton(team.id)} />
             <DeleteButton onClick={handleOpen} />
-          </div>
-        </div>
+          </>
+        }
+      >
+        <p>{team.description}</p>
       </CardContainer>
       <TeamDeleteModal open={open} handleClose={handleClose} team={team} />
     </>

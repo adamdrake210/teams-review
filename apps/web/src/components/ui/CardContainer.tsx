@@ -15,7 +15,7 @@ export const CardContainer = ({
   action,
 }: CardContainerProps) => {
   return (
-    <Card sx={{ borderRadius: 4 }}>
+    <Card sx={{ borderRadius: 2 }}>
       <CardHeader title={headerText} sx={{ pb: 0 }} action={action} />
       <CardContent>{children}</CardContent>
     </Card>
