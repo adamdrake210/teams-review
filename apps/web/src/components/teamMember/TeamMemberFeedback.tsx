@@ -13,10 +13,8 @@ export const TeamMemberFeedback = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log("tmid: ", id);
-
   const {
-    data: teamMemberData,
+    data: teamMember,
     isLoading,
     isError,
     error,
@@ -24,8 +22,6 @@ export const TeamMemberFeedback = () => {
     [RQ_KEY_TEAM_MEMBER],
     () => getTeamMemberRequest(String(id))
   );
-
-  console.log("teamMemberData:", teamMemberData);
 
   return (
     <Loading isLoading={isLoading} isError={isError} error={error}>
@@ -36,10 +32,10 @@ export const TeamMemberFeedback = () => {
         <Typography component="h2" variant="h4" gutterBottom>
           Feedback Details
         </Typography>
-        {teamMemberData && (
+        {teamMember && (
           <MonthlyFeedbackDetails
-            monthlyFeedback={teamMemberData.monthlyFeedback}
-            teamMemberId={String(id)}
+            monthlyFeedback={teamMember.monthlyFeedback}
+            teamMemberId={teamMember.id}
           />
         )}
       </Box>

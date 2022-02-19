@@ -7,19 +7,10 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id } = req.body;
-
   try {
     const session = await getSession({ req });
     if (session) {
-      const feedback = await prisma.teamMember.findUnique({
-        where: {
-          id,
-        },
-        select: {
-          monthlyFeedback: true,
-        },
-      });
+      const feedback = "get-one";
       res.json(feedback);
     } else {
       res.status(401).send({ message: "Unauthorized" });

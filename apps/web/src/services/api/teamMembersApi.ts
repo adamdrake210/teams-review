@@ -12,9 +12,9 @@ const {
 export async function getTeamMemberRequest(
   getTeamMemberRequestParams: TeamMember["id"]
 ) {
-  const response = await fetchAbsolute(API_TEAM_MEMBER_GET_ONE, {
-    body: JSON.stringify({ id: getTeamMemberRequestParams }),
-  });
+  const response = await fetch(
+    `${API_TEAM_MEMBER_GET_ONE.url}/${getTeamMemberRequestParams}`
+  );
   return await response.json();
 }
 

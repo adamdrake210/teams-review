@@ -9,15 +9,9 @@ import {
   updateMonthlyFeedbackRequest,
 } from "@/services/api/monthlyFeedbackApi";
 import { Months } from "@/types/types";
-import {
-  RQ_KEY_FEEDBACKS_ALL,
-  RQ_KEY_TEAM_MEMBER,
-  RQ_KEY_USER,
-} from "@/constants/constants";
+import { RQ_KEY_TEAM_MEMBER } from "@/constants/constants";
 import { ErrorText } from "../ui/typography/ErrorText";
 import { ControlledTextField } from "../ui/forms/ControlledTextField";
-
-const queries = [RQ_KEY_TEAM_MEMBER, RQ_KEY_USER, RQ_KEY_FEEDBACKS_ALL];
 
 type MonthlyFeedbackFormProps = {
   monthlyFeedback: MonthlyFeedback | string;
@@ -51,11 +45,11 @@ export const MonthlyFeedbackForm = ({
     },
     onSuccess: () => {
       handleClose();
-      queryClient.refetchQueries(queries);
+      queryClient.refetchQueries(RQ_KEY_TEAM_MEMBER);
     },
     // Always refetch after error or success:
     onSettled: () => {
-      queryClient.invalidateQueries(queries);
+      queryClient.invalidateQueries(RQ_KEY_TEAM_MEMBER);
     },
   });
 
@@ -65,11 +59,11 @@ export const MonthlyFeedbackForm = ({
     },
     onSuccess: () => {
       handleClose();
-      queryClient.refetchQueries(queries);
+      queryClient.refetchQueries([RQ_KEY_TEAM_MEMBER]);
     },
     // Always refetch after error or success:
     onSettled: () => {
-      queryClient.invalidateQueries(queries);
+      queryClient.invalidateQueries(RQ_KEY_TEAM_MEMBER);
     },
   });
 
