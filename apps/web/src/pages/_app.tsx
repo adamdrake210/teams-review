@@ -15,7 +15,6 @@ import { EmotionCache } from "@emotion/cache";
 
 import createEmotionCache from "utils/createEmotionCache";
 import getDesignTokens from "styles/theme";
-import "../styles/globals.css";
 
 const queryClient = new QueryClient();
 const clientSideEmotionCache = createEmotionCache();
