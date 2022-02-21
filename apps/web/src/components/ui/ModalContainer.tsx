@@ -10,6 +10,8 @@ const useStyles = makeStyles<Theme>((theme) => ({
     boxShadow: theme.shadows[20],
     borderRadius: theme.spacing(1),
     padding: theme.spacing(4),
+    width: "100%",
+    maxWidth: 600,
   },
 }));
 
@@ -34,7 +36,11 @@ export default function ModalContainer({
       onClose={handleClose}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
-      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <div className={classes.paper}>
         {!error ? children : <Loading error={error} isError />}

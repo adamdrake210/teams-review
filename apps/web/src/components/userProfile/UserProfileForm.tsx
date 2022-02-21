@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useForm } from "react-hook-form";
 import { User } from "@prisma/client";
-import { Button } from "@mui/material";
+import { Button, FormControl } from "@mui/material";
 
 import { updateUserRequest } from "@/services/api/userApi";
 import { RQ_KEY_USER } from "@/constants/constants";
-import { ControlledTextField } from "../ui/forms/ControlledTextField";
-import { ErrorText } from "../ui/typography/ErrorText";
-import { SuccessText } from "../ui/typography/SuccessText";
+import { ControlledTextField } from "@/components/ui/fields/ControlledTextField";
+import { ErrorText } from "@/components/ui/typography/ErrorText";
+import { SuccessText } from "@/components/ui/typography/SuccessText";
 
 type UserProfileFormProps = {
   userData: User;
@@ -46,7 +46,16 @@ export const UserProfileForm = ({ userData }: UserProfileFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+    <FormControl
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        my: 2,
+        width: { xs: "100%", md: "30%" },
+      }}
+    >
       <ControlledTextField
         name="firstName"
         label="First Name"
@@ -66,12 +75,16 @@ export const UserProfileForm = ({ userData }: UserProfileFormProps) => {
           handleShowingMessage={setSuccessMessage}
         />
       )}
-      <Button type="submit" disabled={updateMutation.isLoading}>
+      <Button
+        type="submit"
+        variant="contained"
+        disabled={updateMutation.isLoading}
+      >
         Update Profile
       </Button>
       {apiError && (
         <ErrorText>Something went wrong. {apiError.message}</ErrorText>
       )}
-    </form>
+    </FormControl>
   );
 };

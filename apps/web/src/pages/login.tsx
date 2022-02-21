@@ -6,6 +6,7 @@ import { Box, Typography } from "@mui/material";
 import { HOME } from "@/constants/routerConstants";
 import { Layout } from "@/layout/Layout";
 import { COMPANY_NAME } from "@/constants/constants";
+import { green } from "@mui/material/colors";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -36,8 +37,7 @@ export default function Login() {
         }}
       >
         <Typography component="h1" variant="h3" gutterBottom textAlign="center">
-          Welcome to{" "}
-          <span className="text-green-500 uppercase">{COMPANY_NAME}</span>
+          Welcome to <span style={{ color: green[600] }}>{COMPANY_NAME}</span>
         </Typography>
         <Typography variant="subtitle1" textAlign="center">
           A single place to keep all your team&apos;s feedback and performance

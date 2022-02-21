@@ -5,8 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/dist/client/router";
 
 import { RQ_KEY_USER } from "@/constants/constants";
-import { updateTeamMemberRequest } from "@/services/api/teamMembersApi";
-import { ControlledTextField } from "@/components/ui/forms/ControlledTextField";
+import { ControlledTextField } from "@/components/ui/fields/ControlledTextField";
 import { TEAMS } from "@/constants/routerConstants";
 import { ErrorText } from "@/components/ui/typography/ErrorText";
 import {
@@ -17,7 +16,7 @@ import {
   createTeamsRequest,
   updateTeamsRequest,
 } from "@/services/api/teamsApi";
-import { Button } from "@mui/material";
+import { Button, FormControl } from "@mui/material";
 
 type TeamsFormProps = {
   editTeams?: Team;
@@ -76,7 +75,16 @@ export const TeamsForm = ({ editTeams }: TeamsFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md my-8">
+    <FormControl
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        my: 2,
+        width: { xs: "100%", md: "30%" },
+      }}
+    >
       <ControlledTextField
         name="title"
         label="Team Title"
@@ -111,6 +119,6 @@ export const TeamsForm = ({ editTeams }: TeamsFormProps) => {
             Something went wrong. {createMutation.error.message}
           </ErrorText>
         ))}
-    </form>
+    </FormControl>
   );
 };
