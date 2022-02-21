@@ -10,8 +10,8 @@ import {
   createTeamMemberRequest,
   updateTeamMemberRequest,
 } from "@/services/api/teamMembersApi";
-import { SelectField } from "@/components/ui/forms/SelectField";
-import { ControlledTextField } from "@/components/ui/forms/ControlledTextField";
+import { SelectField } from "@/components/ui/fields/SelectField";
+import { ControlledTextField } from "@/components/ui/fields/ControlledTextField";
 import { Loading } from "@/components/Loading";
 import { TEAM_MEMBERS } from "@/constants/routerConstants";
 import { ErrorText } from "@/components/ui/typography/ErrorText";
@@ -20,8 +20,8 @@ import {
   IS_ONLY_ALPHABET_CHARACTERS,
   MAX_FIELD_LENGTH,
 } from "@/utils/formHelpers";
-import { DatePick } from "@/components/ui/forms/DatePick";
-import { Button } from "@mui/material";
+import { DatePick } from "@/components/ui/fields/DatePick";
+import { Button, FormControl } from "@mui/material";
 
 type TeamMemberFormProps = {
   editTeamMember?: TeamMember & { team: Team };
@@ -99,7 +99,16 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md my-8">
+    <FormControl
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        my: 2,
+        width: { xs: "100%", md: "30%" },
+      }}
+    >
       <ControlledTextField
         name="firstName"
         label="First Name"
@@ -171,6 +180,6 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
       {apiError && (
         <ErrorText>Something went wrong. {apiError.message}</ErrorText>
       )}
-    </form>
+    </FormControl>
   );
 };

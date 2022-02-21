@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { MonthlyFeedback } from "@prisma/client";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 type FeedbackDetailsProps = {
   feedback: string;
@@ -14,20 +15,23 @@ const FeedbackDetails = ({
   feedback,
 }: FeedbackDetailsProps) => {
   return (
-    <div className="flex flex-col sm:basis-1/2">
+    <Box sx={{ display: "flex", flexDirection: "column", flexBasis: "50%" }}>
       <Typography
         component="h4"
         variant="h5"
         sx={{ textTransform: "capitalize" }}
       >{`${sign} Feedback`}</Typography>
       {typeof monthlyFeedback !== "string" && feedback.length > 0 ? (
-        <p>{feedback}</p>
+        <Typography variant="body1">{feedback}</Typography>
       ) : (
-        <p className="italic text-slate-400">
+        <Typography
+          variant="body1"
+          sx={{ fontStyle: "italic", color: grey[400] }}
+        >
           {`No ${sign} feedback written for this month yet`}
-        </p>
+        </Typography>
       )}
-    </div>
+    </Box>
   );
 };
 

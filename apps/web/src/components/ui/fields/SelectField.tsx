@@ -16,7 +16,7 @@ export const SelectField = ({
   data,
 }: SelectFieldProps) => {
   return (
-    <Box sx={{ my: 2, minWidth: 250 }}>
+    <Box sx={{ my: 2, minWidth: 250, position: "relative" }}>
       <InputLabel id="action-type-select-label">{label}</InputLabel>
       <Controller
         name={name}

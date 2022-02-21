@@ -143,7 +143,7 @@ const Navigation = () => {
           )}
           <Link href={HOME} passHref>
             <Typography
-              variant="h6"
+              variant="h4"
               noWrap
               component="div"
               sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}

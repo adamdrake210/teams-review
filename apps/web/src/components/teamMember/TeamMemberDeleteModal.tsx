@@ -4,11 +4,10 @@ import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
 import { Box, Button, Typography } from "@mui/material";
 
-import ModalContainer from "../ui/ModalContainer";
-import { DangerButton } from "../ui/buttons/DangerButton";
+import ModalContainer from "@/components/ui/ModalContainer";
 import { deleteTeamMemberRequest } from "@/services/api/teamMembersApi";
 import { RQ_KEY_FEEDBACKS_ALL, RQ_KEY_USER } from "@/constants/constants";
-import { ErrorText } from "../ui/typography/ErrorText";
+import { ErrorText } from "@/components/ui/typography/ErrorText";
 import { HOME } from "@/constants/routerConstants";
 
 type TeamMemberDeleteModalProps = {

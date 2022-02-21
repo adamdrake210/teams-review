@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, FormControl, Typography } from "@mui/material";
 import { MonthlyFeedback, TeamMember } from "@prisma/client";
 
 import {
@@ -10,8 +10,8 @@ import {
 } from "@/services/api/monthlyFeedbackApi";
 import { Months } from "@/types/types";
 import { RQ_KEY_TEAM_MEMBER } from "@/constants/constants";
-import { ErrorText } from "../ui/typography/ErrorText";
-import { ControlledTextField } from "../ui/forms/ControlledTextField";
+import { ErrorText } from "@/components/ui/typography/ErrorText";
+import { ControlledTextField } from "@/components/ui/fields/ControlledTextField";
 
 type MonthlyFeedbackFormProps = {
   monthlyFeedback: MonthlyFeedback | string;
@@ -94,9 +94,14 @@ export const MonthlyFeedbackForm = ({
   };
 
   return (
-    <form
+    <FormControl
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full md:w-[600px] max-w-md my-8"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        my: 2,
+      }}
     >
       <Typography component="h2" variant="h4">
         {
@@ -142,6 +147,6 @@ export const MonthlyFeedbackForm = ({
           Something went wrong. {updateMutation.error.message}
         </ErrorText>
       )}
-    </form>
+    </FormControl>
   );
 };

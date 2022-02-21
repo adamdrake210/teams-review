@@ -31,7 +31,7 @@ export const TeamMembersCard = ({ teamMembers }: TeamMembersCardProps) => {
                   ":hover": { textDecoration: "underline", cursor: "pointer" },
                 }}
               >
-                <span className="font-bold">
+                <span style={{ fontWeight: 700 }}>
                   {teamMember.firstName} {teamMember.lastName}
                 </span>{" "}
                 - {teamMember.position}
