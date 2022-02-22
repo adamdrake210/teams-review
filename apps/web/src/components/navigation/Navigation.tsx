@@ -49,7 +49,7 @@ const avatorDropDownMenu = [
   },
 ];
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   const { data: session, status } = useSession();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -88,11 +88,12 @@ const Navigation = () => {
         <Toolbar disableGutters>
           <Link href={HOME} passHref>
             <Typography
-              variant="h5"
+              variant="h4"
               noWrap
               component="div"
               sx={{
                 mr: 2,
+                fontWeight: 700,
                 cursor: "pointer",
                 display: { xs: "none", md: "flex" },
                 ":hover": { textDecoration: "underline" },
