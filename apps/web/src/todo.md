@@ -1,5 +1,4 @@
 - switch for between dark mode & light mode
-- move tailwind when possible
 - Update Readme
 - delete user account
 - if no team members - message that no team members/ teams etc

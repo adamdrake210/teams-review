@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useForm } from "react-hook-form";
 import { User } from "@prisma/client";
-import { Button, FormControl } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 import { updateUserRequest } from "@/services/api/userApi";
 import { RQ_KEY_USER } from "@/constants/constants";
@@ -46,8 +46,7 @@ export const UserProfileForm = ({ userData }: UserProfileFormProps) => {
   };
 
   return (
-    <FormControl
-      onSubmit={handleSubmit(onSubmit)}
+    <Box
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -56,35 +55,37 @@ export const UserProfileForm = ({ userData }: UserProfileFormProps) => {
         width: { xs: "100%", md: "30%" },
       }}
     >
-      <ControlledTextField
-        name="firstName"
-        label="First Name"
-        control={control}
-        rules={{ required: "First Name is required" }}
-      />
-      <ControlledTextField
-        name="lastName"
-        label="Last Name"
-        control={control}
-        rules={{ required: "Last Name is required" }}
-      />
-
-      {successMessage && (
-        <SuccessText
-          message="The updates were saved successfully"
-          handleShowingMessage={setSuccessMessage}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ControlledTextField
+          name="firstName"
+          label="First Name"
+          control={control}
+          rules={{ required: "First Name is required" }}
         />
-      )}
-      <Button
-        type="submit"
-        variant="contained"
-        disabled={updateMutation.isLoading}
-      >
-        Update Profile
-      </Button>
-      {apiError && (
-        <ErrorText>Something went wrong. {apiError.message}</ErrorText>
-      )}
-    </FormControl>
+        <ControlledTextField
+          name="lastName"
+          label="Last Name"
+          control={control}
+          rules={{ required: "Last Name is required" }}
+        />
+
+        {successMessage && (
+          <SuccessText
+            message="The updates were saved successfully"
+            handleShowingMessage={setSuccessMessage}
+          />
+        )}
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={updateMutation.isLoading}
+        >
+          Update Profile
+        </Button>
+        {apiError && (
+          <ErrorText>Something went wrong. {apiError.message}</ErrorText>
+        )}
+      </form>
+    </Box>
   );
 };

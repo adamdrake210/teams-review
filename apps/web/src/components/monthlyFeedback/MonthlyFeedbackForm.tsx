@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { Box, Button, FormControl, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { MonthlyFeedback, TeamMember } from "@prisma/client";
 
 import {
@@ -94,8 +94,7 @@ export const MonthlyFeedbackForm = ({
   };
 
   return (
-    <FormControl
-      onSubmit={handleSubmit(onSubmit)}
+    <Box
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -103,50 +102,56 @@ export const MonthlyFeedbackForm = ({
         my: 2,
       }}
     >
-      <Typography component="h2" variant="h4">
-        {
-          Months[
-            typeof monthlyFeedback === "string"
-              ? monthlyFeedback
-              : new Date(monthlyFeedback.createdAt).getMonth()
-          ]
-        }
-      </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Typography component="h2" variant="h4">
+          {
+            Months[
+              typeof monthlyFeedback === "string"
+                ? monthlyFeedback
+                : new Date(monthlyFeedback.createdAt).getMonth()
+            ]
+          }
+        </Typography>
 
-      <ControlledTextField
-        name="positiveFeedback"
-        label="Positive Feedback"
-        control={control}
-        placeholder="What did they do really well this month..."
-        rows={10}
-      />
-      <ControlledTextField
-        name="negativeFeedback"
-        label="Negative Feedback"
-        control={control}
-        placeholder="Where is there room for improvement..."
-        rows={10}
-      />
+        <ControlledTextField
+          name="positiveFeedback"
+          label="Positive Feedback"
+          control={control}
+          placeholder="What did they do really well this month..."
+          rows={10}
+        />
+        <ControlledTextField
+          name="negativeFeedback"
+          label="Negative Feedback"
+          control={control}
+          placeholder="Where is there room for improvement..."
+          rows={10}
+        />
 
-      <Box
-        sx={{ display: "flex", width: "100%", justifyContent: "space-between" }}
-      >
-        <Button
-          type="submit"
-          variant="contained"
-          disabled={updateMutation.isLoading}
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
         >
-          Update Feedback
-        </Button>
-        <Button color="secondary" variant="outlined" onClick={handleClose}>
-          Cancel
-        </Button>
-      </Box>
-      {updateMutation.isError && (
-        <ErrorText>
-          Something went wrong. {updateMutation.error.message}
-        </ErrorText>
-      )}
-    </FormControl>
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={updateMutation.isLoading}
+          >
+            Update Feedback
+          </Button>
+          <Button color="secondary" variant="outlined" onClick={handleClose}>
+            Cancel
+          </Button>
+        </Box>
+        {updateMutation.isError && (
+          <ErrorText>
+            Something went wrong. {updateMutation.error.message}
+          </ErrorText>
+        )}
+      </form>
+    </Box>
   );
 };
