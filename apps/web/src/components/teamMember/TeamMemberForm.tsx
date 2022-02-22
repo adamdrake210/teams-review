@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/dist/client/router";
+import { Box, Button } from "@mui/material";
 
 import { RQ_KEY_TEAM_MEMBER, RQ_KEY_USER } from "@/constants/constants";
 import { getUser } from "@/services/api/userApi";
@@ -21,7 +22,6 @@ import {
   MAX_FIELD_LENGTH,
 } from "@/utils/formHelpers";
 import { DatePick } from "@/components/ui/fields/DatePick";
-import { Button, FormControl } from "@mui/material";
 
 type TeamMemberFormProps = {
   editTeamMember?: TeamMember & { team: Team };
@@ -34,8 +34,6 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
   const [startDate, setStartDate] = useState(
     editTeamMember ? new Date(editTeamMember?.joined) : new Date()
   );
-
-  console.log("editTeamMember: ", new Date(editTeamMember?.joined));
 
   const { handleSubmit, control } = useForm<TeamMember>({
     defaultValues: {
@@ -85,8 +83,6 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
 
   const onSubmit = (formData: TeamMember) => {
     setApiError(null);
-
-    console.log("formData: ", { ...formData, joined: startDate.toISOString() });
     if (editTeamMember) {
       updateMutation.mutate({
         id: editTeamMember.id,
@@ -99,8 +95,7 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
   };
 
   return (
-    <FormControl
-      onSubmit={handleSubmit(onSubmit)}
+    <Box
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -109,77 +104,79 @@ export const TeamMemberForm = ({ editTeamMember }: TeamMemberFormProps) => {
         width: { xs: "100%", md: "30%" },
       }}
     >
-      <ControlledTextField
-        name="firstName"
-        label="First Name"
-        control={control}
-        rules={{
-          required: "First Name is required",
-          maxLength: MAX_FIELD_LENGTH,
-          pattern: IS_ONLY_ALPHABET_CHARACTERS,
-        }}
-      />
-      <ControlledTextField
-        name="lastName"
-        label="Last Name"
-        control={control}
-        rules={{
-          required: "Last Name is required",
-          maxLength: MAX_FIELD_LENGTH,
-          pattern: IS_ONLY_ALPHABET_CHARACTERS,
-        }}
-      />
-      <ControlledTextField
-        name="email"
-        label="Email"
-        control={control}
-        rules={{
-          required: "Email is required",
-          maxLength: MAX_FIELD_LENGTH,
-          pattern: IS_EMAIL_PATTERN,
-        }}
-      />
-      <ControlledTextField
-        name="position"
-        label="Current Position"
-        control={control}
-        rules={{
-          required: "Current Position is required",
-          maxLength: MAX_FIELD_LENGTH,
-        }}
-      />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ControlledTextField
+          name="firstName"
+          label="First Name"
+          control={control}
+          rules={{
+            required: "First Name is required",
+            maxLength: MAX_FIELD_LENGTH,
+            pattern: IS_ONLY_ALPHABET_CHARACTERS,
+          }}
+        />
+        <ControlledTextField
+          name="lastName"
+          label="Last Name"
+          control={control}
+          rules={{
+            required: "Last Name is required",
+            maxLength: MAX_FIELD_LENGTH,
+            pattern: IS_ONLY_ALPHABET_CHARACTERS,
+          }}
+        />
+        <ControlledTextField
+          name="email"
+          label="Email"
+          control={control}
+          rules={{
+            required: "Email is required",
+            maxLength: MAX_FIELD_LENGTH,
+            pattern: IS_EMAIL_PATTERN,
+          }}
+        />
+        <ControlledTextField
+          name="position"
+          label="Current Position"
+          control={control}
+          rules={{
+            required: "Current Position is required",
+            maxLength: MAX_FIELD_LENGTH,
+          }}
+        />
 
-      <DatePick startDate={startDate} setStartDate={setStartDate} />
+        <DatePick startDate={startDate} setStartDate={setStartDate} />
 
-      <Loading isLoading={isLoading} error={error} isError={isError}>
-        {userData && userData.teams.length > 0 ? (
-          <SelectField
-            name="teamId"
-            label="Select Team"
-            control={control}
-            data={userData.teams}
-          />
-        ) : (
-          <ErrorText>
-            You need to create a team first before creating any team members.
-          </ErrorText>
+        <Loading isLoading={isLoading} error={error} isError={isError}>
+          {userData && userData.teams.length > 0 ? (
+            <SelectField
+              name="teamId"
+              label="Select Team"
+              control={control}
+              data={userData.teams}
+            />
+          ) : (
+            <ErrorText>
+              You need to create a team first before creating any team members.
+            </ErrorText>
+          )}
+        </Loading>
+
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={
+            updateMutation.isLoading ||
+            createMutation.isLoading ||
+            !(userData && userData.teams.length > 0)
+          }
+        >
+          {editTeamMember ? "Update" : "Submit"}
+        </Button>
+        {apiError && (
+          <ErrorText>Something went wrong. {apiError.message}</ErrorText>
         )}
-      </Loading>
-
-      <Button
-        type="submit"
-        variant="contained"
-        disabled={
-          updateMutation.isLoading ||
-          createMutation.isLoading ||
-          !(userData && userData.teams.length > 0)
-        }
-      >
-        {editTeamMember ? "Update" : "Submit"}
-      </Button>
-      {apiError && (
-        <ErrorText>Something went wrong. {apiError.message}</ErrorText>
-      )}
-    </FormControl>
+      </form>
+    </Box>
   );
 };
