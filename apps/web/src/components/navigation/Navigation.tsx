@@ -49,7 +49,7 @@ const avatorDropDownMenu = [
   },
 ];
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   const { data: session, status } = useSession();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
